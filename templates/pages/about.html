@@ -4,7 +4,7 @@
 <div class="page-header pt-30 background-body">
     <div class="custom-container position-relative mx-auto">
         <div class="bg-overlay rounded-12 overflow-hidden">
-            <img class="w-100 h-100 img-banner" src="assets/imgs/page-header/banner.png" alt="Kigali Nanny Agency"/>
+            <img class="w-100 h-100 img-banner" src="{% static 'img/story/banner.jpg' %}" alt="Kigali Nanny Agency"/>
         </div>
         <div class="container position-absolute z-1 top-50 start-50 translate-middle">
             <h2 class="text-white">About Us</h2>
@@ -13,7 +13,7 @@
         <div class="background-body position-absolute z-1 top-100 start-50 translate-middle px-3 py-2 rounded-12 border d-flex gap-3 @@navigation-page">
             <a href="index.html" class="neutral-700 text-md-medium">Home</a>
             <span>
-                <img src="assets/imgs/template/icons/arrow-right.svg" alt="Kigali Nanny Agency"/>
+                <img src="{% static 'img/story/icons/arrow-right.svg' %}" alt="Kigali Nanny Agency"/>
             </span>
             <a href="#" class="neutral-1000 text-md-bold">About Us</a>
         </div>
@@ -36,7 +36,7 @@
         <div class="row g-4">
             <div class="col-lg-4 col-md-6">
                 <div class="box-image rounded-12 position-relative overflow-hidden">
-                    <img class="rounded-12" src="assets/imgs/section-1/img-1.png" alt="Kigali Nanny Agency"/>
+                    <img class="rounded-12" src="{% static 'img/img-6.jpg' %}" alt="Kigali Nanny Agency"/>
                     <div class="box-tag bg-white p-3 d-flex position-absolute bottom-0 end-0 rounded-12 m-3">
                         <span class="text-dark fs-72 me-3">86</span>
                         <h6>
@@ -47,7 +47,7 @@
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="box-image rounded-12 position-relative overflow-hidden">
-                    <img class="rounded-12" src="assets/imgs/section-1/img-2.png" alt="Kigali Nanny Agency"/>
+                    <img class="rounded-12" src="{% static 'img/story/img-3.jpg' %}" alt="Kigali Nanny Agency"/>
                 </div>
             </div>
             <div class="col-lg-4 col-12">
@@ -58,7 +58,7 @@
                             Years of <br/>Experience
                         </h4>
                     </div>
-                    <img class="rounded-12" src="assets/imgs/section-1/img-3.png" alt="Kigali Nanny Agency"/>
+                    <img class="rounded-12" src="{% static 'img/story/img-2.jpg' %}" alt="Kigali Nanny Agency"/>
                 </div>
             </div>
         </div>
@@ -67,11 +67,6 @@
         <div class="row mt-40">
             <div class="col-lg-3 col-sm-6">
                 <div class="card-why text-start wow fadeInUp">
-                    <div class="card-image">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="62" height="62" viewBox="0 0 62 62" fill="none">
-                            <!-- SVG content omitted for brevity -->
-                        </svg>
-                    </div>
                     <div class="card-info">
                         <h6 class="text-xl-bold neutral-1000 text-start">Personalized Care</h6>
                         <p class="text-md-medium neutral-500">Select the ideal nanny tailored to your family's specific needs and preferences.</p>
@@ -80,11 +75,6 @@
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="card-why text-start wow fadeInUp">
-                    <div class="card-image">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="62" height="62" viewBox="0 0 62 62" fill="none">
-                            <!-- SVG content omitted for brevity -->
-                        </svg>
-                    </div>
                     <div class="card-info">
                         <h6 class="text-xl-bold neutral-1000 text-start">Clear Pricing</h6>
                         <p class="text-md-medium neutral-500">Enjoy straightforward pricing with no hidden fees, giving you full transparency.</p>
@@ -93,11 +83,6 @@
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="card-why text-start wow fadeInUp">
-                    <div class="card-image">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="62" height="62" viewBox="0 0 62 62" fill="none">
-                            <!-- SVG content omitted for brevity -->
-                        </svg>
-                    </div>
                     <div class="card-info">
                         <h6 class="text-xl-bold neutral-1000 text-start">Convenient Scheduling</h6>
                         <p class="text-md-medium neutral-500">Benefit from flexible scheduling options that accommodate your busy lifestyle.</p>
@@ -106,11 +91,6 @@
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="card-why text-start wow fadeInUp">
-                    <div class="card-image">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="62" height="62" viewBox="0 0 62 62" fill="none">
-                            <!-- SVG content omitted for brevity -->
-                        </svg>
-                    </div>
                     <div class="card-info">
                         <h6 class="text-xl-bold neutral-1000 text-start">24/7 Support</h6>
                         <p class="text-md-medium neutral-500">Access our support team anytime for assistance and peace of mind.</p>
@@ -141,28 +121,16 @@
                     </div>
                     <a class="btn btn-primary mt-2" href="#">
                         Get Started Now
-                    
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
                     </a>
                 </div>
                 <div class="col-lg-6 offset-lg-1 position-relative z-1 mt-lg-0 mt-4">
                     <div class="d-flex flex-column gap-4">
                         <div class="d-flex gap-4">
                             <div class="position-relative">
-                                <img class="bdrd8 w-100" src="assets/imgs/cta/cta-8/img-1.png" alt="Kigali Nanny Agency"/>
+                                <img class="bdrd8 w-100" src="{% static 'img/story/img-4.jpg' %}" alt="Kigali Nanny Agency"/>
                             </div>
                             <div class="mt-auto">
-                                <img class="bdrd8 w-100" src="assets/imgs/cta/cta-8/img-2.png" alt="Kigali Nanny Agency"/>
-                            </div>
-                        </div>
-                        <div class="d-flex gap-4">
-                            <div class="position-relative">
-                                <img class="bdrd8 w-100" src="assets/imgs/cta/cta-8/img-3.png" alt="Kigali Nanny Agency"/>
-                            </div>
-                            <div class="position-relative">
-                                <img class="bdrd8 w-100" src="assets/imgs/cta/cta-8/img-4.png" alt="Kigali Nanny Agency"/>
+                                <img class="bdrd8 w-100" src="{% static 'img/story/img-5.jpg' %}" alt="Kigali Nanny Agency"/>
                             </div>
                         </div>
                     </div>
