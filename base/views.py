@@ -20,4 +20,4 @@ def contact(request):
 def Login(request):
     return render(request, 'Auth/login.html')
 def Signup(request):
-    return render(request, 'Authsignup.html')
+    return render(request, 'Auth/signup.html')

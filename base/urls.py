@@ -12,6 +12,6 @@ urlpatterns = [
     path('jobs', getJobs, name="getJobs"),
     path('job/slug', showJob, name="showJob"),
     path('contact', contact, name="contact"),
-    path('Auth/signup', Signup, name="signup"),
-    path('Auth/login', Login, name="login"),
+    path('signup', Signup, name="signup"),
+    path('login', Login, name="login"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
