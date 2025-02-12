@@ -17,3 +17,7 @@ def showJob(request):
 
 def contact(request):
     return render(request, 'pages/contact.html')
+def Login(request):
+    return render(request, 'Auth/login.html')
+def Signup(request):
+    return render(request, 'Authsignup.html')
