@@ -1,3 +1,4 @@
+{% load static %}
 <footer class="footer">
     <div class="container">
         <div class="footer-top">
@@ -19,8 +20,8 @@
             <div class="col-md-3 col-sm-12 footer-1">
                 <div class="mt-20 mb-20">
                     <a class="d-flex" href="index.html">
-                        <img class="light-mode" alt="Kigali Nanny Agency" src="assets/imgs/template/logo-w.svg"/>
-                        <img class="dark-mode" alt="Kigali Nanny Agency" src="assets/imgs/template/logo-w.svg"/>
+                        <img class="light-mode" alt="Kigali Nanny Agency"  style="width: 100px;" src="{% static 'img/logo/logo-green.png' %}"/>
+                        <img class="dark-mode" alt="Kigali Nanny Agency"  style="width: 100px;" src="{% static 'img/logo/logo-green.png' %}"/>
                     </a>
                     <div class="box-info-contact mt-0">
                         <p class="text-md neutral-400 icon-address">Kigali Business Center, KG 7 Ave, Kigali, Rwanda</p>
