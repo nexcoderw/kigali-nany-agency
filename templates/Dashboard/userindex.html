@@ -31,24 +31,15 @@
                                         <span class="fs-14 text-gray-6">Since 16 Aprill 2015</span>
                                     </div>
                                 </div>
-                                <div>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a href="user-dashboard-setting.html" class="p-1 rounded-circle align-items-center justify-content-center btn-edit">
-                                            <i class="fi fi-rr-pencil fs-7"></i>
-                                        </a>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
                     <div class="card-body user-sidebar-body">
                         <ul class="dashboard-sidebar-menu">
-                            <li class="py-2"><a href="user-dashboard-home.html"><i class="fi fi-rr-home me-1"></i> User Dashboard</a></li>
-                            <li class="py-2"><a href="user-dashboard-bookings.html"><i class="fi fi-rr-calendar me-1"></i>My Bookings</a></li>
-                            <li class="py-2"><a href="user-dashboard-wishlist.html"><i class="fi fi-rr-heart me-1"></i>My Wishlist</a></li>
-                            <li class="py-2"><a href="user-dashboard-wallet.html"><i class="fi fi-rr-money me-1"></i>My Wallet</a></li>
-                            <li class="py-2"><a href="user-dashboard-profile.html"><i class="fi fi-rr-user me-1"></i>My Profile</a></li>
-                            <li class="py-2"><a href="user-dashboard-setting.html"><i class="fi fi-rr-settings me-1"></i>Setting</a></li>
+                            <li class="py-2"><a href="/dashboard"><i class="fi fi-rr-home me-1"></i> User Dashboard</a></li>
+                            <li class="py-2"><a href="/userbookings"><i class="fi fi-rr-calendar me-1"></i>My Bookings</a></li>
+                            <li class="py-2"><a href="/#"><i class="fi fi-rr-user me-1"></i>My Profile</a></li>
                         </ul>
                     </div>
                 </div>
@@ -110,46 +101,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!--notifications & recent bookings-->
-                <div class="row mt-4">
-                    <!-- Booking -->
-                    <div class="col-xl-12 d-flex">
-                        <div class="card shadow-none flex-fill">
-                            <div class="card-header">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="neutral-1000 text-md-bold fs-5">Bookings Statistics</span>
-                                    <div class="dropdown">
-                                        <a href="javascript:void(0);" class="dropdown-toggle btn btn-sort bg-neutral-100 btn-sm text-gray-6 rounded-pill fw-normal fs-8 d-inline-flex align-items-center" data-bs-toggle="dropdown">
-                                            <i class="fi fi-rr-filter-list me-2"></i>Fillter
-                                        </a>
-                                        <ul class="dropdown-menu small dropdown-menu-end p-2">
-                                            <li>
-                                                <a href="javascript:void(0);" class="dropdown-item rounded-1">
-                                                    <i class="ti ti-point-filled me-1"></i>All
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);" class="dropdown-item rounded-1">
-                                                    <i class="ti ti-point-filled me-1"></i>Recent
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="card shadow-none mb-2">
-                                    <div class="card-body">
-                                        <div id="chart"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Booking -->
-
                 </div>
 
                 <!--notifications & recent bookings-->
@@ -297,77 +248,6 @@
                                     </div>
                                 </div>
 
-                                <div class="card shadow-none mb-2">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center flex-wrap row-gap-2">
-                                            <a href="cars-details-1.html" class="thumb-1 flex-shrink-0 me-2">
-                                                <img src="assets/imgs/cars-listing/cars-listing-6/car-2.png" class="img-fluid" alt="Img">
-                                            </a>
-                                            <div class="flex-fill">
-                                                <div class="d-flex justify-content-between align-items-center mb-1">
-                                                    <p class="fs-6 text-truncate text-md-bold"><a href="cars-details-1.html">Ford
-                                                            Mustang GT Premium
-                                                            <span class="text-gray-5 fw-normal fs-8">( Australia )</span></a>
-                                                    </p>
-                                                    <span class="badge badge-purple badge-sm neutral-500 rounded-pill"><i class="ti ti-point-filled me-1"></i>Paid</span>
-                                                </div>
-                                                <div class="d-flex align-items-center flex-wrap">
-                                                    <p class="fs-8 d-flex align-items-center border-end pe-2 me-2 mb-0"><i class="isax isax-calendar-25 me-2"></i>Date : 01 Jan 2025</p>
-                                                    <p class="fs-8 d-flex align-items-center"><i class="isax isax-timer5 me-2"></i>Time:
-                                                        06:30 AM</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card shadow-none mb-2">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center flex-wrap row-gap-2">
-                                            <a href="cars-details-1.html" class="thumb-1 flex-shrink-0 me-2">
-                                                <img src="assets/imgs/cars-listing/cars-listing-6/car-3.png" class="img-fluid" alt="Img">
-                                            </a>
-                                            <div class="flex-fill">
-                                                <div class="d-flex justify-content-between align-items-center mb-1">
-                                                    <p class="fs-6 text-truncate text-md-bold"><a href="cars-details-1.html">Subaru
-                                                            Impreza WRX STI
-                                                            <span class="text-gray-5 fw-normal fs-8">( Australia )</span></a>
-                                                    </p>
-                                                    <span class="badge badge-purple badge-sm neutral-500 rounded-pill"><i class="ti ti-point-filled me-1"></i>Paid</span>
-                                                </div>
-                                                <div class="d-flex align-items-center flex-wrap">
-                                                    <p class="fs-8 d-flex align-items-center border-end pe-2 me-2 mb-0"><i class="isax isax-calendar-25 me-2"></i>Date : 01 Jan 2025</p>
-                                                    <p class="fs-8 d-flex align-items-center"><i class="isax isax-timer5 me-2"></i>Time:
-                                                        06:30 AM</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card shadow-none mb-2">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center flex-wrap row-gap-2">
-                                            <a href="cars-details-1.html" class="thumb-1 flex-shrink-0 me-2">
-                                                <img src="assets/imgs/cars-listing/cars-listing-6/car-4.png" class="img-fluid" alt="Img">
-                                            </a>
-                                            <div class="flex-fill">
-                                                <div class="d-flex justify-content-between align-items-center mb-1">
-                                                    <p class="fs-6 text-truncate text-md-bold"><a href="cars-details-1.html">Mazda MX-5
-                                                            Miata Club
-                                                            <span class="text-gray-5 fw-normal fs-8">( Australia )</span></a>
-                                                    </p>
-                                                    <span class="badge badge-purple badge-sm neutral-500 rounded-pill"><i class="ti ti-point-filled me-1"></i>Paid</span>
-                                                </div>
-                                                <div class="d-flex align-items-center flex-wrap">
-                                                    <p class="fs-8 d-flex align-items-center border-end pe-2 me-2 mb-0"><i class="isax isax-calendar-25 me-2"></i>Date : 01 Jan 2025</p>
-                                                    <p class="fs-8 d-flex align-items-center"><i class="isax isax-timer5 me-2"></i>Time:
-                                                        06:30 AM</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

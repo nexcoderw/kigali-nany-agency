@@ -26,3 +26,5 @@ def Signup(request):
 
 def UserDashboard(request):
     return render(request, 'Dashboard/userindex.html')
+def UserBookings(request):
+    return render(request, 'Dashboard/userbookings.html')
