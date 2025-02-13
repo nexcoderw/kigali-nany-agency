@@ -42,5 +42,23 @@ class ClientProfile(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.number_of_children} children"
 
+class Booking(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('accepted', 'Accepted'),
+        ('declined', 'Declined'),
+        ('completed', 'Completed'),
+    ]
+
+    client = models.ForeignKey(ClientProfile, on_delete=models.CASCADE, related_name="bookings")
+    nanny = models.ForeignKey(NannyProfile, on_delete=models.CASCADE, related_name="bookings")
+    date_requested = models.DateTimeField(auto_now_add=True)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+
+    def __str__(self):
+        return f"Booking by {self.client.user.username} for {self.nanny.user.username} - {self.status}"
+
 
 
