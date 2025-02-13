@@ -23,7 +23,10 @@ def contact(request):
     return render(request, 'pages/contact.html')
 
 def Signup(request):
+    print("🔍 Signup view triggered!")  # Debugging
     if request.method == "POST":
+        print("✅ Signup form submitted!")  # Debugging
+
         username = request.POST["username"]
         email = request.POST["email"]
         phone = request.POST["phone"]
@@ -33,31 +36,34 @@ def Signup(request):
 
         if password != confirm_password:
             messages.error(request, "Passwords do not match.")
-            return redirect("signup")
+            return redirect("base:signup")
 
         if UserProfile.objects.filter(username=username).exists():
             messages.error(request, "Username already taken.")
-            return redirect("signup")
+            return redirect("base:signup")
 
         user = UserProfile.objects.create_user(username=username, email=email, phone=phone, role=role, password=password)
         messages.success(request, "Account created successfully! You can now log in.")
-        return redirect("login")
+        return redirect("base:login")
 
     return render(request, "Auth/signup.html")
 
 
+
 def Login(request):
+    print("🔍 Login view triggered!")
     if request.method == "POST":
+        print("✅ Login form submitted!")  # Debugging
         username = request.POST["username"]
         password = request.POST["password"]
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect("dashboard")  # Redirect to dashboard instead of home
+            return redirect("base:dashboard")  # Redirect to dashboard instead of home
         else:
             messages.error(request, "Invalid username or password")
-            return redirect("login")
+            return redirect("base:login")
 
     return render(request, "Auth/login.html")
 
