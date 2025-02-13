@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .models import UserProfile
 
 def home(request):
     return render(request, 'pages/index.html')
@@ -18,10 +21,48 @@ def showJob(request):
 
 def contact(request):
     return render(request, 'pages/contact.html')
-def Login(request):
-    return render(request, 'Auth/login.html')
 def Signup(request):
-    return render(request, 'Auth/signup.html')
+    if request.method == "POST":
+        username = request.POST["username"]
+        email = request.POST["email"]
+        phone = request.POST["phone"]
+        role = request.POST["role"]
+        password = request.POST["password"]
+        confirm_password = request.POST["confirm_password"]
+
+        if password != confirm_password:
+            messages.error(request, "Passwords do not match.")
+            return redirect("base:signup")
+
+        if UserProfile.objects.filter(username=username).exists():
+            messages.error(request, "Username already taken.")
+            return redirect("base:signup")
+
+        user = UserProfile.objects.create_user(username=username, email=email, phone=phone, role=role, password=password)
+        messages.success(request, "Account created successfully! You can now log in.")
+        return redirect("base:login")
+
+    return render(request, "Auth/signup.html")
+
+def Login(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect("base:home")  # Redirect to home page after login
+        else:
+            messages.error(request, "Invalid username or password")
+            return redirect("base:login")
+
+    return render(request, "Auth/login.html")
+
+def Logout(request):
+    logout(request)
+    messages.success(request, "You have been logged out successfully.")
+    return redirect("base:login")
 
 #Dashboard pages
 def login_redirect(view_func):
