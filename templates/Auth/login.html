@@ -12,31 +12,32 @@
                         <h4 class="neutral-1000">Welcome back</h4>
                     </div>
                     <div class="form-login mt-30">
-                        <form action="#">
+                        <form method="POST" action="{% url 'base:login' %}">
+                            {% csrf_token %}
                             <div class="form-group">
-                                <input class="form-control username" type="text" placeholder="Email / Username">
+                                <input class="form-control" type="text" name="username" placeholder="Email / Username" required />
                             </div>
                             <div class="form-group">
-                                <input class="form-control password" type="password" placeholder="****************">
+                                <input class="form-control" type="password" name="password" placeholder="Password" required />
                             </div>
                             <div class="form-group">
                                 <div class="box-remember-forgot">
-                                    <div class="remeber-me">
-                                        <label class="text-xs-medium neutral-500"> <input class="cb-remember" type="checkbox">Remember me </label>
+                                    <label class="neutral-500">
+                                        <input class="cb-remember" type="checkbox" name="remember_me"> Remember me
+                                    </label>
+                                    <div class="forgotpass">
+                                        <a class="neutral-500" href="#">Forgot password?</a>
                                     </div>
-                                    <div class="forgotpass"><a class="text-xs-medium neutral-500" href="#">Forgot password?</a></div>
                                 </div>
                             </div>
                             <div class="form-group mb-30">
-                                <a class="btn btn-primary w-100" href="#">Sign in
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </a>
+                                <button class="btn btn-primary w-100" type="submit">Sign In</button>
                             </div>
-                            
-                            <p class="text-sm-medium neutral-500 text-center mt-70">Don’t have an account? <a class="neutral-1000" href="signup">Register Here !</a></p>
+                            <p class="text-sm-medium neutral-500 text-center mt-70">
+                                Don’t have an account? <a class="neutral-1000" href="{% url 'base:signup' %}">Register Here!</a>
+                            </p>
                         </form>
+                        
                     </div>
                 </div>
             </div>
