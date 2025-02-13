@@ -60,5 +60,18 @@ class Booking(models.Model):
     def __str__(self):
         return f"Booking by {self.client.user.username} for {self.nanny.user.username} - {self.status}"
 
+class Review(models.Model):
+    client = models.ForeignKey(ClientProfile, on_delete=models.CASCADE, related_name="reviews")
+    nanny = models.ForeignKey(NannyProfile, on_delete=models.CASCADE, related_name="reviews")
+    rating = models.IntegerField(
+        choices=[(i, str(i)) for i in range(1, 6)],  # Ratings from 1 to 5
+        help_text="Rate the nanny from 1 (worst) to 5 (best)"
+    )
+    comment = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Review by {self.client.user.username} for {self.nanny.user.username} - {self.rating} stars"
+
 
 
