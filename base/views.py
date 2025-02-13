@@ -21,6 +21,7 @@ def showJob(request):
 
 def contact(request):
     return render(request, 'pages/contact.html')
+
 def Signup(request):
     if request.method == "POST":
         username = request.POST["username"]
@@ -32,17 +33,18 @@ def Signup(request):
 
         if password != confirm_password:
             messages.error(request, "Passwords do not match.")
-            return redirect("base:signup")
+            return redirect("signup")
 
         if UserProfile.objects.filter(username=username).exists():
             messages.error(request, "Username already taken.")
-            return redirect("base:signup")
+            return redirect("signup")
 
         user = UserProfile.objects.create_user(username=username, email=email, phone=phone, role=role, password=password)
         messages.success(request, "Account created successfully! You can now log in.")
-        return redirect("base:login")
+        return redirect("login")
 
     return render(request, "Auth/signup.html")
+
 
 def Login(request):
     if request.method == "POST":
@@ -52,17 +54,18 @@ def Login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect("base:home")  # Redirect to home page after login
+            return redirect("dashboard")  # Redirect to dashboard instead of home
         else:
             messages.error(request, "Invalid username or password")
-            return redirect("base:login")
+            return redirect("login")
 
     return render(request, "Auth/login.html")
+
 
 def Logout(request):
     logout(request)
     messages.success(request, "You have been logged out successfully.")
-    return redirect("base:login")
+    return redirect("login")  # Redirect to login after logout
 
 #Dashboard pages
 def login_redirect(view_func):
