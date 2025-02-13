@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     return render(request, 'pages/index.html')
@@ -23,8 +24,17 @@ def Signup(request):
     return render(request, 'Auth/signup.html')
 
 #Dashboard pages
+def login_redirect(view_func):
+    def wrapper(request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('/')
+        return view_func(request, *args, **kwargs)
+    return wrapper
 
+@login_required(login_url="/login")
 def UserDashboard(request):
     return render(request, 'Dashboard/userindex.html')
+
+@login_required(login_url="/login")
 def UserBookings(request):
     return render(request, 'Dashboard/userbookings.html')
