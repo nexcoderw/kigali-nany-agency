@@ -21,3 +21,8 @@ def Login(request):
     return render(request, 'Auth/login.html')
 def Signup(request):
     return render(request, 'Auth/signup.html')
+
+#Dashboard pages
+
+def Dashboard(request):
+    return render(request, 'Dashboard/index.html')
