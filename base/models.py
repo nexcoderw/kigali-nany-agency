@@ -16,3 +16,14 @@ class NannyProfile(models.Model):
 
     def __str__(self):
         return self.full_name
+
+class Booking(models.Model):
+    client = models.ForeignKey(User, on_delete=models.CASCADE, related_name='client_bookings')
+    nanny = models.ForeignKey(User, on_delete=models.CASCADE, related_name='nanny_bookings')
+    start_date = models.DateField()
+    end_date = models.DateField()
+    status = models.CharField(max_length=10, choices=[('pending', 'Pending'), ('confirmed', 'Confirmed'), ('completed', 'Completed')])
+    payment_status = models.CharField(max_length=10, choices=[('paid', 'Paid'), ('unpaid', 'Unpaid')])
+
+    def __str__(self):
+        return f"Booking from {self.start_date} to {self.end_date} by {self.client.username}"
