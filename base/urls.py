@@ -17,5 +17,6 @@ urlpatterns = [
     path('login', Login, name="login"),
     path('dashboard', UserDashboard, name="dashboard"),
     path('userbookings', UserBookings, name="userbookings"),
+    path('logout', Logout, name="logout"),
     
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

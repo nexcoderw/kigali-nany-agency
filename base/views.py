@@ -71,7 +71,7 @@ def Login(request):
 def Logout(request):
     logout(request)
     messages.success(request, "You have been logged out successfully.")
-    return redirect("login")  # Redirect to login after logout
+    return redirect("base:logout")  # Redirect to login after logout
 
 #Dashboard pages
 def login_redirect(view_func):
