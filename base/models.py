@@ -23,3 +23,15 @@ class UserProfile(AbstractUser):
 
     def __str__(self):
         return f"{self.username} ({self.role})"
+    
+class NannyProfile(models.Model):
+    user = models.OneToOneField(UserProfile, on_delete=models.CASCADE, related_name="nanny_profile")
+    experience = models.IntegerField(help_text="Years of experience")
+    hourly_rate = models.DecimalField(max_digits=6, decimal_places=2)
+    availability = models.BooleanField(default=True)
+    description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.experience} years experience"
+
+
