@@ -24,5 +24,5 @@ def Signup(request):
 
 #Dashboard pages
 
-def Dashboard(request):
-    return render(request, 'Dashboard/index.html')
+def UserDashboard(request):
+    return render(request, 'Dashboard/userindex.html')
