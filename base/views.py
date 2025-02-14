@@ -5,3 +5,6 @@ def home(request):
 
 def dashboard(request):
     return render(request, 'pages/user/dashboard.html')
+
+def getJobListings(request):
+    return render(request, 'pages/user/listing/index.html')
