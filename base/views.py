@@ -26,8 +26,29 @@ def getJobListings(request):
 
     return render(request, 'pages/user/listings/index.html', context)
 
+@login_required
 def addJobListing(request):
-    return render(request, 'pages/user/listings/create.html')
+    """
+    Add a new job listing.
+    """
+    if request.method == 'POST':
+        form = JobPostingForm(request.POST)
+        if form.is_valid():
+            job = form.save(commit=False)
+            job.client = request.user
+            job.save()
+            messages.success(request, _('Your job listing has been successfully created.'))
+            return redirect(reverse('base:getJobListings'))
+        else:
+            messages.error(request, _('Please fix the errors below.'))
+    else:
+        form = JobPostingForm()
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'pages/user/listings/create.html', context)
 
 def editJobListing(request):
     return render(request, 'pages/user/listings/edit.html')
