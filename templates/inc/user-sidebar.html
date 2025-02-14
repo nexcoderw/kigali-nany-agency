@@ -1,0 +1,58 @@
+<div class="col-xl-3 col-lg-4">
+    <div class="card user-sidebar mb-4">
+        <div class="card-header user-sidebar-header">
+            <div class="profile-content rounded-pill">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center justify-content-center py-2">
+                        <img src="https://static.vecteezy.com/system/resources/thumbnails/005/129/844/small_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg" alt="image" class="img-fluid avatar avatar-lg rounded-circle me-3">
+                        <div>
+                            <p class="fw-bold fs-5">Steven Jobs</p>
+                            <span class="fs-14 text-gray-6">Since 16 Aprill 2015</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <a href="#" class="p-1 rounded-circle align-items-center justify-content-center btn-edit">
+                                <i class="fi fi-rr-pencil fs-7"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body user-sidebar-body">
+            <ul class="dashboard-sidebar-menu">
+                <li class="py-2">
+                    <a href="#">
+                        <i class="fi fi-rr-dashboard"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="py-2">
+                    <a href="#">
+                        <i class="fi fi-rr-briefcase me-1"></i> 
+                        Job Listing
+                    </a>
+                </li>
+                <li class="py-2">
+                    <a href="#">
+                        <i class="fi fi-rr-users-alt me-1"></i> 
+                        Applicants
+                    </a>
+                </li>
+                <li class="py-2">
+                    <a href="#">
+                        <i class="fi fi-rr-booking me-1"></i> 
+                        My Bookings
+                    </a>
+                </li>
+                <li class="py-2">
+                    <a href="{% url 'auth:profile' %}">
+                        <i class="fi fi-rr-user-md me-1"></i> 
+                        My Profile
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
