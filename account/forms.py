@@ -11,6 +11,7 @@ class LoginForm(forms.Form):
             'placeholder': 'Enter your email',
             'required': 'required',
             'id': 'emailaddress',
+            'class': 'form-control username',
         }),
         label=_('Email Address'),
         error_messages={
@@ -20,9 +21,10 @@ class LoginForm(forms.Form):
     )
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            'placeholder': 'Enter your password',
+            'placeholder': '**************',
             'required': 'required',
             'id': 'password',
+            'class': 'form-control password',
         }),
         label=_('Password'),
         error_messages={
@@ -140,14 +142,17 @@ class RegisterForm(forms.ModelForm):
             'name': forms.TextInput(attrs={
                 'placeholder': 'Enter your name',
                 'required': 'required',
+                'class': 'form-control username',
             }),
             'email': forms.EmailInput(attrs={
                 'placeholder': 'Enter your email address',
                 'required': 'required',
+                'class': 'form-control email',
             }),
             'phone_number': forms.TextInput(attrs={
                 'placeholder': 'Enter your phone number',
                 'required': 'required',
+                'class': 'form-control username',
             }),
             'role': forms.Select(attrs={
                 'required': 'required',
