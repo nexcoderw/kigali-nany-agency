@@ -46,10 +46,15 @@ def userRegister(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST, request.FILES)
         if form.is_valid():
-            user = form.save()
+            user = form.save(commit=False)  # Don't save the user yet
+            # Set the password manually to ensure it's hashed
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+
+            # Log the user in immediately after saving
             auth_login(request, user)
             messages.success(request, _("Your account has been created successfully and you are now logged in."))
-            return redirect(reverse('auth:login'))
+            return redirect(reverse('base:home'))  # Or wherever you want to redirect
         else:
             for field, errors in form.errors.items():
                 for error in errors:

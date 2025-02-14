@@ -38,8 +38,7 @@ class LoginForm(forms.Form):
         password = cleaned_data.get('password')
 
         if email and password:
-            # Ensure that 'email' is used as the username for authentication
-            user = authenticate(request=self.request, username=email, password=password)
+            user = authenticate(email=email, password=password)
             if not user:
                 raise forms.ValidationError(_('The email or password you entered is incorrect. Please try again.'))
             if not user.is_active:
@@ -148,12 +147,11 @@ class RegisterForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={
                 'placeholder': 'Enter your email address',
                 'required': 'required',
-                'class': 'form-control email',
+                'class': 'form-control username',
             }),
             'phone_number': forms.TextInput(attrs={
                 'placeholder': 'Enter your phone number',
                 'required': 'required',
-                'class': 'form-control username',
             }),
             'role': forms.Select(attrs={
                 'required': 'required',
