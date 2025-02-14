@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from base.models import JobPosting, JobCategory, JobStatus
+from django.contrib.auth import get_user_model
 
 @admin.register(JobPosting)
 class JobPostingAdmin(admin.ModelAdmin):
@@ -91,3 +92,9 @@ class JobPostingAdmin(admin.ModelAdmin):
     @admin.action(description='Mark selected jobs as in progress')
     def make_in_progress(self, request, queryset):
         queryset.update(status=JobStatus.IN_PROGRESS)
+
+    # Modify the client field to only show users with 'Client' role
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        form.base_fields['client'].queryset = get_user_model().objects.filter(role='Client')
+        return form
