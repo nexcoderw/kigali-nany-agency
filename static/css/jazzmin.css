@@ -1,0 +1,9 @@
+@import url(https://fonts.googleapis.com/css2?family=Urbanist:wght@100..900&display=swap);
+.main-sidebar {
+    background-color: #70f46d;
+}
+
+/* Apply the Prompt font */
+body, .content-wrapper, .main-sidebar, .main-sidebar .sidebar, .main-sidebar .sidebar-menu, .main-sidebar .sidebar-menu .treeview-menu {
+    font-family: "Prompt", sans-serif;
+}
