@@ -2,6 +2,7 @@ from django import forms
 from account.models import *
 from django.contrib.auth import authenticate
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.password_validation import validate_password
 
 class LoginForm(forms.Form):
@@ -111,6 +112,13 @@ class UserProfileForm(forms.ModelForm):
         if User.objects.filter(phone_number=phone_number).exclude(pk=self.instance.pk).exists():
             raise forms.ValidationError(_('This phone number is already in use. Please use a different one.'))
         return phone_number
+
+class PasswordChangeForm(PasswordChangeForm):
+    old_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Ancien mot de passe'}))
+    new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Nouveau mot de passe'}))
+    new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirmer le nouveau mot de passe'}))
+    class Meta:
+        model = User
 
 class RegisterForm(forms.ModelForm):
     """
