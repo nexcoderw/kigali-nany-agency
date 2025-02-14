@@ -13,55 +13,24 @@
                     <div class="form-login mt-30">
                         <form method="POST">
                             {% csrf_token %}
-                            {{ form.non_field_errors }}
-                            <div class="form-group">
-                                {{ form.email }}
-                                {% if form.email.errors %}
-                                    <div class="text-danger">
-                                        {{ form.email.errors }}
-                                    </div>
-                                {% endif %}
-                            </div>
                             <div class="form-group">
                                 {{ form.name }}
-                                {% if form.name.errors %}
-                                    <div class="text-danger">
-                                        {{ form.name.errors }}
-                                    </div>
-                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form.email }}
                             </div>
                             <div class="form-group">
                                 {{ form.phone_number }}
-                                {% if form.phone_number.errors %}
-                                    <div class="text-danger">
-                                        {{ form.phone_number.errors }}
-                                    </div>
-                                {% endif %}
                             </div>
                             <div class="form-group">
                                 {{ form.password }}
-                                {% if form.password.errors %}
-                                    <div class="text-danger">
-                                        {{ form.password.errors }}
-                                    </div>
-                                {% endif %}
                             </div>
                             <div class="form-group">
                                 {{ form.confirm_password }}
-                                {% if form.confirm_password.errors %}
-                                    <div class="text-danger">
-                                        {{ form.confirm_password.errors }}
-                                    </div>
-                                {% endif %}
                             </div>
                             <div class="form-group my-3">
                                 <label class="d-block neutral-500">Select Role:</label>
                                 {{ form.role }}
-                                {% if form.role.errors %}
-                                    <div class="text-danger">
-                                        {{ form.role.errors }}
-                                    </div>
-                                {% endif %}
                             </div>
                             <div class="form-group mb-30">
                                 <button class="btn btn-primary w-100" type="submit">Sign up
