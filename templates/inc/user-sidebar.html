@@ -6,7 +6,7 @@
                     <div class="d-flex align-items-center justify-content-center py-2">
                         <img src="https://static.vecteezy.com/system/resources/thumbnails/005/129/844/small_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg" alt="image" class="img-fluid avatar avatar-lg rounded-circle me-3">
                         <div>
-                            <p class="fw-bold fs-5">{{ request.user.name }}</p>
+                            <p class="fw-bold fs-5">{{ request.user.name }} ({{ request.user.role }})</p>
                             <span class="fs-14 text-gray-6">Since {{ request.user.created_at|date }}</span>
                         </div>
                     </div>
@@ -22,36 +22,57 @@
         </div>
         <div class="card-body user-sidebar-body">
             <ul class="dashboard-sidebar-menu">
-                <li class="py-2">
-                    <a href="{% url 'base:dashboard' %}">
-                        <i class="fi fi-rr-dashboard"></i>
-                        Dashboard
-                    </a>
-                </li>
-                <li class="py-2">
-                    <a href="{% url 'base:getJobListings' %}">
-                        <i class="fi fi-rr-briefcase me-1"></i> 
-                        Job Listing
-                    </a>
-                </li>
-                <li class="py-2">
-                    <a href="#">
-                        <i class="fi fi-rr-users-alt me-1"></i> 
-                        Applicants
-                    </a>
-                </li>
-                <li class="py-2">
-                    <a href="#">
-                        <i class="fi fi-rr-booking me-1"></i> 
-                        My Bookings
-                    </a>
-                </li>
-                <li class="py-2">
-                    <a href="{% url 'auth:profile' %}">
-                        <i class="fi fi-rr-user-md me-1"></i> 
-                        My Profile
-                    </a>
-                </li>
+                {% if user.role == 'Client' %}
+                    <li class="py-2">
+                        <a href="{% url 'base:dashboard' %}">
+                            <i class="fi fi-rr-dashboard"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a href="{% url 'base:getJobListings' %}">
+                            <i class="fi fi-rr-briefcase me-1"></i> 
+                            Job Listing
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a href="#">
+                            <i class="fi fi-rr-users-alt me-1"></i> 
+                            Applicants
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a href="{% url 'auth:profile' %}">
+                            <i class="fi fi-rr-user-md me-1"></i> 
+                            My Profile
+                        </a>
+                    </li>
+                {% elif user.role == 'Nanny' %}
+                    <li class="py-2">
+                        <a href="{% url 'base:dashboard' %}">
+                            <i class="fi fi-rr-dashboard"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a href="#">
+                            <i class="fi fi-rr-booking me-1"></i> 
+                            My Bookings
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a href="{% url 'auth:profile' %}">
+                            <i class="fi fi-rr-user-md me-1"></i> 
+                            My Profile
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="py-2">
+                        <p>
+                            You are not authorized to view navigation links.
+                        </p>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>

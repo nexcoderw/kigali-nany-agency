@@ -23,53 +23,127 @@
                 {% include 'inc/user-sidebar.html' %}
 
                 <div class="col-xl-9 col-lg-8">
-                    <div class="row">
-                        <div class="col-xl-4 mb-2 mb-lg-0">
-                            <div class="card shadow-none">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <span class="avatar avatar-xl rounded-circle bg-primary me-3">
-                                            <i class="fi fi-rr-bookmark fs-36"></i>
-                                        </span>
-                                        <div>
-                                            <h5><span class="odometer" data-count="25"></span></h5>
-                                            <p>Total Bookings</p>
+                    {% if user.role == 'Client' %}
+                        <div class="row">
+                            <div class="col-xl-3 mb-2 mb-lg-0">
+                                <div class="card shadow-none">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-column">
+                                            <span class="avatar avatar-xl rounded-circle bg-primary me-3">
+                                                <i class="fi fi-rr-ticket-alt"></i>
+                                            </span>
+                                            <div>
+                                                <p>Total Bookings</p>
+                                                <h5><span class="odometer" data-count="425"></span></h5>
+                                                <p><span class="text-success"><i class="fi fi-rr-arrow-small-up"></i>45%</span> This Week</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 mb-2 mb-lg-0">
+                                <div class="card shadow-none">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-column">
+                                            <span class="avatar avatar-xl rounded-circle bg-danger me-3">
+                                                <i class="fi fi-rr-car-side"></i>
+                                            </span>
+                                            <div>
+                                                <p>New Vehicles Listings</p>
+                                                <h5><span class="odometer" data-count="15"></span></h5>
+                                                <p><span class="text-danger">15%</span> This Week</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 mb-2 mb-lg-0">
+                                <div class="card shadow-none">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-column">
+                                            <span class="avatar avatar-xl rounded-circle bg-info me-3">
+                                                <i class="fi fi-rr-sack-dollar"></i>
+                                            </span>
+                                            <div>
+                                                <p>Total Transaction</p>
+                                                <h5>$<span class="odometer" data-count="625"></span></h5>
+                                                <p><span class="text-success"><i class="fi fi-rr-arrow-small-up"></i>25%</span> This Week</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 mb-2 mb-lg-0">
+                                <div class="card shadow-none">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-column">
+                                            <span class="avatar avatar-xl rounded-circle bg-warning me-3">
+                                                <i class="fi fi-rr-users-alt"></i>
+                                            </span>
+                                            <div>
+                                                <p>New Agents</p>
+                                                <h5><span class="odometer" data-count="12"></span></h5>
+                                                <p><span class="text-danger"><i class="fi fi-rr-arrow-small-down"></i>5%</span> This Week</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    {% elif user.role == 'Nanny' %}
+                        <div class="row">
+                            <div class="col-xl-4 mb-2 mb-lg-0">
+                                <div class="card shadow-none">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <span class="avatar avatar-xl rounded-circle bg-primary me-3">
+                                                <i class="fi fi-rr-bookmark fs-36"></i>
+                                            </span>
+                                            <div>
+                                                <h5><span class="odometer" data-count="25"></span></h5>
+                                                <p>Total Bookings</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 mb-2 mb-lg-0">
+                                <div class="card shadow-none">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <span class="avatar avatar-xl rounded-circle bg-danger me-3">
+                                                <i class="fi fi-rr-research-arrows-circle"></i>
+                                            </span>
+                                            <div>
+                                                <h5>$<span class="odometer" data-count="28"></span>K</h5>
+                                                <p>Total Transactions</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="card shadow-none">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <span class="avatar avatar-xl rounded-circle bg-warning me-3">
+                                                <i class="fi fi-rr-wallet"></i>
+                                            </span>
+                                            <div>
+                                                <h5>$<span class="odometer" data-count="2458"></span></h5>
+                                                <p>Wallet balance</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 mb-2 mb-lg-0">
-                            <div class="card shadow-none">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <span class="avatar avatar-xl rounded-circle bg-danger me-3">
-                                            <i class="fi fi-rr-research-arrows-circle"></i>
-                                        </span>
-                                        <div>
-                                            <h5>$<span class="odometer" data-count="28"></span>K</h5>
-                                            <p>Total Transactions</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4">
-                            <div class="card shadow-none">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <span class="avatar avatar-xl rounded-circle bg-warning me-3">
-                                            <i class="fi fi-rr-wallet"></i>
-                                        </span>
-                                        <div>
-                                            <h5>$<span class="odometer" data-count="2458"></span></h5>
-                                            <p>Wallet balance</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {% else %}
+                        <p class="text-center">
+                            You are not authorized to view navigation links.
+                        </p>
+                    {% endif %}
                 </div>
             </div>
         </div>
