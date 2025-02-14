@@ -1,5 +1,5 @@
 {% extends 'layouts/app.html' %}
-
+{% load custom_filters %}
 {% block content %}
 
     <section class="box-section background-body pt-80">
@@ -101,7 +101,7 @@
                                                     <tr>
                                                         <th>ID</th>
                                                         <th>Job Title & Salary</th>
-                                                        <th>Time (Months)</th>
+                                                        <th>Time</th>
                                                         <th>Address</th>
                                                         <th>Status</th>
                                                         <th>Actions</th>
@@ -113,19 +113,25 @@
                                                             <td><a href="javascript:void(0);" class="text-primary-dark fw-medium">#{{ job.id }}</a></td>
                                                             <td>
                                                                 <div class="d-flex align-items-center">
-                                                                    <a href="#" class="avatar avatar-lg">
-                                                                        <img src="https://carento-demo.vercel.app/assets/imgs/cars-listing/cars-listing-6/car-1.png" class="img-fluid" alt="img">
-                                                                    </a>
                                                                     <div class="ms-2">
                                                                         <p class="text-dark mb-0 fw-medium fs-14">
                                                                             <a href="#">{{ job.title }}</a>
                                                                         </p>
-                                                                        <span class="fs-14 fw-normal neutral-500">{{ job.salary }} RWF</span>
+                                                                        <span class="fw-bold neutral-500" style="font-size: 12px;">{{ job.salary }} RWF</span>
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            <td>{{ job.start_date|date:"F j, Y" }} - {{ job.end_date|date:"F j, Y" }}</td>
-                                                            <td>{{ job.location }}</td>
+                                                            <td>{% if job.end_date %}{{ job.start_date|time_diff }}{% else %}Ongoing{% endif %}</td>
+                                                            <td>
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="ms-2">
+                                                                        <p class="text-dark mb-0 fw-medium fs-14">
+                                                                            <a href="#">{{ job.location }}</a>
+                                                                        </p>
+                                                                        <span class="fw-bold neutral-500" style="font-size: 12px;">{{ job.get_category_display }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
                                                             <td>
                                                                 {% if job.status == 'open' %}
                                                                     <span class="badge badge-success rounded-pill d-inline-flex align-items-center fs-10">
@@ -156,6 +162,10 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
+                                                    {% empty %}
+                                                        <div class="col-12">
+                                                            <p class="text-center">No job listings found. Add a new job to get started!</p>
+                                                        </div>
                                                     {% endfor %}
                                                 </tbody>
                                             </table>
