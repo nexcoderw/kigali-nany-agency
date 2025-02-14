@@ -11,3 +11,6 @@ def getJobListings(request):
 
 def addJobListing(request):
     return render(request, 'pages/user/listings/create.html')
+
+def editJobListing(request):
+    return render(request, 'pages/user/listings/edit.html')
