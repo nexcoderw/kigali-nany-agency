@@ -25,7 +25,12 @@ class JobStatus(models.TextChoices):
     IN_PROGRESS = 'in_progress', _('In Progress')
 
 class JobPosting(models.Model):
-    client = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='job_postings')
+    client = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+        related_name='job_postings',
+        limit_choices_to={'role': 'Client'}
+    )
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.CharField(max_length=50, choices=JobCategory.choices)
