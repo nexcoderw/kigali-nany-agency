@@ -13,4 +13,5 @@ urlpatterns = [
     path('job-listings/', getJobListings, name="getJobListings"),
     path('job-listing/add/', addJobListing, name="addJobListing"),
     path('job-listing/edit/', editJobListing, name="editJobListing"),
+    path('job-listing/delete/', deleteJobListing, name="deleteJobListing"),
 ]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

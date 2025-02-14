@@ -14,3 +14,6 @@ def addJobListing(request):
 
 def editJobListing(request):
     return render(request, 'pages/user/listings/edit.html')
+
+def deleteJobListing(request):
+    pass
