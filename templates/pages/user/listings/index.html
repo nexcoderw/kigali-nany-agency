@@ -35,26 +35,55 @@
                                                 <span class="icon-addon">
                                                     <i class="fi fi-rr-search"></i>
                                                 </span>
-                                                <input type="text" id="search-input" class="input-small" placeholder="Search job title or location">
+                                                <input type="text" class="input-small" placeholder="Search job title or location">
                                             </div>
 
                                             <!-- Status Filter Dropdown -->
                                             <div class="dropdown">
-                                                <select id="status-filter" class="form-select">
-                                                    <option value="">Select Status</option>
-                                                    <option value="open">Open</option>
-                                                    <option value="closed">Closed</option>
-                                                    <option value="pending">Pending</option>
-                                                    <option value="in_progress">In Progress</option>
-                                                </select>
+                                                <a href="javascript:void(0);" class="dropdown-toggle btn btn-sort bg-neutral-100 btn-sm neutral-500 rounded-pill fw-normal fs-8 d-inline-flex align-items-center" data-bs-toggle="dropdown">
+                                                    <i class="fi fi-rr-steering-wheel me-2"></i> Status
+                                                </a>
+                                                <ul class="dropdown-menu small dropdown-menu-end p-2">
+                                                    <li>
+                                                        <a href="?status=open" class="dropdown-item rounded-1">
+                                                            <i class="ti ti-point-filled me-1"></i> Open
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="?status=closed" class="dropdown-item rounded-1">
+                                                            <i class="ti ti-point-filled me-1"></i> Closed
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="?status=pending" class="dropdown-item rounded-1">
+                                                            <i class="ti ti-point-filled me-1"></i> Pending
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="?status=in_progress" class="dropdown-item rounded-1">
+                                                            <i class="ti ti-point-filled me-1"></i> In Progress
+                                                        </a>
+                                                    </li>
+                                                </ul>
                                             </div>
 
                                             <!-- Sort Filter Dropdown -->
                                             <div class="dropdown">
-                                                <select id="sort-filter" class="form-select">
-                                                    <option value="newest">Sort by: Newest</option>
-                                                    <option value="oldest">Sort by: Oldest</option>
-                                                </select>
+                                                <a href="javascript:void(0);" class="dropdown-toggle btn btn-sort bg-neutral-100 btn-sm neutral-500 rounded-pill fw-normal fs-8 d-inline-flex align-items-center" data-bs-toggle="dropdown">
+                                                    <i class="fi fi-rr-filter-list me-2"></i> Sort
+                                                </a>
+                                                <ul class="dropdown-menu small dropdown-menu-end p-2">
+                                                    <li>
+                                                        <a href="?sort=newest" class="dropdown-item rounded-1">
+                                                            <i class="ti ti-point-filled me-1"></i> Newest
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="?sort=oldest" class="dropdown-item rounded-1">
+                                                            <i class="ti ti-point-filled me-1"></i> Oldest
+                                                        </a>
+                                                    </li>
+                                                </ul>
                                             </div>
 
                                         </div>
@@ -67,7 +96,7 @@
                                 <div class="card-body">
                                     <div class="card shadow-none mb-2">
                                         <div class="table-responsive">
-                                            <table class="table datatable table-striped" id="job-listings-table">
+                                            <table class="table datatable table-striped">
                                                 <thead class="thead-light">
                                                     <tr>
                                                         <th>ID</th>
@@ -133,13 +162,31 @@
                                         </div>
 
                                         <!-- Pagination -->
-                                        <nav aria-label="Page navigation example" id="pagination-container">
+                                        <nav aria-label="Page navigation example">
                                             <ul class="pagination">
+                                                <li class="page-item {% if job_postings.has_previous %}active{% endif %}">
+                                                    <a class="page-link" href="?page=1{% if status_filter %}&status={{ status_filter }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}" aria-label="Previous">
+                                                        <span aria-hidden="true">
+                                                            <svg width="12" height="12" viewbox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M6.00016 1.33325L1.3335 5.99992M1.3335 5.99992L6.00016 10.6666M1.3335 5.99992H10.6668" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </svg>
+                                                        </span>
+                                                    </a>
+                                                </li>
                                                 {% for page_num in job_postings.paginator.page_range %}
                                                     <li class="page-item {% if job_postings.number == page_num %}active{% endif %}">
-                                                        <a class="page-link" href="javascript:void(0);" onclick="loadPage({{ page_num }})">{{ page_num }}</a>
+                                                        <a class="page-link" href="?page={{ page_num }}{% if status_filter %}&status={{ status_filter }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}">{{ page_num }}</a>
                                                     </li>
                                                 {% endfor %}
+                                                <li class="page-item {% if job_postings.has_next %}active{% endif %}">
+                                                    <a class="page-link" href="?page={{ job_postings.paginator.num_pages }}{% if status_filter %}&status={{ status_filter }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}" aria-label="Next">
+                                                        <span aria-hidden="true">
+                                                            <svg width="12" height="12" viewbox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M5.99967 10.6666L10.6663 5.99992L5.99968 1.33325M10.6663 5.99992L1.33301 5.99992" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </svg>
+                                                        </span>
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </nav>
                                     </div>
@@ -153,52 +200,3 @@
     </section>
 
 {% endblock content %}
-
-{% block extra_js %}
-<script>
-    // Function to load job listings based on selected filters and pagination
-    function loadListings(page = 1) {
-        const statusFilter = document.querySelector('#status-filter').value;
-        const sortBy = document.querySelector('#sort-filter').value;
-        const searchQuery = document.querySelector('#search-input').value;
-
-        const url = new URL(window.location.href);
-        const params = new URLSearchParams();
-
-        if (statusFilter) params.append('status', statusFilter);
-        if (sortBy) params.append('sort', sortBy);
-        if (searchQuery) params.append('search', searchQuery);
-        params.append('page', page);
-
-        url.search = params.toString();
-
-        fetch(url)
-            .then(response => response.text())
-            .then(data => {
-                // Update the job listings table with the new data
-                document.querySelector('#job-listings-table').innerHTML = data;
-            });
-    }
-
-    // Event listener for filter changes
-    document.querySelector('#status-filter').addEventListener('change', function () {
-        loadListings();
-    });
-
-    document.querySelector('#sort-filter').addEventListener('change', function () {
-        loadListings();
-    });
-
-    document.querySelector('#search-input').addEventListener('keyup', function () {
-        loadListings();
-    });
-
-    // Pagination handling
-    function loadPage(page) {
-        loadListings(page);
-    }
-
-    // Initial load on page load
-    loadListings();
-</script>
-{% endblock %}
