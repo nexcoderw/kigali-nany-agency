@@ -1,4 +1,11 @@
-from django.shortcuts import render
+from base.forms import *
+from base.models import *
+from django.http import Http404
+from django.urls import reverse
+from django.contrib import messages
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
 
 def home(request):
     return render(request, 'pages/index.html')
@@ -6,8 +13,18 @@ def home(request):
 def dashboard(request):
     return render(request, 'pages/user/dashboard.html')
 
+@login_required
 def getJobListings(request):
-    return render(request, 'pages/user/listings/index.html')
+    """
+    Display the list of job postings.
+    """
+    job_postings = JobPosting.objects.filter(client=request.user).order_by('-created_at')
+
+    context = {
+        'job_postings': job_postings
+    }
+
+    return render(request, 'pages/user/listings/index.html', context)
 
 def addJobListing(request):
     return render(request, 'pages/user/listings/create.html')
