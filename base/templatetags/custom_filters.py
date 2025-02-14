@@ -1,6 +1,7 @@
 from django import template
 from datetime import datetime, date
 from django.utils import timezone
+from datetime import datetime as dt
 
 register = template.Library()
 
@@ -12,10 +13,17 @@ def time_diff(value):
     # Ensure value is a datetime object
     now = timezone.now()
 
-    # Check if value is a date object but not a datetime
+    # If value is a date object but not a datetime, convert it to datetime
     if isinstance(value, date) and not isinstance(value, datetime):
         # Convert to datetime if it's a date object
         value = datetime.combine(value, datetime.min.time())
+
+    # Make sure both now and value are timezone aware
+    if timezone.is_naive(value):
+        value = timezone.make_aware(value, timezone.get_current_timezone())
+
+    if timezone.is_naive(now):
+        now = timezone.make_aware(now, timezone.get_current_timezone())
 
     # Calculate the time difference
     delta = value - now
