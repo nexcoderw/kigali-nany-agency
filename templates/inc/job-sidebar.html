@@ -5,10 +5,31 @@
                 <h6 class="text-lg-bold item-collapse neutral-1000">Categories</h6>
                 <div class="box-collapse scrollFilter">
                     <ul class="list-filter-checkbox">
-                        <li>
-                            <span class="text-sm-medium">Accessories</span>
-                            <span class="checkmark"></span>
-                        </li>
+                        {% for code, name in job_categories %}
+                            <li>
+                                <a href="#" class="text-sm-medium">
+                                    {{ name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar-left border-1 background-body">
+        <div class="box-filters-sidebar">
+            <div class="block-filter border-1">
+                <h6 class="text-lg-bold item-collapse neutral-1000">Job Status</h6>
+                <div class="box-collapse scrollFilter">
+                    <ul class="list-filter-checkbox">
+                        {% for status_code, status_name in job_statuses %}
+                            <li>
+                                <a href="#" class="text-sm-medium">
+                                    {{ status_name }}
+                                </a>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
