@@ -13,7 +13,16 @@ def home(request):
     return render(request, 'pages/index.html')
 
 def getJobs(request):
-    return render(request, 'pages/jobs/index.html')
+    jobs = JobPosting.objects.all().order_by('-created_at')
+
+    context = {
+        'jobs': jobs
+    }
+
+    return render(request, 'pages/jobs/index.html', context)
+
+def showJobDetails(request):
+    pass
 
 def dashboard(request):
     return render(request, 'pages/user/dashboard.html')
