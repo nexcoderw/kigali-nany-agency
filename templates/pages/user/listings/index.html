@@ -10,9 +10,9 @@
                     <span>
                         <img src="https://carento-demo.vercel.app/assets/imgs/template/icons/arrow-right.svg" alt="Carento" />
                     </span>
-                    <a href="#" class="neutral-1000 text-md-bold">Job Listing</a>
+                    <a href="#" class="neutral-1000 text-md-bold">Job Listings</a>
                 </div>
-                <h3 class="mt-3 neutral-1000">Job Listing</h3>
+                <h3 class="mt-3 neutral-1000">Job Listings</h3>
             </div>
         </div>
     </section>
@@ -28,62 +28,44 @@
                             <div class="card shadow-none flex-fill">
                                 <div class="card-header">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <span class="neutral-1000 text-md-bold fs-5">Booking List</span>
-                                        <div class="fillter d-flex gap-2">
+                                        <span class="neutral-1000 text-md-bold fs-5">Job Listings</span>
+                                        <div class="d-flex gap-2">
                                             <div class="input-icon-start position-relative">
                                                 <span class="icon-addon">
                                                     <i class="fi fi-rr-search"></i>
                                                 </span>
-                                                <input type="text" class="input-small" placeholder="Search">
+                                                <input type="text" class="input-small" placeholder="Search job title or location">
                                             </div>
                                             <div class="dropdown">
                                                 <a href="javascript:void(0);" class="dropdown-toggle btn btn-sort bg-neutral-100 btn-sm neutral-500 rounded-pill fw-normal fs-8 d-inline-flex align-items-center" data-bs-toggle="dropdown">
-                                                    <i class="fi fi-rr-steering-wheel me-2"></i>
-                                                    Status
+                                                    <i class="fi fi-rr-steering-wheel me-2"></i> Status
                                                 </a>
                                                 <ul class="dropdown-menu small dropdown-menu-end p-2">
                                                     <li>
                                                         <a href="javascript:void(0);" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i>
-                                                            Pending
+                                                            <i class="ti ti-point-filled me-1"></i> Pending
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="javascript:void(0);" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i>
-                                                            Completed
+                                                            <i class="ti ti-point-filled me-1"></i> Completed
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="dropdown">
                                                 <a href="javascript:void(0);" class="dropdown-toggle btn btn-sort bg-neutral-100 btn-sm neutral-500 rounded-pill fw-normal fs-8 d-inline-flex align-items-center" data-bs-toggle="dropdown">
-                                                    <i class="fi fi-rr-filter-list me-2"></i>Sort
+                                                    <i class="fi fi-rr-filter-list me-2"></i> Sort
                                                 </a>
                                                 <ul class="dropdown-menu small dropdown-menu-end p-2">
                                                     <li>
                                                         <a href="javascript:void(0);" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i>Newest
+                                                            <i class="ti ti-point-filled me-1"></i> Newest
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="javascript:void(0);" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i>Oldest
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i>Paid
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i>Unpaid
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i>Cancelled
+                                                            <i class="ti ti-point-filled me-1"></i> Oldest
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -94,6 +76,7 @@
                                         </a>
                                     </div>
                                 </div>
+
                                 <div class="card-body">
                                     <div class="card shadow-none mb-2">
                                         <div class="table-responsive">
@@ -105,52 +88,49 @@
                                                         <th>Time (Months)</th>
                                                         <th>Address</th>
                                                         <th>Status</th>
-                                                        <th></th>
+                                                        <th>Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td><a href="javascript:void(0);" class="text-primary-dark fw-medium">#CR-2356</a>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <a href="#" class="avatar avatar-lg">
-                                                                    <img src="https://carento-demo.vercel.app/assets/imgs/cars-listing/cars-listing-6/car-1.png" class="img-fluid" alt="img">
-                                                                </a>
-                                                                <div class="ms-2">
-                                                                    <p class="text-dark mb-0 fw-medium fs-14">
-                                                                        <a href="#">
-                                                                            Taking Care of Kids
-                                                                        </a>
-                                                                    </p>
-                                                                    <span class="fs-14 fw-normal neutral-500">
-                                                                        30000 RWF
-                                                                    </span>
+                                                    {% for job in jobListing %}
+                                                        <tr>
+                                                            <td><a href="javascript:void(0);" class="text-primary-dark fw-medium">#{{ job.id }}</a></td>
+                                                            <td>
+                                                                <div class="d-flex align-items-center">
+                                                                    <a href="#" class="avatar avatar-lg">
+                                                                        <img src="https://carento-demo.vercel.app/assets/imgs/cars-listing/cars-listing-6/car-1.png" class="img-fluid" alt="img">
+                                                                    </a>
+                                                                    <div class="ms-2">
+                                                                        <p class="text-dark mb-0 fw-medium fs-14">
+                                                                            <a href="#">{{ job.title }}</a>
+                                                                        </p>
+                                                                        <span class="fs-14 fw-normal neutral-500">
+                                                                            {{ job.salary }} RWF
+                                                                        </span>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>2 Months</td>
-                                                        <td>Kanombe</td>
-                                                        <td>
-                                                            <span class="badge badge-info rounded-pill d-inline-flex align-items-center fs-10"><i class="fi fi-rr-caret-right me-1"></i>Pending</span>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <a href="#" class="px-2">
-                                                                    <i class="fi fi-rr-arrow-up-right-from-square"></i>
-                                                                    View
-                                                                </a>
-                                                                <a href="{% url 'base:editJobListing' %}" class="px-2">
-                                                                    <i class="fi fi-rr-attribution-pencil"></i>
-                                                                    Edit
-                                                                </a>
-                                                                <a href="{% url 'base:deleteJobListing' %}" class="px-2">
-                                                                    <i class="fi fi-rr-recycle-bin"></i>
-                                                                    Delete
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                            </td>
+                                                            <td>{{ job.start_date|date:"F j, Y" }} - {{ job.end_date|date:"F j, Y" }}</td>
+                                                            <td>{{ job.location }}</td>
+                                                            <td>
+                                                                <span class="badge badge-info rounded-pill d-inline-flex align-items-center fs-10">
+                                                                    <i class="fi fi-rr-caret-right me-1"></i>{{ job.get_status_display }}
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <div class="d-flex align-items-center">
+                                                                    <a href="{% url 'base:editJobListing' job.slug %}" class="px-2">
+                                                                        <i class="fi fi-rr-attribution-pencil"></i>
+                                                                        Edit
+                                                                    </a>
+                                                                    <a href="{% url 'base:deleteJobListing' job.slug %}" class="px-2">
+                                                                        <i class="fi fi-rr-recycle-bin"></i>
+                                                                        Delete
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
                                                 </tbody>
                                             </table>
                                         </div>
