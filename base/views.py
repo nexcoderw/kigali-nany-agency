@@ -8,3 +8,6 @@ def dashboard(request):
 
 def getJobListings(request):
     return render(request, 'pages/user/listings/index.html')
+
+def addJobListing(request):
+    return render(request, 'pages/user/listings/create.html')
