@@ -18,10 +18,10 @@ def getJobListings(request):
     """
     Display the list of job postings.
     """
-    jobListing = JobPosting.objects.filter(client=request.user).order_by('-created_at')
+    job_postings = JobPosting.objects.filter(client=request.user).order_by('-created_at')
 
     context = {
-        'jobListing': jobListing
+        'job_postings': job_postings
     }
 
     return render(request, 'pages/user/listings/index.html', context)

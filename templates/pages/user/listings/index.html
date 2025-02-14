@@ -30,41 +30,56 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="neutral-1000 text-md-bold fs-5">Job Listings</span>
                                         <div class="d-flex gap-2">
+                                            <!-- Search Input -->
                                             <div class="input-icon-start position-relative">
                                                 <span class="icon-addon">
                                                     <i class="fi fi-rr-search"></i>
                                                 </span>
                                                 <input type="text" class="input-small" placeholder="Search job title or location">
                                             </div>
+
+                                            <!-- Status Filter Dropdown -->
                                             <div class="dropdown">
                                                 <a href="javascript:void(0);" class="dropdown-toggle btn btn-sort bg-neutral-100 btn-sm neutral-500 rounded-pill fw-normal fs-8 d-inline-flex align-items-center" data-bs-toggle="dropdown">
                                                     <i class="fi fi-rr-steering-wheel me-2"></i> Status
                                                 </a>
                                                 <ul class="dropdown-menu small dropdown-menu-end p-2">
                                                     <li>
-                                                        <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                                                        <a href="?status=open" class="dropdown-item rounded-1">
+                                                            <i class="ti ti-point-filled me-1"></i> Open
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="?status=closed" class="dropdown-item rounded-1">
+                                                            <i class="ti ti-point-filled me-1"></i> Closed
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="?status=pending" class="dropdown-item rounded-1">
                                                             <i class="ti ti-point-filled me-1"></i> Pending
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="javascript:void(0);" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i> Completed
+                                                        <a href="?status=in_progress" class="dropdown-item rounded-1">
+                                                            <i class="ti ti-point-filled me-1"></i> In Progress
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </div>
+
+                                            <!-- Sort Filter Dropdown -->
                                             <div class="dropdown">
                                                 <a href="javascript:void(0);" class="dropdown-toggle btn btn-sort bg-neutral-100 btn-sm neutral-500 rounded-pill fw-normal fs-8 d-inline-flex align-items-center" data-bs-toggle="dropdown">
                                                     <i class="fi fi-rr-filter-list me-2"></i> Sort
                                                 </a>
                                                 <ul class="dropdown-menu small dropdown-menu-end p-2">
                                                     <li>
-                                                        <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                                                        <a href="?sort=newest" class="dropdown-item rounded-1">
                                                             <i class="ti ti-point-filled me-1"></i> Newest
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                                                        <a href="?sort=oldest" class="dropdown-item rounded-1">
                                                             <i class="ti ti-point-filled me-1"></i> Oldest
                                                         </a>
                                                     </li>
@@ -92,7 +107,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {% for job in jobListing %}
+                                                    {% for job in job_postings %}
                                                         <tr>
                                                             <td><a href="javascript:void(0);" class="text-primary-dark fw-medium">#{{ job.id }}</a></td>
                                                             <td>
@@ -104,28 +119,38 @@
                                                                         <p class="text-dark mb-0 fw-medium fs-14">
                                                                             <a href="#">{{ job.title }}</a>
                                                                         </p>
-                                                                        <span class="fs-14 fw-normal neutral-500">
-                                                                            {{ job.salary }} RWF
-                                                                        </span>
+                                                                        <span class="fs-14 fw-normal neutral-500">{{ job.salary }} RWF</span>
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                             <td>{{ job.start_date|date:"F j, Y" }} - {{ job.end_date|date:"F j, Y" }}</td>
                                                             <td>{{ job.location }}</td>
                                                             <td>
-                                                                <span class="badge badge-info rounded-pill d-inline-flex align-items-center fs-10">
-                                                                    <i class="fi fi-rr-caret-right me-1"></i>{{ job.get_status_display }}
-                                                                </span>
+                                                                {% if job.status == 'open' %}
+                                                                    <span class="badge badge-success rounded-pill d-inline-flex align-items-center fs-10">
+                                                                        <i class="fi fi-rr-check-circle me-1"></i> Open
+                                                                    </span>
+                                                                {% elif job.status == 'closed' %}
+                                                                    <span class="badge badge-danger rounded-pill d-inline-flex align-items-center fs-10">
+                                                                        <i class="fi fi-rr-door-closed me-1"></i> Closed
+                                                                    </span>
+                                                                {% elif job.status == 'pending' %}
+                                                                    <span class="badge badge-warning rounded-pill d-inline-flex align-items-center fs-10">
+                                                                        <i class="fi fi-rr-hourglass me-1"></i> Pending
+                                                                    </span>
+                                                                {% elif job.status == 'in_progress' %}
+                                                                    <span class="badge badge-info rounded-pill d-inline-flex align-items-center fs-10">
+                                                                        <i class="fi fi-rr-caret-right me-1"></i> In Progress
+                                                                    </span>
+                                                                {% endif %}
                                                             </td>
                                                             <td>
                                                                 <div class="d-flex align-items-center">
                                                                     <a href="{% url 'base:editJobListing' job.slug %}" class="px-2">
-                                                                        <i class="fi fi-rr-attribution-pencil"></i>
-                                                                        Edit
+                                                                        <i class="fi fi-rr-attribution-pencil"></i> Edit
                                                                     </a>
                                                                     <a href="{% url 'base:deleteJobListing' job.slug %}" class="px-2">
-                                                                        <i class="fi fi-rr-recycle-bin"></i>
-                                                                        Delete
+                                                                        <i class="fi fi-rr-recycle-bin"></i> Delete
                                                                     </a>
                                                                 </div>
                                                             </td>
@@ -134,6 +159,8 @@
                                                 </tbody>
                                             </table>
                                         </div>
+
+                                        <!-- Pagination -->
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination">
                                                 <li class="page-item">
