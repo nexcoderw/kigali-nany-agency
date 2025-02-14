@@ -8,7 +8,7 @@
                 <div class="col-md-9 mb-30 wow fadeInUp">
                     <h4 class="title-svg neutral-1000 mb-15">Latest Jobs</h4>
                     <p class="text-md-medium text-bold neutral-500">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae, amet?
+                        Browse job opportunities and apply easily.
                     </p>
                 </div>
             </div>
@@ -23,58 +23,28 @@
                         <div class="row align-items-center">
                             <div class="col-xl-4 col-md-4 mb-10 text-lg-start text-center">
                                 <div class="box-view-type">
-                                    <span class="text-sm-bold neutral-500 number-found">64 items found</span>
+                                    <span class="text-sm-bold neutral-500 number-found">{{ jobs_count }} jobs found</span>
                                 </div>
                             </div>
                             <div class="col-xl-8 col-md-8 mb-10 text-lg-end text-center">
                                 <div class="box-item-sort">
-                                    <a class="btn btn-sort" href="#">
-                                        <svg width="18" height="18" viewbox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M8.25 6L5.25 3M5.25 3L2.25 6M5.25 3L5.25 15" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            <path d="M9.75 12L12.75 15M12.75 15L15.75 12M12.75 15L12.75 3" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </svg>
-                                    </a>
-                                    <div class="item-sort border-1">
-                                        <span class="text-xs-medium neutral-500 mr-5">Show</span>
-                                        <div class="dropdown dropdown-sort border-1-right">
-                                            <button class="btn dropdown-toggle" id="dropdownSort2" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
-                                                <span>20</span>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownSort2">
-                                                <li>
-                                                    <a class="dropdown-item active" href="#">20</a>
-                                                </li>
-                                                <li>
-                                                    <a class="dropdown-item" href="#">30</a>
-                                                </li>
-                                                <li>
-                                                    <a class="dropdown-item" href="#">50</a>
-                                                </li>
-                                            </ul>
+                                    <form method="get" class="d-flex">
+                                        <div class="filter-group me-3">
+                                            <select name="limit" class="form-select">
+                                                <option value="12" {% if filter_params.limit == "12" %}selected{% endif %}>Show: 12</option>
+                                                <option value="30" {% if filter_params.limit == "30" %}selected{% endif %}>Show: 30</option>
+                                                <option value="50" {% if filter_params.limit == "50" %}selected{% endif %}>Show: 50</option>
+                                            </select>
                                         </div>
-                                    </div>
-                                    <div class="item-sort border-1">
-                                        <span class="text-xs-medium neutral-500 mr-5">Sort by:</span>
-                                        <div class="dropdown dropdown-sort border-1-right">
-                                            <button class="btn dropdown-toggle" id="dropdownSort" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <span>Most Viewed</span>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-light m-0" aria-labelledby="dropdownSort">
-                                                <li>
-                                                    <a class="dropdown-item active" href="#">Most Viewed</a>
-                                                </li>
-                                                <li>
-                                                    <a class="dropdown-item" href="#">Recently search</a>
-                                                </li>
-                                                <li>
-                                                    <a class="dropdown-item" href="#">Most popular</a>
-                                                </li>
-                                                <li>
-                                                    <a class="dropdown-item" href="#">Top rated</a>
-                                                </li>
-                                            </ul>
+                                        <div class="filter-group">
+                                            <select name="sort" class="form-select">
+                                                <option value="newest" {% if filter_params.sort == "newest" %}selected{% endif %}>Sort by (Newest)</option>
+                                                <option value="oldest" {% if filter_params.sort == "oldest" %}selected{% endif %}>Oldest</option>
+                                            </select>
                                         </div>
-                                    </div>
+                                        <button type="submit" class="btn btn-primary ms-2">Apply</button>
+                                        <a href="{% url 'base:getJobs' %}" class="btn btn-secondary ms-2">Reset</a>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -93,14 +63,6 @@
                                             <div class="pb-25"></div>
                                         </div>
                                         <div class="card-info p-3 pt-30 border-top">
-                                            <div class="card-rating">
-                                                <div class="card-left"></div>
-                                                <div class="card-right">
-                                                    <span class="rating text-xs-medium rounded-pill">
-                                                        4.9 5 <span class="text-xs-medium neutral-500">(672 reviews)</span>
-                                                    </span>
-                                                </div>
-                                            </div>
                                             <div class="card-title">
                                                 <a class="text-lg-bold neutral-1000" href="{% url 'base:showJobDetails' job.slug %}">
                                                     {{ job.title|truncatechars:10 }}
@@ -109,10 +71,10 @@
                                             <div class="card-program">
                                                 <ul class="list-style-disc ps-3 pe-4">
                                                     <li class="text-xs-medium neutral-1000">
-                                                        Location: <strong>{{ job.start_date|date }} - {{ job.end_date|date }}</strong>
+                                                        Location: <strong>{{ job.location }}</strong>
                                                     </li>
                                                     <li class="text-xs-medium neutral-1000">
-                                                        Contact Number: <strong>{{ job.client.phone_number }}</strong>
+                                                        Salary: <strong>{{ job.salary|intcomma }} RWF</strong>
                                                     </li>
                                                     <li class="text-xs-medium neutral-1000">
                                                         Category: <strong>{{ job.get_category_display }}</strong>
@@ -143,18 +105,6 @@
                                                             </span>
                                                         {% endif %}
                                                     </a>
-                                                </div>
-                                                <div class="endtime">
-                                                    <div class="card-price">
-                                                        <h6 class="text-lg-bold neutral-1000" style="font-size: 16px;">
-                                                            {{ job.salary|intcomma }} RWF / <span style="font-size: 12px;">per day</span>
-                                                        </h6>
-                                                    </div>
-                                                    <div class="card-button">
-                                                        <a class="btn btn-gray" href="#">
-                                                            Apply
-                                                        </a>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
