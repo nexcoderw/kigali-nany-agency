@@ -1,8 +1,8 @@
 import os
 import random
 from django.db import models
-from frontend.models import *
-from backend.managers import *
+from account.models import *
+from account.managers import *
 from django.db.models import Avg
 from django.utils import timezone
 from django.utils.text import slugify
