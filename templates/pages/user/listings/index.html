@@ -22,7 +22,172 @@
             <div class="row">
                 {% include 'inc/user-sidebar.html' %}
 
+                <div class="col-xl-9 col-lg-8">
+                    <div class="row">
+                        <div class="col-xl-12 d-flex">
+                            <div class="card shadow-none flex-fill">
+                                <div class="card-header">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="neutral-1000 text-md-bold fs-5">Booking List</span>
+                                        <div class="fillter d-flex gap-2">
+                                            <div class="input-icon-start position-relative">
+                                                <span class="icon-addon">
+                                                    <i class="fi fi-rr-search"></i>
+                                                </span>
+                                                <input type="text" class="input-small" placeholder="Search">
+                                            </div>
+                                            <div class="dropdown">
+                                                <a href="javascript:void(0);" class="dropdown-toggle btn btn-sort bg-neutral-100 btn-sm neutral-500 rounded-pill fw-normal fs-8 d-inline-flex align-items-center" data-bs-toggle="dropdown">
+                                                    <i class="fi fi-rr-steering-wheel me-2"></i>Car type
+                                                </a>
+                                                <ul class="dropdown-menu small dropdown-menu-end p-2">
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                                                            <i class="ti ti-point-filled me-1"></i>Sedan
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                                                            <i class="ti ti-point-filled me-1"></i>Coupe
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                                                            <i class="ti ti-point-filled me-1"></i>Hatchback
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="dropdown">
+                                                <a href="javascript:void(0);" class="dropdown-toggle btn btn-sort bg-neutral-100 btn-sm neutral-500 rounded-pill fw-normal fs-8 d-inline-flex align-items-center" data-bs-toggle="dropdown">
+                                                    <i class="fi fi-rr-filter-list me-2"></i>Sort
+                                                </a>
+                                                <ul class="dropdown-menu small dropdown-menu-end p-2">
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                                                            <i class="ti ti-point-filled me-1"></i>Newest
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                                                            <i class="ti ti-point-filled me-1"></i>Oldest
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                                                            <i class="ti ti-point-filled me-1"></i>Paid
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                                                            <i class="ti ti-point-filled me-1"></i>Unpaid
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                                                            <i class="ti ti-point-filled me-1"></i>Cancelled
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                 
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card shadow-none mb-2">
+                                        <div class="table-responsive">
+                                            <table class="table datatable table-striped">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Job Title & Salary</th>
+                                                        <th>Time (Months)</th>
+                                                        <th>Address</th>
+                                                        <th>Status</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><a href="javascript:void(0);" class="text-primary-dark fw-medium">#CR-2356</a>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <a href="#" class="avatar avatar-lg">
+                                                                    <img src="https://carento-demo.vercel.app/assets/imgs/cars-listing/cars-listing-6/car-1.png" class="img-fluid" alt="img">
+                                                                </a>
+                                                                <div class="ms-2">
+                                                                    <p class="text-dark mb-0 fw-medium fs-14">
+                                                                        <a href="#">
+                                                                            Taking Care of Kids
+                                                                        </a>
+                                                                    </p>
+                                                                    <span class="fs-14 fw-normal neutral-500">
+                                                                        30000 RWF
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>2 Months</td>
+                                                        <td>Kanombe</td>
+                                                        <td>
+                                                            <span class="badge badge-info rounded-pill d-inline-flex align-items-center fs-10"><i class="fi fi-rr-caret-right me-1"></i>Pending</span>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <a href="#" class="px-2">
+                                                                    <i class="fi fi-rr-arrow-up-right-from-square"></i>
+                                                                    View
+                                                                </a>
+                                                                <a href="#" class="px-2">
+                                                                    <i class="fi fi-rr-attribution-pencil"></i>
+                                                                    Edit
+                                                                </a>
+                                                                <a href="#" class="px-2">
+                                                                    <i class="fi fi-rr-recycle-bin"></i>
+                                                                    Delete
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Previous">
+                                                        <span aria-hidden="true">
+                                                            <svg width="12" height="12" viewbox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M6.00016 1.33325L1.3335 5.99992M1.3335 5.99992L6.00016 10.6666M1.3335 5.99992H10.6668" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </svg>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link active" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Next">
+                                                        <span aria-hidden="true">
+                                                            <svg width="12" height="12" viewbox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M5.99967 10.6666L10.6663 5.99992L5.99968 1.33325M10.6663 5.99992L1.33301 5.99992" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </svg>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

@@ -7,4 +7,4 @@ def dashboard(request):
     return render(request, 'pages/user/dashboard.html')
 
 def getJobListings(request):
-    return render(request, 'pages/user/listing/index.html')
+    return render(request, 'pages/user/listings/index.html')
