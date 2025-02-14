@@ -1,0 +1,77 @@
+{% extends 'layouts/app.html' %}
+
+{% block content %}
+
+    <div class="container pt-140 pb-170">
+        <div class="row">
+            <div class="col-lg-5 mx-auto">
+                <div class="register-content border rounded-3 px-md-5 px-3 ptb-50">
+                    <div class="text-center">
+                        <p class="neutral-1000 px-4 py-2 bg-2 text-sm-bold rounded-12 d-inline-flex align-items-center">Register</p>
+                        <h4 class="neutral-1000">Create an Account</h4>
+                    </div>
+                    <div class="form-login mt-30">
+                        <form action="#">
+                            <div class="form-group">
+                                <input class="form-control username" type="text" placeholder="Email / Username" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control email" type="text" placeholder="Email / Username" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control password" type="password" placeholder="***********" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control password" type="password" placeholder="***********" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control password" type="password" placeholder="***********" />
+                            </div>
+                            <div class="form-group my-3">
+                                <div class="box-remember-forgot">
+                                    <div class="remeber-me d-flex align-items-center neutral-500">
+                                        <input class="cb-remember" type="checkbox" />
+                                        Nanny
+                                    </div>
+                                </div>
+                                <div class="box-remember-forgot">
+                                    <div class="remeber-me d-flex align-items-center neutral-500">
+                                        <input class="cb-remember" type="checkbox" />
+                                        Client
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mb-30">
+                                <a class="btn btn-primary w-100" href="#">Sign up
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                            <p class="text-md-medium neutral-500 text-center">Or connect with your social account</p>
+                            <div class="box-button-logins">
+                                <a class="btn btn-login btn-google mr-10" href="#">
+                                    <img src="https://carento-demo.vercel.app/assets/imgs/template/popup/google.svg" alt="Carento" />
+                                    <span class="text-sm-bold">Sign up with Google</span>
+                                </a>
+                                <a class="btn btn-login mr-10" href="#">
+                                    <img src="https://carento-demo.vercel.app/assets/imgs/template/popup/facebook.svg" alt="Carento" />
+                                </a>
+                                <a class="btn btn-login" href="#">
+                                    <img src="https://carento-demo.vercel.app/assets/imgs/template/popup/apple.svg" alt="Carento" />
+                                </a>
+                            </div>
+                            <p class="text-sm-medium neutral-500 text-center mt-70">
+                                Already have an account? 
+                                <a class="neutral-1000" href="#">
+                                    Login Here !
+                                </a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
