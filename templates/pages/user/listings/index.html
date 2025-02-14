@@ -121,7 +121,7 @@
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            <td id="time-difference-{{ job.id }}" data-start="{{ job.start_date }}" data-end="{{ job.end_date }}"></td>
+                                                            <td>{{ job.start_date|date:"F j, Y" }} - {{ job.end_date|date:"F j, Y" }}</td>
                                                             <td>
                                                                 <div class="d-flex align-items-center">
                                                                     <div class="ms-2">
@@ -170,6 +170,35 @@
                                                 </tbody>
                                             </table>
                                         </div>
+
+                                        <!-- Pagination -->
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                                <li class="page-item {% if job_postings.has_previous %}active{% endif %}">
+                                                    <a class="page-link" href="?page=1{% if status_filter %}&status={{ status_filter }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}" aria-label="Previous">
+                                                        <span aria-hidden="true">
+                                                            <svg width="12" height="12" viewbox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M6.00016 1.33325L1.3335 5.99992M1.3335 5.99992L6.00016 10.6666M1.3335 5.99992H10.6668" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </svg>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                {% for page_num in job_postings.paginator.page_range %}
+                                                    <li class="page-item {% if job_postings.number == page_num %}active{% endif %}">
+                                                        <a class="page-link" href="?page={{ page_num }}{% if status_filter %}&status={{ status_filter }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}">{{ page_num }}</a>
+                                                    </li>
+                                                {% endfor %}
+                                                <li class="page-item {% if job_postings.has_next %}active{% endif %}">
+                                                    <a class="page-link" href="?page={{ job_postings.paginator.num_pages }}{% if status_filter %}&status={{ status_filter }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}" aria-label="Next">
+                                                        <span aria-hidden="true">
+                                                            <svg width="12" height="12" viewbox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M5.99967 10.6666L10.6663 5.99992L5.99968 1.33325M10.6663 5.99992L1.33301 5.99992" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            </svg>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
                                     </div>
                                 </div>
                             </div>
@@ -181,36 +210,3 @@
     </section>
 
 {% endblock content %}
-
-<script>
-    // JavaScript to calculate time difference
-    function calculateTimeDifference(startDate, endDate) {
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-
-        let diffInDays = Math.floor((end - start) / (1000 * 3600 * 24));
-        let years = Math.floor(diffInDays / 365);
-        let months = Math.floor((diffInDays % 365) / 30);
-        let days = diffInDays % 30;
-
-        if (years > 0) {
-            return `${years} year${years > 1 ? 's' : ''}, ${months} month${months > 1 ? 's' : ''}, ${days} day${days > 1 ? 's' : ''}`;
-        } else if (months > 0) {
-            return `${months} month${months > 1 ? 's' : ''}, ${days} day${days > 1 ? 's' : ''}`;
-        } else {
-            return `${days} day${days > 1 ? 's' : ''}`;
-        }
-    }
-
-    // Apply the function to all job listings
-    document.addEventListener("DOMContentLoaded", function () {
-        const jobListings = document.querySelectorAll("[id^='time-difference-']");
-        jobListings.forEach(function (listing) {
-            const startDate = listing.getAttribute('data-start');
-            const endDate = listing.getAttribute('data-end');
-            const timeDifference = calculateTimeDifference(startDate, endDate);
-            listing.innerText = timeDifference;
-        });
-    });
-</script>
-
