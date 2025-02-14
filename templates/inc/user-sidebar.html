@@ -6,13 +6,13 @@
                     <div class="d-flex align-items-center justify-content-center py-2">
                         <img src="https://static.vecteezy.com/system/resources/thumbnails/005/129/844/small_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg" alt="image" class="img-fluid avatar avatar-lg rounded-circle me-3">
                         <div>
-                            <p class="fw-bold fs-5">Steven Jobs</p>
-                            <span class="fs-14 text-gray-6">Since 16 Aprill 2015</span>
+                            <p class="fw-bold fs-5">{{ request.user.name }}</p>
+                            <span class="fs-14 text-gray-6">Since {{ request.user.created_at|date }}</span>
                         </div>
                     </div>
                     <div>
                         <div class="d-flex align-items-center justify-content-center">
-                            <a href="#" class="p-1 rounded-circle align-items-center justify-content-center btn-edit">
+                            <a href="{% url 'auth:profile' %}" class="p-1 rounded-circle align-items-center justify-content-center btn-edit">
                                 <i class="fi fi-rr-pencil fs-7"></i>
                             </a>
                         </div>
