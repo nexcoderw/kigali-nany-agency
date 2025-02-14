@@ -42,6 +42,29 @@ class ClientProfile(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.number_of_children} children"
 
+class Job(models.Model):
+    client = models.ForeignKey(ClientProfile, on_delete=models.CASCADE, related_name="jobs_posted")
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    location = models.CharField(max_length=255)
+    salary_offered = models.DecimalField(max_digits=10, decimal_places=2)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    status = models.CharField(max_length=15, choices=[
+        ('open', 'Open'),
+        ('closed', 'Closed'),
+        ('in_progress', 'In Progress'),
+        ('completed', 'Completed')
+    ], default='open')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.title} by {self.client.user.username}"
+
+    class Meta:
+        ordering = ['-created_at']
+
 class Booking(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
