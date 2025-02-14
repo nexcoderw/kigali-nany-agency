@@ -1,5 +1,5 @@
 from django import template
-from datetime import timedelta
+from datetime import datetime, date
 from django.utils import timezone
 
 register = template.Library()
@@ -8,16 +8,18 @@ register = template.Library()
 def time_diff(value):
     if not value:
         return ""
-    
-    now = timezone.now()
-    end_date = value
 
-    if isinstance(value, str):
-        end_date = timezone.make_aware(datetime.strptime(value, "%Y-%m-%d"))
-        
-    # Time difference calculation
-    delta = end_date - now
-    
+    # Ensure value is a datetime object
+    now = timezone.now()
+
+    # Check if value is a date object but not a datetime
+    if isinstance(value, date) and not isinstance(value, datetime):
+        # Convert to datetime if it's a date object
+        value = datetime.combine(value, datetime.min.time())
+
+    # Calculate the time difference
+    delta = value - now
+
     # Calculate years, months, and days
     years, remainder = divmod(delta.days, 365)
     months, days = divmod(remainder, 30)
