@@ -39,3 +39,27 @@ def userLogout(request):
     messages.success(request, _("You have been successfully logged out."))
 
     return redirect('auth:login')
+
+def userRegister(request):
+    if request.user.is_authenticated:
+        return redirect(reverse('base:home'))
+    if request.method == 'POST':
+        form = RegisterForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save()
+            auth_login(request, user)
+            messages.success(request, _("Your account has been created successfully and you are now logged in."))
+            return redirect(reverse('auth:login'))
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, error)
+            messages.error(request, _("Please correct the errors below."))
+    else:
+        form = RegisterForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'pages/auth/register.html', context)
