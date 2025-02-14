@@ -74,5 +74,16 @@ def editJobListing(request, slug):
 
     return render(request, 'pages/user/listings/edit.html', context)
 
-def deleteJobListing(request):
-    pass
+@login_required
+def deleteJobListing(request, slug):
+    """
+    Delete a job listing.
+    """
+    try:
+        job = JobPosting.objects.get(slug=slug, client=request.user)
+        job.delete()
+        messages.success(request, _('Your job listing has been deleted.'))
+    except JobPosting.DoesNotExist:
+        raise Http404(_('Job listing not found.'))
+
+    return redirect(reverse('base:getJobListings'))
