@@ -8,7 +8,7 @@
                 <div class="col-md-9 mb-30 wow fadeInUp">
                     <h4 class="title-svg neutral-1000 mb-15">Latest Jobs</h4>
                     <p class="text-md-medium text-bold neutral-500">
-                        Browse job opportunities and apply easily.
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae, amet?
                     </p>
                 </div>
             </div>
@@ -29,21 +29,29 @@
                             <div class="col-xl-8 col-md-8 mb-10 text-lg-end text-center">
                                 <div class="box-item-sort">
                                     <form method="get" class="d-flex">
-                                        <div class="filter-group me-3">
-                                            <select name="limit" class="form-select">
+                                        <div class="item-sort border-1 me-3">
+                                            <select name="limit" class="form-select" style="border: none;">
                                                 <option value="12" {% if filter_params.limit == "12" %}selected{% endif %}>Show: 12</option>
                                                 <option value="30" {% if filter_params.limit == "30" %}selected{% endif %}>Show: 30</option>
                                                 <option value="50" {% if filter_params.limit == "50" %}selected{% endif %}>Show: 50</option>
                                             </select>
                                         </div>
-                                        <div class="filter-group">
-                                            <select name="sort" class="form-select">
+                                        <div class="item-sort border-1">
+                                            <select name="sort" class="form-select" style="border: none;">
                                                 <option value="newest" {% if filter_params.sort == "newest" %}selected{% endif %}>Sort by (Newest)</option>
                                                 <option value="oldest" {% if filter_params.sort == "oldest" %}selected{% endif %}>Oldest</option>
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-primary ms-2">Apply</button>
-                                        <a href="{% url 'base:getJobs' %}" class="btn btn-secondary ms-2">Reset</a>
+                                        <div class="card-button ms-2">
+                                            <button type="submit" class="btn btn-gray" style="background: #70f46d;;">
+                                                Filter
+                                            </button>
+                                        </div>
+                                        <div class="card-button">
+                                            <a class="btn btn-gray" href="{% url 'base:getJobs' %}">
+                                                Reset
+                                            </a>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -54,27 +62,20 @@
                             {% for job in jobs %}
                                 <div class="col-lg-4 col-md-6">
                                     <div class="card-journey-small background-card hover-up">
-                                        <div class="card-image">
-                                            <a class="wish" href="#">
-                                                <svg width="20" height="18" viewbox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M17.071 10.1422L11.4141 15.7991C10.6331 16.5801 9.36672 16.5801 8.58568 15.7991L2.92882 10.1422C0.9762 8.1896 0.9762 5.02378 2.92882 3.07116C4.88144 1.11853 8.04727 1.11853 9.99989 3.07116C11.9525 1.11853 15.1183 1.11853 17.071 3.07116C19.0236 5.02378 19.0236 8.1896 17.071 10.1422Z" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </a>
-                                            <div class="pb-25"></div>
-                                        </div>
+                                        <div class="pb-25"></div>
                                         <div class="card-info p-3 pt-30 border-top">
                                             <div class="card-title">
                                                 <a class="text-lg-bold neutral-1000" href="{% url 'base:showJobDetails' job.slug %}">
-                                                    {{ job.title|truncatechars:10 }}
+                                                    {{ job.title|truncatechars:20 }}
                                                 </a>
                                             </div>
                                             <div class="card-program">
                                                 <ul class="list-style-disc ps-3 pe-4">
                                                     <li class="text-xs-medium neutral-1000">
-                                                        Location: <strong>{{ job.location }}</strong>
+                                                        Location: <strong>{{ job.start_date|date }} - {{ job.end_date|date }}</strong>
                                                     </li>
                                                     <li class="text-xs-medium neutral-1000">
-                                                        Salary: <strong>{{ job.salary|intcomma }} RWF</strong>
+                                                        Contact Number: <strong>{{ job.client.phone_number }}</strong>
                                                     </li>
                                                     <li class="text-xs-medium neutral-1000">
                                                         Category: <strong>{{ job.get_category_display }}</strong>
@@ -82,9 +83,7 @@
                                                 </ul>
                                                 <div class="endtime pt-3 mt-3 border-top">
                                                     <div class="card-price">
-                                                        <h6 class="text-md-medium neutral-500 text-decoration-line-through">
-                                                            
-                                                        </h6>
+                                                        <h6 class="text-md-medium neutral-500 text-decoration-line-through"></h6>
                                                     </div>
                                                     <a href="#" class="card-button pe-3">
                                                         {% if job.status == 'open' %}
@@ -105,6 +104,18 @@
                                                             </span>
                                                         {% endif %}
                                                     </a>
+                                                </div>
+                                                <div class="endtime">
+                                                    <div class="card-price">
+                                                        <a href="{% url 'base:showJobDetails' job.slug %}" class="text-lg-bold neutral-1000" style="font-size: 16px;">
+                                                            {{ job.salary|intcomma }} RWF / <span style="font-size: 12px;">per day</span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="card-button">
+                                                        <a class="btn btn-gray" href="{% url 'base:showJobDetails' job.slug %}">
+                                                            Apply
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
