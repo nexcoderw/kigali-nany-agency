@@ -7,8 +7,8 @@ app_name = 'base'
 
 urlpatterns = [
     path('', home, name="home"),
-    path('jobs', getJobs, name="getJobs"),
-    path('job/slug/', showJobDetails, name="showJobDetails"),
+    path('jobs/', getJobs, name="getJobs"),
+    path('job/<slug>/', showJobDetails, name="showJobDetails"),
 
     path('dashboard/', dashboard, name="dashboard"),
 
