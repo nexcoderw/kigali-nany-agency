@@ -72,7 +72,10 @@
                                             <div class="card-program">
                                                 <ul class="list-style-disc ps-3 pe-4">
                                                     <li class="text-xs-medium neutral-1000">
-                                                        Location: <strong>{{ job.start_date|date }} - {{ job.end_date|date }}</strong>
+                                                        Location: <strong>{{ job.location }}</strong>
+                                                    </li>
+                                                    <li class="text-xs-medium neutral-1000">
+                                                        Time: <strong>{{ job.start_date|date }} - {{ job.end_date|date }}</strong>
                                                     </li>
                                                     <li class="text-xs-medium neutral-1000">
                                                         Contact Number: <strong>{{ job.client.phone_number }}</strong>
