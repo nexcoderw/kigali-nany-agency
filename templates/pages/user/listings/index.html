@@ -40,26 +40,21 @@
 
                                             <!-- Status Filter Dropdown -->
                                             <div class="dropdown">
-                                                <a href="javascript:void(0);" class="dropdown-toggle btn btn-sort bg-neutral-100 btn-sm neutral-500 rounded-pill fw-normal fs-8 d-inline-flex align-items-center" data-bs-toggle="dropdown">
-                                                    <i class="fi fi-rr-steering-wheel me-2"></i> Status
-                                                </a>
-                                                <ul class="dropdown-menu small dropdown-menu-end p-2">
-                                                    <li><a href="javascript:void(0);" class="dropdown-item" data-status="open">Open</a></li>
-                                                    <li><a href="javascript:void(0);" class="dropdown-item" data-status="closed">Closed</a></li>
-                                                    <li><a href="javascript:void(0);" class="dropdown-item" data-status="pending">Pending</a></li>
-                                                    <li><a href="javascript:void(0);" class="dropdown-item" data-status="in_progress">In Progress</a></li>
-                                                </ul>
+                                                <select id="status-filter" class="form-select">
+                                                    <option value="">Select Status</option>
+                                                    <option value="open">Open</option>
+                                                    <option value="closed">Closed</option>
+                                                    <option value="pending">Pending</option>
+                                                    <option value="in_progress">In Progress</option>
+                                                </select>
                                             </div>
 
                                             <!-- Sort Filter Dropdown -->
                                             <div class="dropdown">
-                                                <a href="javascript:void(0);" class="dropdown-toggle btn btn-sort bg-neutral-100 btn-sm neutral-500 rounded-pill fw-normal fs-8 d-inline-flex align-items-center" data-bs-toggle="dropdown">
-                                                    <i class="fi fi-rr-filter-list me-2"></i> Sort
-                                                </a>
-                                                <ul class="dropdown-menu small dropdown-menu-end p-2">
-                                                    <li><a href="javascript:void(0);" class="dropdown-item" data-sort="newest">Newest</a></li>
-                                                    <li><a href="javascript:void(0);" class="dropdown-item" data-sort="oldest">Oldest</a></li>
-                                                </ul>
+                                                <select id="sort-filter" class="form-select">
+                                                    <option value="newest">Sort by: Newest</option>
+                                                    <option value="oldest">Sort by: Oldest</option>
+                                                </select>
                                             </div>
 
                                         </div>
@@ -161,9 +156,10 @@
 
 {% block extra_js %}
 <script>
+    // Function to load job listings based on selected filters and pagination
     function loadListings(page = 1) {
-        const statusFilter = document.querySelector('input[name="status"]:checked')?.value;
-        const sortBy = document.querySelector('input[name="sort"]:checked')?.value;
+        const statusFilter = document.querySelector('#status-filter').value;
+        const sortBy = document.querySelector('#sort-filter').value;
         const searchQuery = document.querySelector('#search-input').value;
 
         const url = new URL(window.location.href);
@@ -179,15 +175,18 @@
         fetch(url)
             .then(response => response.text())
             .then(data => {
-                document.querySelector('#job-listings-table').innerHTML = data; // Update the table
+                // Update the job listings table with the new data
+                document.querySelector('#job-listings-table').innerHTML = data;
             });
     }
 
-    // Event listener for filters and sorting
-    document.querySelectorAll('.dropdown-item').forEach(item => {
-        item.addEventListener('click', function () {
-            loadListings();
-        });
+    // Event listener for filter changes
+    document.querySelector('#status-filter').addEventListener('change', function () {
+        loadListings();
+    });
+
+    document.querySelector('#sort-filter').addEventListener('change', function () {
+        loadListings();
     });
 
     document.querySelector('#search-input').addEventListener('keyup', function () {
@@ -199,6 +198,7 @@
         loadListings(page);
     }
 
-    loadListings(); // Initial load on page load
+    // Initial load on page load
+    loadListings();
 </script>
 {% endblock %}
