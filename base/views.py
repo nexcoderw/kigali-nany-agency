@@ -77,8 +77,14 @@ def getJobs(request):
 
     return render(request, 'pages/jobs/index.html', context)
 
-def showJobDetails(request):
-    pass
+def showJobDetails(request, slug):
+    job = get_object_or_404(JobPosting, slug=slug)
+    
+    context = {
+        'job': job
+    }
+
+    return render(request, 'pages/jobs/show.html', context)
 
 def dashboard(request):
     return render(request, 'pages/user/dashboard.html')
