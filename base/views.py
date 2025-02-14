@@ -50,8 +50,29 @@ def addJobListing(request):
 
     return render(request, 'pages/user/listings/create.html', context)
 
-def editJobListing(request):
-    return render(request, 'pages/user/listings/edit.html')
+@login_required
+def editJobListing(request, slug):
+    """
+    Edit an existing job listing.
+    """
+    job = get_object_or_404(JobPosting, slug=slug, client=request.user)
+    if request.method == 'POST':
+        form = JobPostingForm(request.POST, instance=job)
+        if form.is_valid():
+            form.save()
+            messages.success(request, _('Your job listing has been updated.'))
+            return redirect(reverse('base:getJobListings'))
+        else:
+            messages.error(request, _('Please fix the errors below.'))
+    else:
+        form = JobPostingForm(instance=job)
+
+    context = {
+        'form': form,
+        'job': job
+    }
+
+    return render(request, 'pages/user/listings/edit.html', context)
 
 def deleteJobListing(request):
     pass
