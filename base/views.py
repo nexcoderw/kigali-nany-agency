@@ -1,5 +1,6 @@
 from base.forms import *
 from base.models import *
+from account.models import *
 from django.db.models import Q
 from django.http import Http404
 from django.urls import reverse
@@ -87,7 +88,13 @@ def showJobDetails(request, slug):
     return render(request, 'pages/jobs/show.html', context)
 
 def getNannies(request):
-    return render(request, 'pages/nannies/index.html')
+    nannies = User.objects.all().order_by('-created_at')
+
+    context = {
+        'nannies': nannies
+    }
+
+    return render(request, 'pages/nannies/index.html', context)
 
 def dashboard(request):
     return render(request, 'pages/user/dashboard.html')
