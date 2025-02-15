@@ -39,7 +39,7 @@
                             </div>
                             <div class="card-info">
                                 <div class="card-title">
-                                    <a class="title heading-6" href="#">
+                                    <a class="title heading-6" href="{% url 'base:showNanny' nanny.slug %}">
                                         {{ nanny.name }}
                                     </a>
                                     <p class="text-md-medium neutral-500">
@@ -47,7 +47,7 @@
                                     </p>
                                 </div>
                                 <div class="card-method-contact2">
-                                    <a class="btn btn-primary" href="#">
+                                    <a class="btn btn-primary" href="{% url 'base:showNanny' nanny.slug %}">
                                         Hire Me
                                     </a>
                                 </div>
