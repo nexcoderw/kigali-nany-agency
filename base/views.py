@@ -88,7 +88,7 @@ def showJobDetails(request, slug):
     return render(request, 'pages/jobs/show.html', context)
 
 def getNannies(request):
-    nannies = User.objects.all().order_by('-created_at')
+    nannies = User.objects.filter(role = 'Nanny').order_by('-created_at')
 
     context = {
         'nannies': nannies
