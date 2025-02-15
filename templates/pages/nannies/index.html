@@ -2,16 +2,88 @@
 {% load humanize %}
 {% block content %}
 
-    <section class="section-box pt-50 background-body">
+    <section class="box-section background-body py-96 border-bottom">
         <div class="container">
             <div class="row align-items-end">
-                <div class="col-md-9 mb-30 wow fadeInUp">
-                    <h4 class="title-svg neutral-1000 mb-15">Nannies</h4>
-                    <p class="text-md-medium text-bold neutral-500">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae, amet?
+                <div class="col-md-8">
+                    <h4 class="neutral-1000">
+                        Our Nannies
+                    </h3>
+                    <p class="text-md-medium neutral-500">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis, fugit tenetur? Accusantium labore alias dolore tenetur.
                     </p>
                 </div>
+                <div class="col-md-4">
+                    <div class="d-flex justify-content-end mt-md-0 mt-4">
+                        <a class="btn btn-primary rounded-3" href="{% url 'auth:register' %}">
+                            Become a nanny
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
             </div>
+            <div class="row mt-60">
+                {% for nanny in nannies %}
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="card-contact card-dealer d-flex">
+                            <div class="card-image me-3">
+                                <div class="position-relative">
+                                    {% if nanny.image %}
+                                            <img src="{{ nanny.image.url }}" alt="{{ job.title }}"  style="width: 60px; border-radius: 50%;" />
+                                    {% else %}
+                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" style="width: 60px; border-radius: 50%;" alt="{{ job.title }}" />
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="card-info">
+                                <div class="card-title">
+                                    <a class="title heading-6" href="#">
+                                        {{ nanny.name }}
+                                    </a>
+                                    <p class="text-md-medium neutral-500">
+                                        Phone Number <strong>{{ nanny.phone_number }}</strong>
+                                    </p>
+                                </div>
+                                <div class="card-method-contact2">
+                                    <a class="btn btn-primary" href="#">
+                                        Hire Me
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">
+                                <svg width="12" height="12" viewbox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.00016 1.33325L1.3335 5.99992M1.3335 5.99992L6.00016 10.6666M1.3335 5.99992H10.6668" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link active" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item"><a class="page-link" href="#">...</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">
+                                <svg width="12" height="12" viewbox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5.99967 10.6666L10.6663 5.99992L5.99968 1.33325M10.6663 5.99992L1.33301 5.99992" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </section>
 
