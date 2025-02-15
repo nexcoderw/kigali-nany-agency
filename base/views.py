@@ -96,6 +96,15 @@ def getNannies(request):
 
     return render(request, 'pages/nannies/index.html', context)
 
+def showNanny(request, slug):
+    nanny = get_object_or_404(User, slug=slug)
+    
+    context = {
+        'nanny': nanny
+    }
+
+    return render(request, 'pages/nannies/show.html', context)
+
 def dashboard(request):
     return render(request, 'pages/user/dashboard.html')
 

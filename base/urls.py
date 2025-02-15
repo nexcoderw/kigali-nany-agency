@@ -11,6 +11,7 @@ urlpatterns = [
     path('job/<slug>/', showJobDetails, name="showJobDetails"),
 
     path('nannies/', getNannies, name="getNannies"),
+    path('nanny/<slug>/', showNanny, name="showNanny"),
 
     path('dashboard/', dashboard, name="dashboard"),
 
