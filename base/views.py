@@ -86,6 +86,9 @@ def showJobDetails(request, slug):
 
     return render(request, 'pages/jobs/show.html', context)
 
+def getNannies(request):
+    return render(request, 'pages/nannies/index.html')
+
 def dashboard(request):
     return render(request, 'pages/user/dashboard.html')
 

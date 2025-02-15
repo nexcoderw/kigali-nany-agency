@@ -10,6 +10,8 @@ urlpatterns = [
     path('jobs/', getJobs, name="getJobs"),
     path('job/<slug>/', showJobDetails, name="showJobDetails"),
 
+    path('nannies/', getNannies, name="getNannies"),
+
     path('dashboard/', dashboard, name="dashboard"),
 
     path('job-listings/', getJobListings, name="getJobListings"),
