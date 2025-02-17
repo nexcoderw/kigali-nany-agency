@@ -106,7 +106,8 @@ def showJobDetails(request, slug):
         form = JobApplicationForm()
 
     context = {
-        'job': job
+        'job': job,
+        'form': form
     }
 
     return render(request, 'pages/jobs/show.html', context)

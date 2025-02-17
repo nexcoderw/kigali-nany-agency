@@ -466,19 +466,32 @@
                             <p class="text-xl-bold neutral-1000">Apply Job</p>
                         </div>
                         <div class="content-booking-form">
-                            <div class="item-line-booking">
-                                <div class="input-group">
-                                    <textarea name="message" class="form-control" placeholder="Message" style="width: 100%;"></textarea>
+                            <form method="POST">
+                                <div class="item-line-booking">
+                                    <div class="input-group">
+                                        {{ form.experience }}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="box-button-book">
-                                <a class="btn btn-book" href="#">
-                                    Apply Now
-                                    <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </a>
-                            </div>
+                                <div class="item-line-booking">
+                                    <strong>Availability</strong>
+                                    <div class="input-calendar">
+                                        {{ form.availability }}
+                                    </div>
+                                </div>
+                                <div class="item-line-booking">
+                                    <div class="input-group">
+                                        {{ form.cover_letter }}
+                                    </div>
+                                </div>
+                                <div class="box-button-book">
+                                    <a class="btn btn-book" href="#">
+                                        Apply Now
+                                        <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </form>
                             <div class="box-need-help">
                                 <a href="#">
                                     <svg width="12" height="14" viewbox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">

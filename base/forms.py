@@ -69,7 +69,7 @@ class JobApplicationForm(forms.ModelForm):
                 'required': 'required',
                 'class': 'form-control'
             }),
-            'availability': forms.DateInput(attrs={
+            'availability': forms.DateTimeInput(attrs={
                 'required': 'required',
                 'class': 'form-control'
             }),
