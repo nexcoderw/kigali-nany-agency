@@ -290,3 +290,12 @@ def getJobApplications(request):
     }
 
     return render(request, 'pages/user/applications/index.html', context)
+
+def getJobApplicationDetails(request, id):
+    application = get_object_or_404(JobApplication, id=id)
+
+    context = {
+        'application': application
+    }
+
+    return render(request, 'pages/user/applications/show.html', context)
