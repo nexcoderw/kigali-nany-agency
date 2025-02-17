@@ -461,48 +461,47 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="booking-form">
-                        <div class="head-booking-form">
-                            <p class="text-xl-bold neutral-1000">Apply Job</p>
-                        </div>
-                        <div class="content-booking-form">
-                            <form method="POST">
-                                {% csrf_token %}
-                                <div class="item-line-booking">
-                                    <div class="input-group">
-                                        {{ form.experience }}
-                                    </div>
-                                </div>
-                                <div class="item-line-booking">
-                                    <strong>Availability</strong>
-                                    <div class="input-calendar">
-                                        {{ form.availability }}
-                                    </div>
-                                </div>
-                                <div class="item-line-booking">
-                                    <div class="input-group">
-                                        {{ form.cover_letter }}
-                                    </div>
-                                </div>
-                                <div class="box-button-book">
-                                    <button type="submit" class="btn btn-book">Apply Now
-                                        <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </form>
-                            <div class="box-need-help">
-                                <a href="#">
-                                    <svg width="12" height="14" viewbox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M2.83366 3.66667C2.83366 1.92067 4.25433 0.5 6.00033 0.5C7.74633 0.5 9.16699 1.92067 9.16699 3.66667C9.16699 5.41267 7.74633 6.83333 6.00033 6.83333C4.25433 6.83333 2.83366 5.41267 2.83366 3.66667ZM8.00033 7.83333H4.00033C1.88699 7.83333 0.166992 9.55333 0.166992 11.6667C0.166992 12.678 0.988992 13.5 2.00033 13.5H10.0003C11.0117 13.5 11.8337 12.678 11.8337 11.6667C11.8337 9.55333 10.1137 7.83333 8.00033 7.83333Z" fill=""></path>
-                                    </svg>
-                                    Need some help?
-                            
-                                </a>
+                    {% if user.role == 'Nanny' %}
+                        {% if already_applied %}
+                            <div class="alert alert-info">
+                                You have already applied for this job.
                             </div>
-                        </div>
-                    </div>
+                        {% else %}
+                            <div class="booking-form">
+                                <div class="head-booking-form">
+                                    <p class="text-xl-bold neutral-1000">Apply Job</p>
+                                </div>
+                                <div class="content-booking-form">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <div class="item-line-booking">
+                                            <div class="input-group">
+                                                {{ form.experience }}
+                                            </div>
+                                        </div>
+                                        <div class="item-line-booking">
+                                            <strong>Availability</strong>
+                                            <div class="input-calendar">
+                                                {{ form.availability }}
+                                            </div>
+                                        </div>
+                                        <div class="item-line-booking">
+                                            <div class="input-group">
+                                                {{ form.cover_letter }}
+                                            </div>
+                                        </div>
+                                        <div class="box-button-book">
+                                            <button type="submit" class="btn btn-book">Apply Now
+                                                <svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
                     <div class="sidebar-left border-1 background-card">
                         <h6 class="text-xl-bold neutral-1000">Listed by</h6>
                         <div class="box-sidebar-content">
