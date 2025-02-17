@@ -502,12 +502,17 @@
                             </div>
                         {% endif %}
                     {% else %}
-                        <!-- If user is not a Nanny, show a login redirect button -->
-                        {% if login_required %}
-                            <div class="alert alert-warning">
-                                Please <a href="{% url 'auth:login' %}">log in</a> to apply for this job.
-                            </div>
-                        {% endif %}
+                        <!-- If the user has a role other than 'Nanny' -->
+                        <div class="alert alert-warning">
+                            Become a nanny to apply for this job.
+                        </div>
+                    {% endif %}
+
+                    {% if login_required %}
+                        <!-- If user is not logged in, show login prompt -->
+                        <div class="alert alert-warning">
+                            Please <a href="{% url 'auth:login' %}">log in</a> to apply for this job.
+                        </div>
                     {% endif %}
                     <div class="sidebar-left border-1 background-card">
                         <h6 class="text-xl-bold neutral-1000">Listed by</h6>
