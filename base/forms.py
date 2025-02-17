@@ -54,3 +54,28 @@ class JobPostingForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['category'].choices = JobCategory.choices
         self.fields['status'].choices = JobStatus.choices
+
+class JobApplicationForm(forms.ModelForm):
+    """
+    Form for creating and editing job postings.
+    """
+
+    class Meta:
+        model = JobApplication
+        fields = ['experience', 'availability', 'cover_letter']
+        widgets = {
+            'experience': forms.TextInput(attrs={
+                'placeholder': _('Describe your experience in this field'),
+                'required': 'required',
+                'class': 'form-control'
+            }),
+            'availability': forms.DateInput(attrs={
+                'required': 'required',
+                'class': 'form-control'
+            }),
+            'cover_letter': forms.Textarea(attrs={
+                'placeholder': _('Cover letter'),
+                'required': 'required',
+                'class': 'form-control'
+            }),
+        }
