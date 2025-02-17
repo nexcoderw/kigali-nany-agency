@@ -235,6 +235,7 @@ def deleteJobListing(request, slug):
 
     return redirect(reverse('base:getJobListings'))
 
+@login_required
 def getJobApplicants(request):
     """
     Retrieves all job applicants who have applied for the jobs posted by the logged-in user (client).
@@ -258,6 +259,7 @@ def getJobApplicants(request):
 
     return render(request, 'pages/user/applicants/index.html', context)
 
+@login_required
 def getJobApplicantDetails(request, id):
     applicant = get_object_or_404(JobApplication, id=id)
 
@@ -267,6 +269,7 @@ def getJobApplicantDetails(request, id):
 
     return render(request, 'pages/user/applicants/show.html', context)
 
+@login_required
 def acceptApplication(request, id):
     applicant = get_object_or_404(JobApplication, id=id)
 
@@ -280,6 +283,7 @@ def acceptApplication(request, id):
     messages.success(request, 'Application has been accepted.')
     return JsonResponse({'status': 'success', 'message': 'Application accepted.'})
 
+@login_required
 def getJobApplications(request):
     """
     Retrieves all job applications that the logged-in Nanny has sent.
@@ -304,6 +308,7 @@ def getJobApplications(request):
 
     return render(request, 'pages/user/applications/index.html', context)
 
+@login_required
 def getJobApplicationDetails(request, id):
     application = get_object_or_404(JobApplication, id=id)
 
