@@ -78,39 +78,42 @@ def getJobs(request):
 
     return render(request, 'pages/jobs/index.html', context)
 
-@login_required
 def showJobDetails(request, slug):
     job = get_object_or_404(JobPosting, slug=slug)
 
-    # Ensure only users with the 'Nanny' role can access this form
-    if request.user.role != 'Nanny':
-        messages.error(request, 'You are not authorized to apply for this job.')
-        return redirect(reverse('base:getJobs'))
+    # Check if the user is logged in and has the 'Nanny' role
+    if request.user.is_authenticated and request.user.role == 'Nanny':
+        # Check if the user has already applied for the job
+        if JobApplication.objects.filter(nanny=request.user, job=job).exists():
+            messages.info(request, 'You have already applied for this job.')
+            return render(request, 'pages/jobs/show.html', {'job': job, 'already_applied': True})
 
-    # Check if the user has already applied for the job
-    if JobApplication.objects.filter(nanny=request.user, job=job).exists():
-        messages.info(request, 'You have already applied for this job.')
-        return render(request, 'pages/jobs/show.html', {'job': job, 'already_applied': True})
-
-    if request.method == 'POST':
-        form = JobApplicationForm(request.POST)
-        if form.is_valid():
-            application = form.save(commit=False)
-            application.nanny = request.user
-            application.job = job
-            application.save()
-            messages.success(request, 'Your application has been submitted successfully.')
-            return redirect(reverse('base:showJobDetails', kwargs={'slug': job.slug}))
+        if request.method == 'POST':
+            form = JobApplicationForm(request.POST)
+            if form.is_valid():
+                application = form.save(commit=False)
+                application.nanny = request.user
+                application.job = job
+                application.save()
+                messages.success(request, 'Your application has been submitted successfully.')
+                return redirect(reverse('base:showJobDetails', kwargs={'slug': job.slug}))
+            else:
+                messages.error(request, 'Please correct the errors below.')
         else:
-            messages.error(request, 'Please correct the errors below.')
-    else:
-        form = JobApplicationForm()
+            form = JobApplicationForm()
 
-    context = {
-        'job': job,
-        'form': form,
-        'already_applied': False
-    }
+        context = {
+            'job': job,
+            'form': form,
+            'already_applied': False
+        }
+    else:
+        # If the user isn't logged in or doesn't have the Nanny role, display a login redirect button
+        context = {
+            'job': job,
+            'already_applied': False,
+            'login_required': True
+        }
 
     return render(request, 'pages/jobs/show.html', context)
 
