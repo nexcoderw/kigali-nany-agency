@@ -22,4 +22,5 @@ urlpatterns = [
     path('job-listing/delete/<slug:slug>/', deleteJobListing, name="deleteJobListing"),
 
     path('applicants/', getJobApplicants, name="getJobApplicants"),
+    path('applicant/<id>/', getJobApplicantDetails, name="getJobApplicantDetails"),
 ]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

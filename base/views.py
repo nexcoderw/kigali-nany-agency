@@ -257,3 +257,7 @@ def getJobApplicants(request):
     }
 
     return render(request, 'pages/user/applicants/index.html', context)
+
+def getJobApplicantDetails(request, id):
+    
+    return render(request, 'pages/user/applicants/show.html')
