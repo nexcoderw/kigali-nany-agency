@@ -57,17 +57,17 @@
                                             <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Job</p>
                                             <p class="fs-6 text-truncate">{{ application.job.title }}</p>
                                         </div>
-                                        <div class="col-lg-3 me-2 me-lg-0 mb-4">
+                                        <div class="col-lg-4 me-2 me-lg-0 mb-4">
                                             <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Job Salary</p>
                                             <p class="fs-6 text-truncate">{{ application.job.salary|floatformat|intcomma }} RWF</p>
                                         </div>
-                                        <div class="col-lg-3 me-2 me-lg-0 mb-4">
+                                        <div class="col-lg-4 me-2 me-lg-0 mb-4">
                                             <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Location</p>
                                             <p class="fs-6 text-truncate">{{ application.job.location }}</p>
                                         </div>
-                                        <div class="col-lg-6 me-2 me-lg-0 mb-4">
+                                        <div class="col-lg-4 me-2 me-lg-0 mb-4">
                                             <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Time</p>
-                                            <p class="fs-6 text-truncate">{{ application.job.start_date|date:"F j, Y" }} - {{ application.job.end_date|date:"F j, Y" }}</p>
+                                            <p class="fs-6 text-truncate">{{ application.job.start_date|date }} - {{ application.job.end_date|date }}</p>
                                         </div>
                                     </div>
                                 </div>
