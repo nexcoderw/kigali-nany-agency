@@ -269,18 +269,19 @@ def getJobApplicantDetails(request, id):
 
 def getJobApplications(request):
     """
-    Retrieves all job applicants who have applied for the jobs posted by the logged-in user (client).
-    Displays an empty state message if no applicants are found.
+    Retrieves all job applications that the logged-in Nanny has sent.
+    Only accessible to users with the 'Nanny' role.
+    Displays an empty state message if no applications are found.
     """
-    # Ensure the user is logged in and is a client
-    if not request.user.is_authenticated or request.user.role != 'Client':
-        messages.error(request, "You are not authorized to view applicants for this job.")
-        return redirect('base:getJobs')
-
-    # Retrieve the job applications for the jobs posted by the logged-in user (client)
+    # Ensure the user is logged in and is a Nanny
+    if not request.user.is_authenticated or request.user.role != 'Nanny':
+        messages.error(request, "You are not authorized to view your job applications.")
+        return redirect('base:getJobs')  # Redirect to the job listings or another page as appropriate
+    
+    # Retrieve all job applications sent by the logged-in nanny
     applications = JobApplication.objects.filter(nanny=request.user)
-
-    # If no applicants are found, display a message
+    
+    # If no applications are found, display a message
     if not applications.exists():
         messages.info(request, "You have not applied to any jobs yet.")
     
