@@ -234,3 +234,6 @@ def deleteJobListing(request, slug):
         raise Http404(_('Job listing not found.'))
 
     return redirect(reverse('base:getJobListings'))
+
+def getJobApplicants(request):
+    return render(request, 'pages/user/applicants/index.html')
