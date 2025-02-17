@@ -1,3 +1,4 @@
+from account.models import *
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
@@ -64,3 +65,32 @@ class JobPosting(models.Model):
     class Meta:
         verbose_name = _('Job Posting')
         verbose_name_plural = _('Job Postings')
+
+class ApplicationStatus(models.TextChoices):
+    PENDING = 'pending', _('Pending')
+    ACCEPTED = 'accepted', _('Accepted')
+    REJECTED = 'rejected', _('Rejected')
+
+class JobApplication(models.Model):
+    nanny = models.ForeignKey(
+        User, on_delete=models.CASCADE, limit_choices_to={'role': 'Nanny'}, related_name='applications'
+    )
+    job = models.ForeignKey(
+        JobPosting, on_delete=models.CASCADE, related_name='applications'
+    )
+    experience = models.TextField(null=True, blank=True, help_text=_('Describe your experience relevant to this job.'))
+    availability = models.DateField(null=True, blank=True, help_text=_('Specify your availability for the job.'))
+    cover_letter = models.TextField(null=True, blank=True, help_text=_('Provide any additional information or comments.'))
+    status = models.CharField(
+        max_length=50, choices=ApplicationStatus.choices, default=ApplicationStatus.PENDING
+    )
+    applied_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Application for {self.job.title} by {self.nanny.name}"
+
+    class Meta:
+        verbose_name = _('Job Application')
+        verbose_name_plural = _('Job Applications')
+        unique_together = ('nanny', 'job')
