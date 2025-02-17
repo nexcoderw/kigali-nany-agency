@@ -57,15 +57,15 @@
                                             <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Job</p>
                                             <p class="fs-6 text-truncate">{{ application.job.title }}</p>
                                         </div>
-                                        <div class="col-lg-4 me-2 me-lg-0 mb-4">
+                                        <div class="col-lg-3 me-2 me-lg-0 mb-4">
                                             <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Job Salary</p>
                                             <p class="fs-6 text-truncate">{{ application.job.salary|floatformat|intcomma }} RWF</p>
                                         </div>
-                                        <div class="col-lg-4 me-2 me-lg-0 mb-4">
+                                        <div class="col-lg-3 me-2 me-lg-0 mb-4">
                                             <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Location</p>
                                             <p class="fs-6 text-truncate">{{ application.job.location }}</p>
                                         </div>
-                                        <div class="col-lg-4 me-2 me-lg-0 mb-4">
+                                        <div class="col-lg-6 me-2 me-lg-0 mb-4">
                                             <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Time</p>
                                             <p class="fs-6 text-truncate">{{ application.job.start_date|date:"F j, Y" }} - {{ application.job.end_date|date:"F j, Y" }}</p>
                                         </div>
@@ -86,7 +86,21 @@
                                         </div>
                                         <div class="col-lg-4 me-2 me-lg-0">
                                             <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Application Status</p>
-                                            <p class="fs-6 text-truncate">{{ application.availability|date }}</p>
+                                            <p class="fs-6 text-truncate">
+                                                {% if application.status == 'accepted' %}
+                                                    <span class="badge badge-success rounded-pill d-inline-flex align-items-center fs-10">
+                                                        <i class="fi fi-rr-check-circle me-1"></i> Accepted
+                                                    </span>
+                                                {% elif application.status == 'rejected' %}
+                                                    <span class="badge badge-danger rounded-pill d-inline-flex align-items-center fs-10">
+                                                        <i class="fi fi-rr-door-closed me-1"></i> Rejected
+                                                    </span>
+                                                {% elif application.status == 'pending' %}
+                                                    <span class="badge badge-warning rounded-pill d-inline-flex align-items-center fs-10">
+                                                        <i class="fi fi-rr-hourglass me-1"></i> Pending
+                                                    </span>
+                                                {% endif %}
+                                            </p>
                                         </div>
                                         <div class="col-lg-12 me-2 me-lg-0">
                                             <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Nanny Cover letter</p>
