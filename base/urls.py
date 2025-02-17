@@ -23,4 +23,7 @@ urlpatterns = [
 
     path('applicants/', getJobApplicants, name="getJobApplicants"),
     path('applicant/<id>/', getJobApplicantDetails, name="getJobApplicantDetails"),
+
+    # Nanny
+    path('applications/', getJobApplications, name="getJobApplications"),
 ]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
