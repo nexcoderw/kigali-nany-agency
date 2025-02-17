@@ -2,9 +2,9 @@ from base.forms import *
 from base.models import *
 from account.models import *
 from django.db.models import Q
-from django.http import Http404
 from django.urls import reverse
 from django.contrib import messages
+from django.http import Http404, JsonResponse
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
@@ -266,6 +266,19 @@ def getJobApplicantDetails(request, id):
     }
 
     return render(request, 'pages/user/applicants/show.html', context)
+
+def acceptApplication(request, id):
+    applicant = get_object_or_404(JobApplication, id=id)
+
+    # Ensure that only pending applications can be accepted
+    if applicant.status != 'pending':
+        return JsonResponse({'status': 'error', 'message': 'Application is not pending.'})
+
+    applicant.status = 'accepted'
+    applicant.save()
+
+    messages.success(request, 'Application has been accepted.')
+    return JsonResponse({'status': 'success', 'message': 'Application accepted.'})
 
 def getJobApplications(request):
     """
