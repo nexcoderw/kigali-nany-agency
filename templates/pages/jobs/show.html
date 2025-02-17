@@ -501,6 +501,13 @@
                                 </div>
                             </div>
                         {% endif %}
+                    {% else %}
+                        <!-- If user is not a Nanny, show a login redirect button -->
+                        {% if login_required %}
+                            <div class="alert alert-warning">
+                                Please <a href="{% url 'auth:login' %}">log in</a> to apply for this job.
+                            </div>
+                        {% endif %}
                     {% endif %}
                     <div class="sidebar-left border-1 background-card">
                         <h6 class="text-xl-bold neutral-1000">Listed by</h6>
