@@ -259,5 +259,10 @@ def getJobApplicants(request):
     return render(request, 'pages/user/applicants/index.html', context)
 
 def getJobApplicantDetails(request, id):
-    
-    return render(request, 'pages/user/applicants/show.html')
+    applicant = get_object_or_404(JobApplication, id=id)
+
+    context = {
+        'applicant': applicant
+    }
+
+    return render(request, 'pages/user/applicants/show.html', context)
