@@ -283,6 +283,19 @@ def acceptApplication(request, id):
     messages.success(request, 'Application has been accepted.')
     return JsonResponse({'status': 'success', 'message': 'Application accepted.'})
 
+def rejectApplication(request, id):
+    applicant = get_object_or_404(JobApplication, id=id)
+
+    # Ensure that only pending applications can be rejected
+    if applicant.status != 'pending':
+        return JsonResponse({'status': 'error', 'message': 'Application is not pending.'})
+
+    applicant.status = 'rejected'
+    applicant.save()
+
+    messages.success(request, 'Application has been rejected.')
+    return JsonResponse({'status': 'success', 'message': 'Application rejected.'})
+
 @login_required
 def getJobApplications(request):
     """
