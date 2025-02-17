@@ -59,17 +59,20 @@ class JobApplicationForm(forms.ModelForm):
     """
     Form for creating and editing job postings.
     """
-
+    # Set the initial value for availability to today
+    availability = forms.DateField(initial=timezone.now().date(), widget=forms.DateInput(attrs={
+        'type': 'date',  # Ensure it's rendered as a date picker
+        'required': 'required',
+        'class': 'form-control',
+        'min': timezone.now().date()  # Ensure no past dates are selectable
+    }))
+    
     class Meta:
         model = JobApplication
         fields = ['experience', 'availability', 'cover_letter']
         widgets = {
             'experience': forms.TextInput(attrs={
                 'placeholder': _('Describe your experience in this field'),
-                'required': 'required',
-                'class': 'form-control'
-            }),
-            'availability': forms.DateTimeInput(attrs={
                 'required': 'required',
                 'class': 'form-control'
             }),
