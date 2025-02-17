@@ -78,18 +78,19 @@ def getJobs(request):
 
     return render(request, 'pages/jobs/index.html', context)
 
+@login_required
 def showJobDetails(request, slug):
     job = get_object_or_404(JobPosting, slug=slug)
 
-    # Check if the user is a nanny
+    # Ensure only users with the 'Nanny' role can access this form
     if request.user.role != 'Nanny':
         messages.error(request, 'You are not authorized to apply for this job.')
         return redirect(reverse('base:getJobs'))
 
-    # Check if the nanny has already applied for the job
+    # Check if the user has already applied for the job
     if JobApplication.objects.filter(nanny=request.user, job=job).exists():
         messages.info(request, 'You have already applied for this job.')
-        return redirect(reverse('base:showJobDetails', kwargs={'slug': job.slug}))
+        return render(request, 'pages/jobs/show.html', {'job': job, 'already_applied': True})
 
     if request.method == 'POST':
         form = JobApplicationForm(request.POST)
@@ -107,7 +108,8 @@ def showJobDetails(request, slug):
 
     context = {
         'job': job,
-        'form': form
+        'form': form,
+        'already_applied': False
     }
 
     return render(request, 'pages/jobs/show.html', context)
