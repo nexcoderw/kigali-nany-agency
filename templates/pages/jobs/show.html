@@ -467,6 +467,7 @@
                         </div>
                         <div class="content-booking-form">
                             <form method="POST">
+                                {% csrf_token %}
                                 <div class="item-line-booking">
                                     <div class="input-group">
                                         {{ form.experience }}
