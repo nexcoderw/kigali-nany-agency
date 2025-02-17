@@ -236,4 +236,24 @@ def deleteJobListing(request, slug):
     return redirect(reverse('base:getJobListings'))
 
 def getJobApplicants(request):
-    return render(request, 'pages/user/applicants/index.html')
+    """
+    Retrieves all job applicants who have applied for the jobs posted by the logged-in user (client).
+    Displays an empty state message if no applicants are found.
+    """
+    # Ensure the user is logged in and is a client
+    if not request.user.is_authenticated or request.user.role != 'Client':
+        messages.error(request, "You are not authorized to view applicants for this job.")
+        return redirect('base:getJobs')
+
+    # Retrieve the job applications for the jobs posted by the logged-in user (client)
+    job_applicants = JobApplication.objects.filter(job__client=request.user)
+
+    # If no applicants are found, display a message
+    if not job_applicants.exists():
+        messages.info(request, "No applicants have applied to your jobs yet.")
+    
+    context = {
+        'job_applicants': job_applicants
+    }
+
+    return render(request, 'pages/user/applicants/index.html', context)
