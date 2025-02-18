@@ -82,3 +82,69 @@ class JobApplicationForm(forms.ModelForm):
                 'class': 'form-control'
             }),
         }
+
+class HireApplicationForm(forms.ModelForm):
+    """
+    Form for creating and editing a hire application from a client to a nanny.
+    """
+    class Meta:
+        model = HireApplication
+        fields = [
+            'job_title', 
+            'description', 
+            'expected_start_date', 
+            'expected_end_date', 
+            'expected_salary', 
+            'work_schedule', 
+            'additional_requirements'
+        ]
+        widgets = {
+            'job_title': forms.TextInput(attrs={
+                'placeholder': _('Enter job title'),
+                'required': 'required',
+                'class': 'form-control'
+            }),
+            'description': forms.Textarea(attrs={
+                'placeholder': _('Describe the job details'),
+                'required': 'required',
+                'class': 'form-control',
+                'rows': 4
+            }),
+            'expected_start_date': forms.DateInput(attrs={
+                'placeholder': _('Select expected start date'),
+                'class': 'form-control',
+                'type': 'date',
+                'required': 'required'
+            }),
+            'expected_end_date': forms.DateInput(attrs={
+                'placeholder': _('Select expected end date'),
+                'class': 'form-control',
+                'type': 'date',
+                'required': 'required'
+            }),
+            'expected_salary': forms.NumberInput(attrs={
+                'placeholder': _('Enter expected salary'),
+                'required': 'required',
+                'class': 'form-control'
+            }),
+            'work_schedule': forms.Textarea(attrs={
+                'placeholder': _('Provide a detailed work schedule'),
+                'required': 'required',
+                'class': 'form-control',
+                'rows': 4
+            }),
+            'additional_requirements': forms.Textarea(attrs={
+                'placeholder': _('Provide any additional requirements or comments'),
+                'class': 'form-control',
+                'rows': 4
+            }),
+        }
+
+    def clean_expected_salary(self):
+        """
+        Custom validation for expected_salary to ensure it is a positive number.
+        """
+        salary = self.cleaned_data.get('expected_salary')
+        if salary and salary <= 0:
+            raise forms.ValidationError(_('Salary must be a positive number'))
+        return salary
