@@ -1,8 +1,8 @@
+from base.models import *
 from django.contrib import admin
 from django.utils.html import format_html
-from django.utils.translation import gettext_lazy as _
-from base.models import JobPosting, JobCategory, JobStatus, JobApplication
 from django.contrib.auth import get_user_model
+from django.utils.translation import gettext_lazy as _
 
 @admin.register(JobPosting)
 class JobPostingAdmin(admin.ModelAdmin):
@@ -126,3 +126,67 @@ class JobApplicationAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
 
+@admin.register(HireApplication)
+class HireApplicationAdmin(admin.ModelAdmin):
+    """
+    Custom HireApplicationAdmin for managing hire applications in Django admin.
+    """
+    list_display = (
+        'client_name',
+        'nanny_name',
+        'job_title',
+        'expected_start_date',
+        'expected_end_date',
+        'expected_salary',
+        'status_display',
+        'applied_at',
+        'updated_at',
+    )
+
+    search_fields = ('client__email', 'nanny__email', 'job_title', 'status')
+    list_filter = ('status', 'applied_at', 'updated_at')
+    ordering = ('-applied_at',)
+    readonly_fields = ('applied_at', 'updated_at')
+
+    fieldsets = (
+        (None, {
+            'fields': ('client', 'nanny', 'job_posting', 'job_title', 'description', 'expected_start_date', 'expected_end_date', 'expected_salary', 'work_schedule', 'additional_requirements', 'status')
+        }),
+        (_('Dates'), {
+            'fields': ('applied_at', 'updated_at')
+        }),
+    )
+
+    def client_name(self, obj):
+        return obj.client.name
+    client_name.short_description = 'Client Name'
+
+    def nanny_name(self, obj):
+        return obj.nanny.name
+    nanny_name.short_description = 'Nanny Name'
+
+    def status_display(self, obj):
+        return obj.get_status_display()
+    status_display.short_description = 'Status'
+
+    def save_model(self, request, obj, form, change):
+        # Automatically set the 'client' and 'nanny' fields
+        if not obj.client:
+            obj.client = request.user
+        super().save_model(request, obj, form, change)
+
+    actions = ['make_accepted', 'make_rejected']
+
+    @admin.action(description='Mark selected applications as accepted')
+    def make_accepted(self, request, queryset):
+        queryset.update(status='accepted')
+
+    @admin.action(description='Mark selected applications as rejected')
+    def make_rejected(self, request, queryset):
+        queryset.update(status='rejected')
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        form.base_fields['client'].queryset = form.base_fields['client'].queryset.filter(role='Client')
+        form.base_fields['nanny'].queryset = form.base_fields['nanny'].queryset.filter(role='Nanny')
+        return form
