@@ -63,57 +63,73 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-4">
                 <div class="sidebar-left border-1 background-card">
-                    <h6 class="text-xl-bold neutral-1000">Hire Me</h6>
+                    <h6 class="text-xl-bold neutral-1000">Get in touch</h6>
                     <div class="box-sidebar-content">
-                        <form class="form-contact" method="POST">
-                            {% csrf_token %}
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        {{ form.job_title }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        {{ form.expected_salary }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        {{ form.expected_start_date }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        {{ form.expected_end_date }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        {{ form.work_schedule }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        {{ form.description }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <button class="btn btn-book">
-                                        Send message
-                                        <svg width="17" height="16" viewbox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M8.5 15L15.5 8L8.5 1M15.5 8L1.5 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </svg>
-                                    </button>
-                                </div>
+                        {% if login_required %}
+                            <!-- If user is not logged in, show login prompt -->
+                            <div class="alert alert-warning">
+                                Please <a href="{% url 'auth:login' %}">log in</a> to apply for this job.
                             </div>
-                        </form>
-                        <div class="box-info-contact pt-4">
-                            <p class="text-md-medium mobile-phone neutral-1000"><span class="text-md-bold">Mobile:</span> {{ nanny.phone_number }}</p>
-                            <p class="text-md-medium email neutral-1000"><span class="text-md-bold">Email:</span> {{ nanny.email }}</p>
-                        </div>
+                        {% elif client_required %}
+                            <!-- If user has a role other than 'Client' -->
+                            <div class="alert alert-warning">
+                                You need to <a href="{% url 'auth:register' %}">register as a client</a> to hire a nanny.
+                            </div>
+                        {% else %}
+                            <!-- If the user is a client and hasn't applied yet -->
+                            {% if already_applied %}
+                                <div class="alert alert-info">
+                                    You have already sent a hire application to this nanny.
+                                </div>
+                            {% else %}
+                                <form class="form-contact" method="POST">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                {{ form.job_title }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                {{ form.expected_salary }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                {{ form.expected_start_date }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                {{ form.expected_end_date }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                {{ form.work_schedule }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                {{ form.description }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <button class="btn btn-book">
+                                                Send message
+                                                <svg width="17" height="16" viewbox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8.5 15L15.5 8L8.5 1M15.5 8L1.5 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            {% endif %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
