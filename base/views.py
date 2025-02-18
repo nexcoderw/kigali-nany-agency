@@ -396,7 +396,7 @@ def getJobApplications(request):
         'applications': applications
     }
 
-    return render(request, 'pages/user/applications/index.html', context)
+    return render(request, 'pages/user/nanny/job-applications/index.html', context)
 
 @login_required
 def getJobApplicationDetails(request, id):
@@ -406,4 +406,4 @@ def getJobApplicationDetails(request, id):
         'application': application
     }
 
-    return render(request, 'pages/user/applications/show.html', context)
+    return render(request, 'pages/user/nanny/job-applications/show.html', context)
