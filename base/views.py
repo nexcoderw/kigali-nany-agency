@@ -351,7 +351,7 @@ def getHireApplications(request):
         return redirect('base:getJobs')
 
     # Retrieve the job applications for the jobs posted by the logged-in user (client)
-    applications = HireApplication.objects.filter(job__client=request.user)
+    applications = HireApplication.objects.filter(client=request.user)
 
     # If no applicants are found, display a message
     if not applications.exists():
@@ -361,7 +361,7 @@ def getHireApplications(request):
         'applications': applications
     }
 
-    return render(request, 'pages/user/hire-applications/index.html', context)
+    return render(request, 'pages/user/client/hire-applications/index.html', context)
 
 @login_required
 def getJobApplications(request):
