@@ -409,7 +409,7 @@ def getJobApplicationDetails(request, id):
     return render(request, 'pages/user/nanny/job-applications/show.html', context)
 
 @login_required
-def getNannyHireApplication(request):
+def getNannyHireApplications(request):
     """
     Retrieves all job applications that the logged-in Nanny has sent.
     Only accessible to users with the 'Nanny' role.
@@ -432,3 +432,13 @@ def getNannyHireApplication(request):
     }
 
     return render(request, 'pages/user/nanny/hire-applications/index.html', context)
+
+@login_required
+def getNannyHireApplicationDetails(request, id):
+    application = get_object_or_404(HireApplication, id=id)
+
+    context = {
+        'application': application
+    }
+
+    return render(request, 'pages/user/nanny/hire-applications/show.html', context)
