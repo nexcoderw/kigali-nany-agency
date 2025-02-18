@@ -2,114 +2,123 @@
 {% load humanize %}
 {% block content %}
 
-    <div class="page-header pt-30 background-body">
-        <div class="custom-container position-relative mx-auto">
-            <div class="bg-overlay rounded-12 overflow-hidden">
-                <img class="w-100 h-100 img-banner" src="https://upload.wikimedia.org/wikipedia/commons/7/78/KCC_Wallpaper_by_Mudahunga.jpg" alt="Carento" />
+<div class="page-header pt-30 background-body">
+    <div class="custom-container position-relative mx-auto">
+        <div class="bg-overlay rounded-12 overflow-hidden">
+            <img class="w-100 h-100 img-banner" src="https://upload.wikimedia.org/wikipedia/commons/7/78/KCC_Wallpaper_by_Mudahunga.jpg" alt="Carento" />
+        </div>
+        <div class="container position-absolute z-1 top-50 start-50 translate-middle">
+            <h2 class="text-white">
+                {{ nanny.name }}
+            </h2>
+            <span class="text-white text-xl-medium">Since {{ nanny.created_at|date }}</span>
+        </div>
+    </div>
+</div>
+
+<section class="box-section box-content-tour-detail box-content-room-detail background-body border-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="box-collapse-expand">
+                    <div class="group-collapse-expand">
+                        <button class="btn btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOverview" aria-expanded="false" aria-controls="collapseOverview">
+                            <h6>Overview</h6>
+                            <svg width="12" height="7" viewbox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L6 6L11 1" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </button>
+                        <div class="collapse show" id="collapseOverview">
+                            <div class="card-contact border-0 border-bottom rounded-0 d-flex">
+                                <div class="card-image me-3">
+                                    <div class="position-relative">
+                                        <img src="https://static.vecteezy.com/system/resources/thumbnails/005/129/844/small_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg" alt="Carento" style="width: 100px; height: 100px;" />
+                                    </div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-title">
+                                        <a class="title heading-6" href="#">{{ nanny.name }}</a>
+                                        <p class="text-md-medium neutral-500">
+                                            Location here
+                                        </p>
+                                    </div>
+                                    <div class="card-method-contact2">
+                                        <a class="email text-xs-bold" href="#">
+                                            Open to work
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-body">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="container position-absolute z-1 top-50 start-50 translate-middle">
-                <h2 class="text-white">
-                    {{ nanny.name }}
-                </h2>
-                <span class="text-white text-xl-medium">Since {{ nanny.created_at|date }}</span>
-            </div>
-            <div class="background-body position-absolute z-1 top-100 start-50 translate-middle px-3 py-2 rounded-12 border d-flex gap-3 d-none">
-                <a href="{% url 'base:home' %}" class="neutral-700 text-md-medium">Home</a>
-                <span>
-                    <img src="https://carento-demo.vercel.app/assets/imgs/template/icons/arrow-right.svg" alt="Carento" />
-                </span>
-                <a href="#" class="neutral-1000 text-md-bold"></a>
+            <div class="col-lg-4">
+                <div class="sidebar-left border-1 background-card">
+                    <h6 class="text-xl-bold neutral-1000">Get in touch</h6>
+                    <div class="box-sidebar-content">
+                        <form class="form-contact" method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        {{ form.job_title }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        {{ form.expected_salary }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        {{ form.expected_start_date }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        {{ form.expected_end_date }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        {{ form.work_schedule }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        {{ form.description }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <button class="btn btn-book">
+                                        Send message
+                                        <svg width="17" height="16" viewbox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.5 15L15.5 8L8.5 1M15.5 8L1.5 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="box-info-contact pt-4">
+                            <p class="text-md-medium mobile-phone neutral-1000"><span class="text-md-bold">Mobile:</span> {{ nanny.phone_number }}</p>
+                            <p class="text-md-medium email neutral-1000"><span class="text-md-bold">Email:</span> {{ nanny.email }}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <section class="box-section box-content-tour-detail box-content-room-detail background-body border-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="box-collapse-expand">
-                        <div class="group-collapse-expand">
-                            <button class="btn btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOverview" aria-expanded="false" aria-controls="collapseOverview">
-                                <h6>Overview</h6>
-                                <svg width="12" height="7" viewbox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1 1L6 6L11 1" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
-                            </button>
-                            <div class="collapse show" id="collapseOverview">
-                                <div class="card-contact border-0 border-bottom rounded-0 d-flex">
-                                    <div class="card-image me-3">
-                                        <div class="position-relative">
-                                            <img src="https://static.vecteezy.com/system/resources/thumbnails/005/129/844/small_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg" alt="Carento" style="width: 100px; height: 100px;" />
-                                        </div>
-                                    </div>
-                                    <div class="card-info">
-                                        <div class="card-title">
-                                            <a class="title heading-6" href="#">{{ nanny.name }}</a>
-                                            <p class="text-md-medium neutral-500">
-                                                Location here
-                                            </p>
-                                        </div>
-                                        <div class="card-method-contact2">
-                                            <a class="email text-xs-bold" href="#">
-                                                Open to work
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card card-body">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="sidebar-left border-1 background-card">
-                        <h6 class="text-xl-bold neutral-1000">Get in touch</h6>
-                        <div class="box-sidebar-content">
-                            <form class="form-contact">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <input class="form-control username" type="text" placeholder="Your name" />
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <input class="form-control email" type="email" placeholder="Your email" />
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <textarea class="form-control message" rows="6" placeholder="Message"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <button class="btn btn-book">
-                                            Send message
-                                            <svg width="17" height="16" viewbox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8.5 15L15.5 8L8.5 1M15.5 8L1.5 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="box-info-contact pt-4">
-                                <p class="text-md-medium mobile-phone neutral-1000"><span class="text-md-bold">Mobile:</span> {{ nanny.phone_number }}</p>
-                                <p class="text-md-medium email neutral-1000"><span class="text-md-bold">Email:</span> {{ nanny.email }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+</section>
 
 {% endblock content %}
