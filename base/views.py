@@ -407,3 +407,27 @@ def getJobApplicationDetails(request, id):
     }
 
     return render(request, 'pages/user/nanny/job-applications/show.html', context)
+
+@login_required
+def getHireApplications(request):
+    """
+    Retrieves all hire applicants who have applied for the jobs posted by the logged-in user (client).
+    Displays an empty state message if no applicants are found.
+    """
+    # Ensure the user is logged in and is a client
+    if not request.user.is_authenticated or request.user.role != 'Client':
+        messages.error(request, "You are not authorized to view applicants for this job.")
+        return redirect('base:getJobs')
+
+    # Retrieve the job applications for the jobs posted by the logged-in user (client)
+    applications = HireApplication.objects.filter(client=request.user)
+
+    # If no applicants are found, display a message
+    if not applications.exists():
+        messages.info(request, "No hire applications you have sent yet.")
+    
+    context = {
+        'applications': applications
+    }
+
+    return render(request, 'pages/user/client/hire-applications/index.html', context)

@@ -16,20 +16,20 @@ urlpatterns = [
     path('dashboard/', dashboard, name="dashboard"),
 
     # Client
-    path('job-listings/', getJobListings, name="getJobListings"),
-    path('job-listing/add/', addJobListing, name="addJobListing"),
-    path('job-listing/edit/<slug:slug>/', editJobListing, name="editJobListing"),
-    path('job-listing/delete/<slug:slug>/', deleteJobListing, name="deleteJobListing"),
+    path('client/job-listings/', getJobListings, name="getJobListings"),
+    path('client/job-listing/add/', addJobListing, name="addJobListing"),
+    path('client/job-listing/edit/<slug:slug>/', editJobListing, name="editJobListing"),
+    path('client/job-listing/delete/<slug:slug>/', deleteJobListing, name="deleteJobListing"),
 
-    path('applicants/', getJobApplicants, name="getJobApplicants"),
-    path('applicant/<id>/', getJobApplicantDetails, name="getJobApplicantDetails"),
-    path('applicant/accept/<int:id>/', acceptApplication, name='acceptApplication'),
-    path('applicant/reject/<int:id>/', rejectApplication, name='rejectApplication'),
+    path('client/applicants/', getJobApplicants, name="getJobApplicants"),
+    path('client/applicant/<id>/', getJobApplicantDetails, name="getJobApplicantDetails"),
+    path('client/applicant/accept/<int:id>/', acceptApplication, name='acceptApplication'),
+    path('client/applicant/reject/<int:id>/', rejectApplication, name='rejectApplication'),
 
-    path('hire-applications/', getHireApplications, name="getHireApplications"),
-    path('hire-applications/<id>/', getHireApplicationDetails, name="getHireApplicationDetails"),
+    path('client/hire-applications/', getHireApplications, name="getHireApplications"),
+    path('client/hire-applications/<id>/', getHireApplicationDetails, name="getHireApplicationDetails"),
 
     # Nanny
-    path('applications/', getJobApplications, name="getJobApplications"),
-    path('application/<id>/', getJobApplicationDetails, name="getJobApplicationDetails"),
+    path('nanny/job-applications/', getJobApplications, name="getJobApplications"),
+    path('nanny/job-application/<id>/', getJobApplicationDetails, name="getJobApplicationDetails"),
 ]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
