@@ -76,7 +76,7 @@
                         {% elif client_required %}
                             <!-- If user has a role other than 'Client' -->
                             <div class="alert alert-warning">
-                                You need to <a href="{% url 'auth:register' %}">register as a client</a> to hire a nanny.
+                                You need to <a href="{% url 'auth:logout' %}">register as a client</a> to hire a nanny.
                             </div>
                         {% else %}
                             <!-- If the user is a client and hasn't applied yet -->
