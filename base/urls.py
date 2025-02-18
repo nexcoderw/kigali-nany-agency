@@ -37,4 +37,5 @@ urlpatterns = [
     path('hire-applications/', getNannyHireApplications, name="getNannyHireApplications"),
     path('hire-applications/<id>/', getNannyHireApplicationDetails, name="getNannyHireApplicationDetails"),
     path('hire-application/accept/<int:id>/', nannyAcceptHireApplication, name='nannyAcceptHireApplication'),
+    path('hire-application/reject/<int:id>/', nannyRejectHireApplication, name='nannyRejectHireApplication'),
 ]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

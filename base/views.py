@@ -456,3 +456,16 @@ def nannyAcceptHireApplication(request, id):
 
     messages.success(request, 'Application has been accepted.')
     return JsonResponse({'status': 'success', 'message': 'Application accepted.'})
+
+def nannyRejectHireApplication(request, id):
+    application = get_object_or_404(HireApplication, id=id)
+
+    # Ensure that only pending applications can be rejected
+    if application.status != 'pending':
+        return JsonResponse({'status': 'error', 'message': 'Application is not pending.'})
+
+    application.status = 'rejected'
+    application.save()
+
+    messages.success(request, 'Application has been rejected.')
+    return JsonResponse({'status': 'success', 'message': 'Application rejected.'})
