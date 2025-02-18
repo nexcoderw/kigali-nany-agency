@@ -17,7 +17,7 @@
                                 <a href="{% url 'base:home' %}" class="fw-bold">Home</a>
                             </li>
                             <li>
-                                <a href="#" class="fw-bold">About Us</a>
+                                <a href="{% url 'base:about' %}" class="fw-bold">About Us</a>
                             </li>
                             <li>
                                 <a href="{% url 'base:getNannies' %}" class="fw-bold">Nannies</a>
@@ -26,7 +26,10 @@
                                 <a href="{% url 'base:getJobs' %}" class="fw-bold">Jobs</a>
                             </li>
                             <li>
-                                <a href="#" class="fw-bold">Contact Us</a>
+                                <a href="{% url 'base:contact' %}" class="fw-bold">Contact Us</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'base:services' %}" class="fw-bold">Services</a>
                             </li>
                         </ul>
                     </nav>

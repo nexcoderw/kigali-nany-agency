@@ -12,6 +12,14 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def home(request):
     return render(request, 'pages/index.html')
+def about(request):
+    return render(request, 'pages/about.html')
+
+def services(request):
+    return render(request, 'pages/services.html')
+
+def contact(request):
+    return render(request, 'pages/contact.html')
 
 def getJobs(request):
     jobs = JobPosting.objects.all().order_by('-created_at')

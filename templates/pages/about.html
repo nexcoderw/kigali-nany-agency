@@ -1,0 +1,144 @@
+{% extends 'layouts/app.html' %}
+{% load static %}
+{% block content %}
+
+<div class="page-header pt-30 background-body">
+    <div class="custom-container position-relative mx-auto">
+        <div class="bg-overlay rounded-12 overflow-hidden">
+            <img class="w-100 h-100 img-banner" src="{% static 'img/breadcrumbs/our-team.jpg' %}" alt="Kigali Nanny Agency"/>
+        </div>
+        <div class="container position-absolute z-1 top-50 start-50 translate-middle">
+            <h2 class="text-white">About Us</h2>
+            <span class="text-white text-xl-medium">Learn more about our mission and services</span>
+        </div>
+        <div class="background-body position-absolute z-1 top-100 start-50 translate-middle px-3 py-2 rounded-12 border d-flex gap-3 @@navigation-page">
+            <a href="index.html" class="neutral-700 text-md-medium">Home</a>
+            <span>
+                <img src="{% static 'img/icons/arrow-right.svg' %}" alt="Kigali Nanny Agency"/>
+            </span>
+            <a href="#" class="neutral-1000 text-md-bold">About Us</a>
+        </div>
+    </div>
+</div>
+<section class="section-1 py-96 background-body">
+    <div class="container">
+        <div class="row pb-50">
+            <div class="col-lg-4">
+                <h3 class="neutral-1000">
+                    The Future of <br/>
+                    <span class="text-primary">Childcare</span>
+                    Starts Here
+                </h3>
+            </div>
+            <div class="col-lg-7 offset-lg-1">
+                <p class="text-lg-medium neutral-500">Welcome to Kigali Nanny Agency, your trusted solution for childcare services. Since our inception, we have focused on providing families with professionally trained, reliable, and caring nannies. Whether you need full-time care, part-time assistance, or short-term support, we have the right candidates to meet your family's needs.</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="box-image rounded-12 position-relative overflow-hidden">
+                    <img class="rounded-12" src="{% static 'img/img-6.jpg' %}" alt="Kigali Nanny Agency"/>
+                    <div class="box-tag bg-white p-3 d-flex position-absolute bottom-0 end-0 rounded-12 m-3">
+                        <span class="text-dark fs-72 me-3">86</span>
+                        <h6>
+                            Trained <br/>Professionals
+                        </h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="box-image rounded-12 position-relative overflow-hidden">
+                    <img class="rounded-12" src="{% static 'img/story/img-3.jpg' %}" alt="Kigali Nanny Agency"/>
+                </div>
+            </div>
+            <div class="col-lg-4 col-12">
+                <div class="d-flex flex-column gap-4 align-self-stretch h-100">
+                    <div class="box-tag background-brand-2 p-5 d-flex rounded-12">
+                        <span class="text-dark fs-96 me-3">25</span>
+                        <h4>
+                            Years of <br/>Experience
+                        </h4>
+                    </div>
+                    <img class="rounded-12" src="{% static 'img/story/img-2.jpg' %}" alt="Kigali Nanny Agency"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container pt-96">
+        <div class="row mt-40">
+            <div class="col-lg-3 col-sm-6">
+                <div class="card-why text-start wow fadeInUp">
+                    <div class="card-info">
+                        <h6 class="text-xl-bold neutral-1000 text-start">Personalized Care</h6>
+                        <p class="text-md-medium neutral-500">Select the ideal nanny tailored to your family's specific needs and preferences.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card-why text-start wow fadeInUp">
+                    <div class="card-info">
+                        <h6 class="text-xl-bold neutral-1000 text-start">Clear Pricing</h6>
+                        <p class="text-md-medium neutral-500">Enjoy straightforward pricing with no hidden fees, giving you full transparency.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card-why text-start wow fadeInUp">
+                    <div class="card-info">
+                        <h6 class="text-xl-bold neutral-1000 text-start">Convenient Scheduling</h6>
+                        <p class="text-md-medium neutral-500">Benefit from flexible scheduling options that accommodate your busy lifestyle.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card-why text-start wow fadeInUp">
+                    <div class="card-info">
+                        <h6 class="text-xl-bold neutral-1000 text-start">24/7 Support</h6>
+                        <p class="text-md-medium neutral-500">Access our support team anytime for assistance and peace of mind.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-cta-7 background-body py-96">
+    <div class="box-cta-6">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <a class="btn btn-signin bg-2 text-dark mb-4" href="#">Our Mission</a>
+                    <h4 class="mb-4 neutral-1000">
+                        Providing Quality Care. <br/>Get started today.
+                    </h4>
+                    <p class="text-lg-medium neutral-500 mb-4">Our mission is to ensure that families in Kigali have access to the best nannies, offering reliable and compassionate childcare solutions.</p>
+                    <div class="row">
+                        <div class="col">
+                            <ul class="list-ticks-green list-ticks-green-2">
+                                <li class="neutral-1000 pe-0">Tailored services to fit every family's unique needs</li>
+                                <li class="neutral-1000 pe-0">Comprehensive background checks and training</li>
+                                <li class="neutral-1000 pe-0">24/7 support to answer your questions and concerns</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a class="btn btn-primary mt-2" href="#">
+                        Get Started Now
+                    </a>
+                </div>
+                <div class="col-lg-6 offset-lg-1 position-relative z-1 mt-lg-0 mt-4">
+                    <div class="d-flex flex-column gap-4">
+                        <div class="d-flex gap-4">
+                            <div class="position-relative">
+                                <img class="bdrd8 w-100" src="{% static 'img/story/img-4.jpg' %}" alt="Kigali Nanny Agency"/>
+                            </div>
+                            <div class="mt-auto">
+                                <img class="bdrd8 w-100" src="{% static 'img/story/img-5.jpg' %}" alt="Kigali Nanny Agency"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-overlay position-absolute bottom-0 end-0 h-75 background-brand-2 opacity-25 z-0 rounded-start-pill"></div>
+    </div>
+</section>
+{% endblock content %}
