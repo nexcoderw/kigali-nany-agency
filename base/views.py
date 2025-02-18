@@ -442,3 +442,17 @@ def getNannyHireApplicationDetails(request, id):
     }
 
     return render(request, 'pages/user/nanny/hire-applications/show.html', context)
+
+@login_required
+def nannyAcceptHireApplication(request, id):
+    application = get_object_or_404(HireApplication, id=id)
+
+    # Ensure that only pending applications can be accepted
+    if application.status != 'pending':
+        return JsonResponse({'status': 'error', 'message': 'Application is not pending.'})
+
+    application.status = 'accepted'
+    application.save()
+
+    messages.success(request, 'Application has been accepted.')
+    return JsonResponse({'status': 'success', 'message': 'Application accepted.'})
