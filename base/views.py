@@ -300,7 +300,7 @@ def getJobApplicants(request):
         'job_applicants': job_applicants
     }
 
-    return render(request, 'pages/user/applicants/index.html', context)
+    return render(request, 'pages/user/client/job-applicants/index.html', context)
 
 @login_required
 def getJobApplicantDetails(request, id):
@@ -310,7 +310,7 @@ def getJobApplicantDetails(request, id):
         'applicant': applicant
     }
 
-    return render(request, 'pages/user/applicants/show.html', context)
+    return render(request, 'pages/user/client/job-applicants/show.html', context)
 
 @login_required
 def acceptApplication(request, id):
