@@ -1,3 +1,4 @@
+
 from base.views import *
 from django.urls import path
 from django.conf import settings
@@ -33,5 +34,6 @@ urlpatterns = [
     path('job-applications/', getJobApplications, name="getJobApplications"),
     path('job-application/<id>/', getJobApplicationDetails, name="getJobApplicationDetails"),
 
-    path('hire-applications/', getNannyHireApplication, name="getNannyHireApplication"),
+    path('hire-applications/', getNannyHireApplications, name="getNannyHireApplications"),
+    path('hire-applications/id/', getNannyHireApplicationDetails, name="getNannyHireApplicationDetails"),
 ]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
