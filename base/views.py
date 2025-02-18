@@ -129,7 +129,7 @@ def getNannies(request):
 def showNanny(request, slug):
     nanny = get_object_or_404(User, slug=slug)
 
-    # If the user is logged in and has 'Client' role
+    # Check if the user is logged in and has the 'Client' role
     if request.user.is_authenticated and request.user.role == 'Client':
         # Check if the client has already sent a hire application to this nanny
         if HireApplication.objects.filter(client=request.user, nanny=nanny).exists():
@@ -159,12 +159,22 @@ def showNanny(request, slug):
         }
 
     else:
-        # If the user isn't logged in or doesn't have the 'Client' role
-        context = {
-            'nanny': nanny,
-            'login_required': not request.user.is_authenticated,  # Check if not logged in
-            'client_required': request.user.role != 'Client'  # Check if not a client
-        }
+        # If the user isn't logged in or doesn't have the 'Client' role, display appropriate messages
+        if not request.user.is_authenticated:
+            context = {
+                'nanny': nanny,
+                'login_required': True,  # Notify the user they need to log in
+            }
+        elif request.user.role != 'Client':
+            context = {
+                'nanny': nanny,
+                'client_required': True,  # Notify the user they need to register as a client
+            }
+        else:
+            context = {
+                'nanny': nanny,
+                'already_applied': False,
+            }
 
     return render(request, 'pages/nannies/show.html', context)
 
