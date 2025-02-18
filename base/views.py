@@ -128,10 +128,35 @@ def getNannies(request):
 
 def showNanny(request, slug):
     nanny = get_object_or_404(User, slug=slug)
-    
-    context = {
-        'nanny': nanny
-    }
+
+    # Check if the user is logged in and has the 'Client' role
+    if request.user.is_authenticated and request.user.role == 'Client':
+        # Handle the form submission
+        if request.method == 'POST':
+            form = HireApplicationForm(request.POST)
+            if form.is_valid():
+                hire_application = form.save(commit=False)
+                hire_application.client = request.user  # Set the client to the logged-in user
+                hire_application.nanny = nanny  # Set the nanny to the nanny whose profile is being viewed
+                hire_application.save()
+
+                messages.success(request, 'Your application to hire the nanny has been sent.')
+                return redirect(reverse('base:showNanny', kwargs={'slug': nanny.slug}))
+            else:
+                messages.error(request, 'Please correct the errors in the form.')
+        else:
+            form = HireApplicationForm()
+
+        context = {
+            'nanny': nanny,
+            'form': form
+        }
+    else:
+        # If the user isn't a client or not logged in, display a message
+        context = {
+            'nanny': nanny,
+            'login_required': True
+        }
 
     return render(request, 'pages/nannies/show.html', context)
 
