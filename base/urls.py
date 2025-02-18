@@ -35,5 +35,5 @@ urlpatterns = [
     path('job-application/<id>/', getJobApplicationDetails, name="getJobApplicationDetails"),
 
     path('hire-applications/', getNannyHireApplications, name="getNannyHireApplications"),
-    path('hire-applications/id/', getNannyHireApplicationDetails, name="getNannyHireApplicationDetails"),
+    path('hire-applications/<id>/', getNannyHireApplicationDetails, name="getNannyHireApplicationDetails"),
 ]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
