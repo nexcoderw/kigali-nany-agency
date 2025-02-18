@@ -27,6 +27,7 @@ urlpatterns = [
     path('applicant/reject/<int:id>/', rejectApplication, name='rejectApplication'),
 
     path('hire-applications/', getHireApplications, name="getHireApplications"),
+    path('hire-applications/<id>/', getHireApplicationDetails, name="getHireApplicationDetails"),
 
     # Nanny
     path('applications/', getJobApplications, name="getJobApplications"),
