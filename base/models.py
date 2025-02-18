@@ -94,3 +94,37 @@ class JobApplication(models.Model):
         verbose_name = _('Job Application')
         verbose_name_plural = _('Job Applications')
         unique_together = ('nanny', 'job')
+
+class HireApplication(models.Model):
+    client = models.ForeignKey(
+        User, on_delete=models.CASCADE, limit_choices_to={'role': 'Client'}, related_name='hire_applications'
+    )
+    nanny = models.ForeignKey(
+        User, on_delete=models.CASCADE, limit_choices_to={'role': 'Nanny'}, related_name='received_applications'
+    )
+    job_posting = models.ForeignKey(
+        JobPosting, on_delete=models.SET_NULL, null=True, blank=True, related_name='hire_applications'
+    )
+    job_title = models.CharField(max_length=255, help_text='The title of the job the client is offering')
+    description = models.TextField(help_text='Detailed description of the job')
+    expected_start_date = models.DateField(help_text='Expected date for the nanny to start the job')
+    expected_end_date = models.DateField(help_text='Expected date for the nanny to finish the job')
+    expected_salary = models.DecimalField(max_digits=10, decimal_places=2, help_text='Expected salary for the nanny')
+    work_schedule = models.TextField(help_text='Detailed work schedule for the nanny')
+    additional_requirements = models.TextField(null=True, blank=True, help_text='Any additional requirements or comments from the client')
+    status = models.CharField(
+        max_length=50,
+        choices=[('pending', 'Pending'), ('accepted', 'Accepted'), ('rejected', 'Rejected')],
+        default='pending',
+        help_text='The current status of the application'
+    )
+    applied_at = models.DateTimeField(default=timezone.now, help_text='The time the nanny was applied to')
+    updated_at = models.DateTimeField(auto_now=True, help_text='The time the application was last updated')
+
+    def __str__(self):
+        return f"Hire application from {self.client.name} to {self.nanny.name} for {self.job_title}"
+
+    class Meta:
+        verbose_name = 'Hire Application'
+        verbose_name_plural = 'Hire Applications'
+        unique_together = ('client', 'nanny', 'job_posting')
