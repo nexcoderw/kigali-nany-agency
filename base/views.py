@@ -78,39 +78,44 @@ def getJobs(request):
 
     return render(request, 'pages/jobs/index.html', context)
 
-def showNanny(request, slug):
-    nanny = get_object_or_404(User, slug=slug)
+def showJobDetails(request, slug):
+    job = get_object_or_404(JobPosting, slug=slug)
 
-    # Check if the user is logged in and has the 'Client' role
-    if request.user.is_authenticated and request.user.role == 'Client':
-        # Handle the form submission
+    # Check if the user is logged in and has the 'Nanny' role
+    if request.user.is_authenticated and request.user.role == 'Nanny':
+        # Check if the user has already applied for the job
+        if JobApplication.objects.filter(nanny=request.user, job=job).exists():
+            messages.info(request, 'You have already applied for this job.')
+            return render(request, 'pages/jobs/show.html', {'job': job, 'already_applied': True})
+
         if request.method == 'POST':
-            form = HireApplicationForm(request.POST)
+            form = JobApplicationForm(request.POST)
             if form.is_valid():
-                hire_application = form.save(commit=False)
-                hire_application.client = request.user  # Set the client to the logged-in user
-                hire_application.nanny = nanny  # Set the nanny to the nanny whose profile is being viewed
-                hire_application.save()
-
-                messages.success(request, 'Your application to hire the nanny has been sent.')
-                return redirect(reverse('base:showNanny', kwargs={'slug': nanny.slug}))
+                application = form.save(commit=False)
+                application.nanny = request.user
+                application.job = job
+                application.save()
+                messages.success(request, 'Your application has been submitted successfully.')
+                return redirect(reverse('base:showJobDetails', kwargs={'slug': job.slug}))
             else:
-                messages.error(request, 'Please correct the errors in the form.')
+                messages.error(request, 'Please correct the errors below.')
         else:
-            form = HireApplicationForm()
+            form = JobApplicationForm()
 
         context = {
-            'nanny': nanny,
-            'form': form
+            'job': job,
+            'form': form,
+            'already_applied': False
         }
     else:
-        # If the user isn't a client or not logged in, display a message
+        # If the user isn't logged in or doesn't have the Nanny role, display a login redirect button
         context = {
-            'nanny': nanny,
+            'job': job,
+            'already_applied': False,
             'login_required': True
         }
 
-    return render(request, 'pages/nannies/show.html', context)
+    return render(request, 'pages/jobs/show.html', context)
 
 def getNannies(request):
     nannies = User.objects.filter(role = 'Nanny').order_by('-created_at')
