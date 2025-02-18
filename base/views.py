@@ -409,25 +409,26 @@ def getJobApplicationDetails(request, id):
     return render(request, 'pages/user/nanny/job-applications/show.html', context)
 
 @login_required
-def getHireApplications(request):
+def getNannyHireApplication(request):
     """
-    Retrieves all hire applicants who have applied for the jobs posted by the logged-in user (client).
-    Displays an empty state message if no applicants are found.
+    Retrieves all job applications that the logged-in Nanny has sent.
+    Only accessible to users with the 'Nanny' role.
+    Displays an empty state message if no applications are found.
     """
-    # Ensure the user is logged in and is a client
-    if not request.user.is_authenticated or request.user.role != 'Client':
-        messages.error(request, "You are not authorized to view applicants for this job.")
-        return redirect('base:getJobs')
-
-    # Retrieve the job applications for the jobs posted by the logged-in user (client)
-    applications = HireApplication.objects.filter(client=request.user)
-
-    # If no applicants are found, display a message
+    # Ensure the user is logged in and is a Nanny
+    if not request.user.is_authenticated or request.user.role != 'Nanny':
+        messages.error(request, "You are not authorized to view your job applications.")
+        return redirect('base:getJobs')  # Redirect to the job listings or another page as appropriate
+    
+    # Retrieve all job applications sent by the logged-in nanny
+    applications = HireApplication.objects.filter(nanny=request.user)
+    
+    # If no applications are found, display a message
     if not applications.exists():
-        messages.info(request, "No hire applications you have sent yet.")
+        messages.info(request, "No one has sent hire application to you set.")
     
     context = {
         'applications': applications
     }
 
-    return render(request, 'pages/user/client/hire-applications/index.html', context)
+    return render(request, 'pages/user/nanny/hire-applications/index.html', context)
