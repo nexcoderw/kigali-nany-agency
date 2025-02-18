@@ -214,7 +214,7 @@ def getJobListings(request):
         'sort_by': sort_by,
     }
 
-    return render(request, 'pages/user/listings/index.html', context)
+    return render(request, 'pages/user/client/listings/index.html', context)
 
 @login_required
 def addJobListing(request):
@@ -238,7 +238,7 @@ def addJobListing(request):
         'form': form
     }
 
-    return render(request, 'pages/user/listings/create.html', context)
+    return render(request, 'pages/user/client/listings/create.html', context)
 
 @login_required
 def editJobListing(request, slug):
@@ -262,7 +262,7 @@ def editJobListing(request, slug):
         'job': job
     }
 
-    return render(request, 'pages/user/listings/edit.html', context)
+    return render(request, 'pages/user/client/listings/edit.html', context)
 
 @login_required
 def deleteJobListing(request, slug):
