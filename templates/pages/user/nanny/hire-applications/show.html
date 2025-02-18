@@ -136,9 +136,9 @@
                 // Construct the correct URL using Django's URL pattern and passing the `id`
                 let url;
                 if (type === 'accept') {
-                    url = "{% url 'base:acceptApplication' id=0 %}".replace('0', id);  // Replacing the placeholder with the actual id
+                    url = "{% url 'base:nannyAcceptHireApplication' id=0 %}".replace('0', id);  // Replacing the placeholder with the actual id
                 } else if (type === 'reject') {
-                    url = "{% url 'base:rejectApplication' id=0 %}".replace('0', id);  // Replacing the placeholder with the actual id
+                    url = "{% url 'base:nannyRejectHireApplication' id=0 %}".replace('0', id);  // Replacing the placeholder with the actual id
                 }
     
                 // Perform the AJAX request to update the status
