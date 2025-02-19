@@ -477,3 +477,39 @@ def nannyRejectHireApplication(request, id):
 
     messages.success(request, 'Application has been rejected.')
     return JsonResponse({'status': 'success', 'message': 'Application rejected.'})
+
+@login_required
+def updateProfile(request):
+    """
+    View to allow users to update their profile information (User, Nanny, or Client).
+    """
+    user = request.user
+
+    # Check if the user is a Nanny or Client to determine which profile to update
+    if user.role == 'Nanny':
+        profile = get_object_or_404(NannyProfile, user=user)
+        profile_form = NannyProfileForm(request.POST or None, instance=profile)
+    elif user.role == 'Client':
+        profile = get_object_or_404(ClientProfile, user=user)
+        profile_form = ClientProfileForm(request.POST or None, instance=profile)
+    else:
+        profile_form = None
+    
+    user_form = UserUpdateForm(request.POST or None, instance=user)
+
+    # If the forms are valid, save the data
+    if request.method == 'POST':
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, "Your profile has been updated successfully!")
+            return redirect('account:update_profile')
+        else:
+            messages.error(request, "Please correct the errors below.")
+
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form,
+    }
+
+    return render(request, 'pages/auth/profile.html', context)
