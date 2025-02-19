@@ -193,3 +193,18 @@ class NannyProfileForm(forms.ModelForm):
             'preferred_working_hours': forms.Textarea(attrs={'rows': 4, 'class': 'form-control'}),
             'availability_notes': forms.Textarea(attrs={'rows': 4, 'class': 'form-control'}),
         }
+
+class ClientProfileForm(forms.ModelForm):
+    """
+    Form for updating client profile details.
+    """
+    class Meta:
+        model = ClientProfile
+        fields = [
+            'company_name', 
+            'company_description', 
+            'address'
+        ]
+        widgets = {
+            'company_description': forms.Textarea(attrs={'rows': 4, 'class': 'form-control'}),
+        }
