@@ -1,7 +1,8 @@
 from base.models import *
 from django import forms
-from base.models import JobPosting, JobCategory, JobStatus
 from django.utils.translation import gettext_lazy as _
+from base.models import JobPosting, JobCategory, JobStatus
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 
 class JobPostingForm(forms.ModelForm):
     """
@@ -148,3 +149,21 @@ class HireApplicationForm(forms.ModelForm):
         if salary and salary <= 0:
             raise forms.ValidationError(_('Salary must be a positive number'))
         return salary
+
+class UserUpdateForm(UserChangeForm):
+    """
+    Form to update the user profile (name, email, phone number, password).
+    """
+    password = forms.CharField(widget=forms.PasswordInput, required=False, help_text="Leave blank if you don't want to change the password")
+
+    class Meta:
+        model = get_user_model()
+        fields = ['name', 'email', 'phone_number', 'password']
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if self.cleaned_data['password']:
+            user.set_password(self.cleaned_data['password'])
+        if commit:
+            user.save()
+        return user
