@@ -167,3 +167,29 @@ class UserUpdateForm(UserChangeForm):
         if commit:
             user.save()
         return user
+
+class NannyProfileForm(forms.ModelForm):
+    """
+    Form for updating nanny profile details.
+    """
+    class Meta:
+        model = NannyProfile
+        fields = [
+            'date_of_birth', 
+            'biography', 
+            'years_of_experience', 
+            'certifications', 
+            'languages_spoken', 
+            'previous_employers', 
+            'hourly_rate', 
+            'preferred_working_hours', 
+            'availability_notes'
+        ]
+        widgets = {
+            'biography': forms.Textarea(attrs={'rows': 4, 'class': 'form-control'}),
+            'certifications': forms.Textarea(attrs={'rows': 4, 'class': 'form-control'}),
+            'languages_spoken': forms.Textarea(attrs={'rows': 4, 'class': 'form-control'}),
+            'previous_employers': forms.Textarea(attrs={'rows': 4, 'class': 'form-control'}),
+            'preferred_working_hours': forms.Textarea(attrs={'rows': 4, 'class': 'form-control'}),
+            'availability_notes': forms.Textarea(attrs={'rows': 4, 'class': 'form-control'}),
+        }
