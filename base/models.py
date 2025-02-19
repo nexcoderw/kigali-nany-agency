@@ -147,3 +147,16 @@ class NannyProfile(models.Model):
     class Meta:
         verbose_name = 'Nanny Profile'
         verbose_name_plural = 'Nanny Profiles'
+
+class ClientProfile(models.Model):
+    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='client_profile')
+    company_name = models.CharField(max_length=255, null=True, blank=True, help_text=_('Name of the company hiring the nanny'))
+    company_description = models.TextField(null=True, blank=True, help_text=_('Brief description of the company'))
+    address = models.CharField(max_length=255, null=True, blank=True)
+    
+    def __str__(self):
+        return f"Client Profile for {self.user.name}"
+
+    class Meta:
+        verbose_name = 'Client Profile'
+        verbose_name_plural = 'Client Profiles'
