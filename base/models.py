@@ -128,3 +128,22 @@ class HireApplication(models.Model):
         verbose_name = 'Hire Application'
         verbose_name_plural = 'Hire Applications'
         unique_together = ('client', 'nanny', 'job_posting')
+
+class NannyProfile(models.Model):
+    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='nanny_profile')
+    date_of_birth = models.DateField(null=True, blank=True)
+    biography = models.TextField(null=True, blank=True, help_text=_('Brief biography of the nanny'))
+    years_of_experience = models.PositiveIntegerField(null=True, blank=True)
+    certifications = models.TextField(null=True, blank=True, help_text=_('Certifications or courses completed'))
+    languages_spoken = models.TextField(null=True, blank=True, help_text=_('Languages spoken by the nanny'))
+    previous_employers = models.TextField(null=True, blank=True, help_text=_('Details of previous employers'))
+    hourly_rate = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, help_text=_('Hourly rate for services'))
+    preferred_working_hours = models.TextField(null=True, blank=True, help_text=_('Preferred working hours'))
+    availability_notes = models.TextField(null=True, blank=True, help_text=_('Any additional availability notes'))
+    
+    def __str__(self):
+        return f"Nanny Profile for {self.user.name}"
+
+    class Meta:
+        verbose_name = 'Nanny Profile'
+        verbose_name_plural = 'Nanny Profiles'
