@@ -1,3 +1,5 @@
+from base.forms import *
+from base.models import *
 from account.forms import *
 from account.models import *
 from django.urls import reverse
@@ -69,36 +71,38 @@ def userRegister(request):
 
     return render(request, 'pages/auth/register.html', context)
 
-# @login_required
-# def userProfile(request):
-#     user = request.user
+@login_required
+def userProfile(request):
+    """
+    View to allow users to update their profile information (User, Nanny, or Client).
+    """
+    user = request.user
 
-#     if request.method == 'POST':
-#         if 'profile_form' in request.POST:
-#             profile_form = UserProfileForm(request.POST, request.FILES, instance=user)
-#             if profile_form.is_valid():
-#                 profile_form.save()
-#                 messages.success(request, 'Profil mis à jour avec succès.')
-#                 return redirect('auth:userProfile')
-#             else:
-#                 password_form = PasswordChangeForm(user=user)
-#         elif 'password_form' in request.POST:
-#             password_form = PasswordChangeForm(user=user, data=request.POST)
-#             if password_form.is_valid():
-#                 password_form.save()
-#                 update_session_auth_hash(request, password_form.user)
-#                 messages.success(request, 'Mot de passe modifié avec succès. Veuillez vous reconnecter.')
-#                 logout(request)
-#                 return redirect('auth:login')
-#             else:
-#                 profile_form = UserProfileForm(instance=user)
-#     else:
-#         profile_form = UserProfileForm(instance=user)
-#         password_form = PasswordChangeForm(user=user)
+    # Check if the user is a Nanny or Client to determine which profile to update
+    if user.role == 'Nanny':
+        profile = get_object_or_404(NannyProfile, user=user)
+        profile_form = NannyProfileForm(request.POST or None, instance=profile)
+    elif user.role == 'Client':
+        profile = get_object_or_404(ClientProfile, user=user)
+        profile_form = ClientProfileForm(request.POST or None, instance=profile)
+    else:
+        profile_form = None
+    
+    user_form = UserUpdateForm(request.POST or None, instance=user)
 
-#     context = {
-#         'profile_form': profile_form,
-#         'password_form': password_form
-#     }
+    # If the forms are valid, save the data
+    if request.method == 'POST':
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, "Your profile has been updated successfully!")
+            return redirect('account:update_profile')
+        else:
+            messages.error(request, "Please correct the errors below.")
 
-#     return render(request, 'pages/auth/profile.html', context)
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form,
+    }
+
+    return render(request, 'pages/auth/profile.html', context)
