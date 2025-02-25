@@ -2,15 +2,17 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from account.models import *
+from account.models import User
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
     """
-    Custom UserAdmin for managing User model in Django admin.
+    Custom UserAdmin for managing the User model.
+    This admin enables assigning groups and user-specific permissions,
+    along with a professional interface for image thumbnails.
     """
 
-    # Display these fields in the admin list view
+    # Fields displayed in the admin list view
     list_display = (
         'email',
         'name',
@@ -35,7 +37,7 @@ class UserAdmin(BaseUserAdmin):
     # Read-only fields in the admin detail view
     readonly_fields = ('slug', 'created_at', 'updated_at', 'image_thumbnail_display')
 
-    # Fieldsets to organize fields in the admin detail view
+    # Fieldsets for organizing fields in the admin detail view
     fieldsets = (
         (None, {
             'fields': ('email', 'password')
@@ -55,38 +57,46 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'name', 'phone_number', 'password1', 'password2', 'role', 'is_active', 'is_staff'),
+            'fields': ('email', 'name', 'phone_number', 'password1', 'password2', 'role', 'is_active', 'is_staff', 'groups', 'user_permissions'),
         }),
     )
 
-    # Display image thumbnail in the list view
+    # Enable horizontal filters for many-to-many fields
+    filter_horizontal = ('groups', 'user_permissions',)
+
     def image_thumbnail(self, obj):
+        """
+        Render a small thumbnail of the user's profile image in the list view.
+        """
         if obj.image:
-            return format_html('<img src="{}" width="50" height="50" style="object-fit: cover; border-radius: 50%;" />', obj.image.url)
+            return format_html(
+                '<img src="{}" width="50" height="50" style="object-fit: cover; border-radius: 50%;" />',
+                obj.image.url
+            )
         return '-'
     image_thumbnail.short_description = 'Image'
 
-    # Display image thumbnail in the detail view
     def image_thumbnail_display(self, obj):
+        """
+        Render a larger profile image in the detail view.
+        """
         if obj.image:
-            return format_html('<img src="{}" width="150" height="150" style="object-fit: cover; border-radius: 50%;" />', obj.image.url)
+            return format_html(
+                '<img src="{}" width="150" height="150" style="object-fit: cover; border-radius: 50%;" />',
+                obj.image.url
+            )
         return '-'
     image_thumbnail_display.short_description = 'Profile Image'
 
-    # Override to ensure proper handling of password hashing
     def save_model(self, request, obj, form, change):
-        if change:
-            obj.save()
-        else:
-            # When creating a new user, set the password properly
+        """
+        Override save_model to handle password hashing on new user creation.
+        """
+        if not change:
             obj.set_password(form.cleaned_data.get('password1'))
-            obj.save()
+        obj.save()
 
-    # Add custom validation or modifications if necessary
-    def formfield_for_dbfield(self, db_field, **kwargs):
-        return super().formfield_for_dbfield(db_field, **kwargs)
-
-    # Add actions if necessary
+    # Custom admin actions for bulk updating user status
     actions = ['make_active', 'make_inactive']
 
     @admin.action(description='Mark selected users as active')
