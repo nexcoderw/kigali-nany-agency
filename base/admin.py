@@ -80,7 +80,8 @@ class JobPostingAdmin(admin.ModelAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
-        form.base_fields['client'].queryset = get_user_model().objects.filter(role='Client')
+        if 'client' in form.base_fields:
+            form.base_fields['client'].queryset = get_user_model().objects.filter(role='Client')
         return form
 
 
