@@ -15,7 +15,7 @@ def user_image_path(instance, filename):
 class User(AbstractBaseUser, PermissionsMixin):
     """
     Custom User model that supports profile images, role-based logic,
-    and flexible assignment of groups and permissions via the admin.
+    and flexible assignment of groups via the admin.
     """
     ROLE_CHOICES = (
         ('Client', 'Client'),
@@ -51,8 +51,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     def save(self, *args, **kwargs):
         """
         Custom save method to handle image deletion and unique slug generation.
-        Note: We have removed automatic permission clearing to allow manual assignment
-        via the admin interface.
         """
         try:
             orig = User.objects.get(pk=self.pk)
