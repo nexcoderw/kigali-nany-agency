@@ -260,6 +260,12 @@ class PasswordResetConfirmForm(forms.Form):
         })
     )
 
+    def __init__(self, *args, **kwargs):
+        super(PasswordResetConfirmForm, self).__init__(*args, **kwargs)
+        # If an initial email is provided, mark the field as readonly.
+        if self.initial.get('email'):
+            self.fields['email'].widget.attrs.update({'readonly': 'readonly'})
+
     def clean(self):
         cleaned_data = super().clean()
         email = cleaned_data.get("email")
