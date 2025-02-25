@@ -25,7 +25,11 @@
                                         <div class="remeber-me">
                                             <label class="text-xs-medium neutral-500"> <input class="cb-remember" type="checkbox">Remember me </label>
                                         </div>
-                                        <div class="forgotpass"><a class="text-xs-medium neutral-500" href="#">Forgot password?</a></div>
+                                        <div class="forgotpass">
+                                            <a class="text-xs-medium neutral-500" href="{% url 'auth:forgetPassword' %}">
+                                                Forgot password?
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group mb-30">
