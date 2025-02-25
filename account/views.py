@@ -1,9 +1,12 @@
+import random
 from base.forms import *
 from base.models import *
 from account.forms import *
 from account.models import *
 from django.urls import reverse
+from django.conf import settings
 from django.contrib import messages
+from django.core.mail import send_mail
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
@@ -107,6 +110,73 @@ def userProfile(request):
 
     return render(request, 'pages/auth/profile.html', context)
 
-def forgetPassword(request):
-    
-    return render(request, 'pages/auth/forget-password.html')
+def generate_otp():
+    """
+    Generate a random 7-digit OTP.
+    """
+    return str(random.randint(1000000, 9999999))
+
+
+def password_reset_request(request):
+    """
+    View to handle OTP requests for password resets.
+    """
+    if request.method == 'POST':
+        form = PasswordResetRequestForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            user = User.objects.get(email=email)
+            otp = generate_otp()
+            user.reset_otp = otp
+            user.otp_created_at = timezone.now()
+            user.save()
+
+            # Send the OTP via email
+            subject = 'Password Reset OTP'
+            message = f'Your password reset OTP is: {otp}'
+            from_email = settings.DEFAULT_FROM_EMAIL
+            recipient_list = [user.email]
+            try:
+                send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+                messages.success(request, "An OTP has been sent to your email address. Please check your inbox.")
+                return redirect('auth:forgetPasswordConfirm')
+            except Exception as e:
+                messages.error(request, "Failed to send OTP email. Please try again later.")
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = PasswordResetRequestForm()
+
+    context = {
+        'form': form,
+        'step': 'request'
+    }
+    return render(request, 'pages/auth/forget-password.html', context)
+
+
+def password_reset_confirm(request):
+    """
+    View to handle OTP confirmation and password reset.
+    """
+    if request.method == 'POST':
+        form = PasswordResetConfirmForm(request.POST)
+        if form.is_valid():
+            user = form.cleaned_data['user']
+            new_password = form.cleaned_data['new_password']
+            user.set_password(new_password)
+            # Clear OTP fields
+            user.reset_otp = None
+            user.otp_created_at = None
+            user.save()
+            messages.success(request, "Your password has been reset successfully. Please log in with your new password.")
+            return redirect('auth:login')
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = PasswordResetConfirmForm()
+
+    context = {
+        'form': form,
+        'step': 'confirm'
+    }
+    return render(request, 'pages/auth/forget-password.html', context)
