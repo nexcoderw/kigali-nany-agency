@@ -1,21 +1,22 @@
 import os
-import random
 from django.db import models
-from account.models import *
-from account.managers import *
-from django.db.models import Avg
 from django.utils import timezone
 from django.utils.text import slugify
 from imagekit.processors import ResizeToFill
 from imagekit.models import ProcessedImageField
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, Permission
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from account.managers import CustomUserManager  # Ensure your custom manager is imported
 
 def user_image_path(instance, filename):
     base_filename, file_extension = os.path.splitext(filename)
     return f'profile_images/user_{slugify(instance.slug)}_{instance.phone_number}{file_extension}'
 
 class User(AbstractBaseUser, PermissionsMixin):
+    """
+    Custom User model that supports profile images, role-based logic,
+    and flexible assignment of groups and permissions via the admin.
+    """
     ROLE_CHOICES = (
         ('Client', 'Client'),
         ('Nanny', 'Nanny'),
@@ -48,17 +49,21 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
 
     def save(self, *args, **kwargs):
-        # Handle image deletion and update slug on name change
+        """
+        Custom save method to handle image deletion and unique slug generation.
+        Note: We have removed automatic permission clearing to allow manual assignment
+        via the admin interface.
+        """
         try:
             orig = User.objects.get(pk=self.pk)
         except User.DoesNotExist:
             orig = None
 
         if orig:
+            # Delete previous image if it has been changed
             if orig.image and self.image != orig.image:
                 orig.image.delete(save=False)
-            if orig.role != self.role:
-                self.setPermissions()
+            # Regenerate slug if the user's name has changed
             if orig.name != self.name:
                 self.slug = self.generate_unique_slug()
         else:
@@ -66,16 +71,11 @@ class User(AbstractBaseUser, PermissionsMixin):
                 self.slug = self.generate_unique_slug()
 
         super(User, self).save(*args, **kwargs)
-        self.setPermissions()
-
-    def setPermissions(self):
-        """
-        Since role does not have associated permissions,
-        simply clear any assigned user permissions.
-        """
-        self.user_permissions.clear()
 
     def generate_unique_slug(self):
+        """
+        Generate a unique slug based on the user's name.
+        """
         base_slug = slugify(self.name)
         slug = base_slug
         counter = 1
@@ -85,7 +85,13 @@ class User(AbstractBaseUser, PermissionsMixin):
         return slug
 
     def get_full_name(self):
+        """
+        Return the user's full name.
+        """
         return self.name
 
     def get_short_name(self):
+        """
+        Return the user's first name if available, otherwise the email.
+        """
         return self.name.split()[0] if self.name else self.email
