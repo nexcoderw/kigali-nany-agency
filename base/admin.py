@@ -142,7 +142,6 @@ class HireApplicationAdmin(admin.ModelAdmin):
         'applied_at',
         'updated_at',
     )
-
     search_fields = ('client__email', 'nanny__email', 'job_title', 'status')
     list_filter = ('status', 'applied_at', 'updated_at')
     ordering = ('-applied_at',)
@@ -150,7 +149,11 @@ class HireApplicationAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('client', 'nanny', 'job_posting', 'job_title', 'description', 'expected_start_date', 'expected_end_date', 'expected_salary', 'work_schedule', 'additional_requirements', 'status')
+            'fields': (
+                'client', 'nanny', 'job_posting', 'job_title', 'description',
+                'expected_start_date', 'expected_end_date', 'expected_salary',
+                'work_schedule', 'additional_requirements', 'status'
+            )
         }),
         (_('Dates'), {
             'fields': ('applied_at', 'updated_at')
@@ -170,7 +173,7 @@ class HireApplicationAdmin(admin.ModelAdmin):
     status_display.short_description = 'Status'
 
     def save_model(self, request, obj, form, change):
-        # Automatically set the 'client' and 'nanny' fields
+        # Automatically set the 'client' field if not provided
         if not obj.client:
             obj.client = request.user
         super().save_model(request, obj, form, change)
@@ -187,6 +190,9 @@ class HireApplicationAdmin(admin.ModelAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
-        form.base_fields['client'].queryset = form.base_fields['client'].queryset.filter(role='Client')
-        form.base_fields['nanny'].queryset = form.base_fields['nanny'].queryset.filter(role='Nanny')
+        # Check if the field exists before modifying the queryset
+        if 'client' in form.base_fields:
+            form.base_fields['client'].queryset = form.base_fields['client'].queryset.filter(role='Client')
+        if 'nanny' in form.base_fields:
+            form.base_fields['nanny'].queryset = form.base_fields['nanny'].queryset.filter(role='Nanny')
         return form

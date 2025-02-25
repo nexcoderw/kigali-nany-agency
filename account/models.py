@@ -33,7 +33,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         null=True,
         blank=True,
     )
-    role = models.CharField(max_length=30, choices=ROLE_CHOICES)
+    role = models.CharField(max_length=30, choices=ROLE_CHOICES, null=True, blank=True)
     slug = models.SlugField(unique=True, max_length=255, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
