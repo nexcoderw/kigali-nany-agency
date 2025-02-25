@@ -1,4 +1,5 @@
 import random
+import logging
 from base.forms import *
 from base.models import *
 from account.forms import *
@@ -12,6 +13,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth import authenticate, login as auth_login, logout, update_session_auth_hash
+
+logger = logging.getLogger(__name__)
 
 def userLogin(request):
     if request.user.is_authenticated:
