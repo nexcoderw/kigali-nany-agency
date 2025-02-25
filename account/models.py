@@ -40,6 +40,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
+    # OTP fields for password reset functionality
+    reset_otp = models.CharField(max_length=7, null=True, blank=True)
+    otp_created_at = models.DateTimeField(null=True, blank=True)
+
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
