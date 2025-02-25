@@ -121,20 +121,17 @@ def generate_otp():
 
 
 def password_reset_request(request):
-    """
-    View to handle OTP requests for password resets.
-    """
     if request.method == 'POST':
         form = PasswordResetRequestForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
             user = User.objects.get(email=email)
-            otp = generate_otp()
+            otp = generate_otp()  # your generate_otp helper function
             user.reset_otp = otp
             user.otp_created_at = timezone.now()
             user.save()
 
-            # Send the OTP via email
+            # Send the OTP via email (ensure your email settings are correct)
             subject = 'Password Reset OTP'
             message = f'Your password reset OTP is: {otp}'
             from_email = settings.DEFAULT_FROM_EMAIL
@@ -142,6 +139,8 @@ def password_reset_request(request):
             try:
                 send_mail(subject, message, from_email, recipient_list, fail_silently=False)
                 messages.success(request, "An OTP has been sent to your email address. Please check your inbox.")
+                # Store the email in session so it can be used in the confirmation form
+                request.session['reset_email'] = email
                 return redirect('auth:forgetPasswordConfirm')
             except Exception as e:
                 messages.error(request, "Failed to send OTP email. Please try again later.")
@@ -149,35 +148,33 @@ def password_reset_request(request):
             messages.error(request, "Please correct the errors below.")
     else:
         form = PasswordResetRequestForm()
-
     context = {
         'form': form,
         'step': 'request'
     }
     return render(request, 'pages/auth/forget-password.html', context)
 
-
 def password_reset_confirm(request):
-    """
-    View to handle OTP confirmation and password reset.
-    """
     if request.method == 'POST':
         form = PasswordResetConfirmForm(request.POST)
         if form.is_valid():
             user = form.cleaned_data['user']
             new_password = form.cleaned_data['new_password']
             user.set_password(new_password)
-            # Clear OTP fields
+            # Clear the OTP fields
             user.reset_otp = None
             user.otp_created_at = None
             user.save()
             messages.success(request, "Your password has been reset successfully. Please log in with your new password.")
+            # Remove the email from session after successful reset
+            request.session.pop('reset_email', None)
             return redirect('auth:login')
         else:
             messages.error(request, "Please correct the errors below.")
     else:
-        form = PasswordResetConfirmForm()
-
+        # Retrieve the email from session and set it as initial data
+        email = request.session.get('reset_email', '')
+        form = PasswordResetConfirmForm(initial={'email': email})
     context = {
         'form': form,
         'step': 'confirm'
