@@ -8,11 +8,11 @@ from account.models import User
 class UserAdmin(BaseUserAdmin):
     """
     Custom UserAdmin for managing the User model.
-    This admin enables assigning groups and user-specific permissions,
-    along with a professional interface for image thumbnails.
+    This admin enables assigning groups via the admin interface,
+    and provides a professional interface for image thumbnails.
     """
 
-    # Fields displayed in the admin list view
+    # Display fields in the admin list view
     list_display = (
         'email',
         'name',
@@ -46,7 +46,7 @@ class UserAdmin(BaseUserAdmin):
             'fields': ('name', 'phone_number', 'image', 'image_thumbnail_display', 'slug')
         }),
         (_('Permissions'), {
-            'fields': ('role', 'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
+            'fields': ('role', 'is_active', 'is_staff', 'is_superuser', 'groups')
         }),
         (_('Important Dates'), {
             'fields': ('last_login', 'created_at', 'updated_at')
@@ -57,12 +57,12 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'name', 'phone_number', 'password1', 'password2', 'role', 'is_active', 'is_staff', 'groups', 'user_permissions'),
+            'fields': ('email', 'name', 'phone_number', 'password1', 'password2', 'role', 'is_active', 'is_staff', 'groups'),
         }),
     )
 
-    # Enable horizontal filters for many-to-many fields
-    filter_horizontal = ('groups', 'user_permissions',)
+    # Enable horizontal filters for the groups many-to-many field
+    filter_horizontal = ('groups',)
 
     def image_thumbnail(self, obj):
         """
