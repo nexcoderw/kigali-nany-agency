@@ -106,3 +106,7 @@ def userProfile(request):
     }
 
     return render(request, 'pages/auth/profile.html', context)
+
+def forgetPassword(request):
+    
+    return render(request, 'pages/auth/forget-password.html')
