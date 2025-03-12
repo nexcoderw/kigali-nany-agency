@@ -216,12 +216,12 @@ class TeamAdmin(admin.ModelAdmin):
     linked_social_profiles.short_description = 'Social Profiles'
     
     def edit_link(self, obj):
-        url = reverse("admin:home_team_change", args=[obj.pk])
+        url = reverse("admin:base_team_change", args=[obj.pk])
         return format_html('<a class="button" href="{}">Edit</a>', url)
     edit_link.short_description = "Edit"
     
     def delete_link(self, obj):
-        url = reverse("admin:home_team_delete", args=[obj.pk])
+        url = reverse("admin:base_team_delete", args=[obj.pk])
         return format_html('<a class="button" href="{}">Delete</a>', url)
     delete_link.short_description = "Delete"
 
@@ -236,11 +236,11 @@ class SettingAdmin(admin.ModelAdmin):
     list_per_page = 20
     
     def edit_link(self, obj):
-        url = reverse("admin:home_setting_change", args=[obj.pk])
+        url = reverse("admin:base_setting_change", args=[obj.pk])
         return format_html('<a class="button" href="{}">Edit</a>', url)
     edit_link.short_description = "Edit"
     
     def delete_link(self, obj):
-        url = reverse("admin:home_setting_delete", args=[obj.pk])
+        url = reverse("admin:base_setting_delete", args=[obj.pk])
         return format_html('<a class="button" href="{}">Delete</a>', url)
     delete_link.short_description = "Delete"
