@@ -6,13 +6,13 @@
         <div class="container">
             <div class="text-center">
                 <div class="background-body px-3 py-2 rounded-12 border d-flex gap-3 d-inline-flex">
-                    <a href="{% url 'base:home' %}" class="neutral-700 text-md-medium">Home</a>
+                    <a href="{% url 'base:home' %}" class="neutral-700 text-md-medium">Accueil</a>
                     <span>
                         <img src="https://carento-demo.vercel.app/assets/imgs/template/icons/arrow-right.svg" alt="Carento" />
                     </span>
-                    <a href="{% url 'base:getNannyHireApplications' %}" class="neutral-1000 text-md-bold">Hire Application</a>
+                    <a href="{% url 'base:getNannyHireApplications' %}" class="neutral-1000 text-md-bold">Candidature d'Embauche</a>
                 </div>
-                <h3 class="mt-3 neutral-1000">Hire Application</h3>
+                <h3 class="mt-3 neutral-1000">Candidature d'Embauche</h3>
             </div>
         </div>
     </section>
@@ -28,59 +28,59 @@
                             <div class="card shadow-none flex-fill">
                                 <div class="card-header">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <span class="neutral-1000 text-md-bold fs-5">Hire Applications</span>
+                                        <span class="neutral-1000 text-md-bold fs-5">Candidatures d'Embauche</span>
                                         <div class="d-flex gap-2">
-                                            <!-- Search Input -->
+                                            <!-- Champ de Recherche -->
                                             <div class="input-icon-start position-relative">
                                                 <span class="icon-addon">
                                                     <i class="fi fi-rr-search"></i>
                                                 </span>
-                                                <input type="text" class="input-small" placeholder="Search job title or location">
+                                                <input type="text" class="input-small" placeholder="Rechercher un titre de poste ou une localisation">
                                             </div>
 
-                                            <!-- Status Filter Dropdown -->
+                                            <!-- Filtre de Statut -->
                                             <div class="dropdown">
                                                 <a href="javascript:void(0);" class="dropdown-toggle btn btn-sort bg-neutral-100 btn-sm neutral-500 rounded-pill fw-normal fs-8 d-inline-flex align-items-center" data-bs-toggle="dropdown">
-                                                    <i class="fi fi-rr-steering-wheel me-2"></i> Status
+                                                    <i class="fi fi-rr-steering-wheel me-2"></i> Statut
                                                 </a>
                                                 <ul class="dropdown-menu small dropdown-menu-end p-2">
                                                     <li>
                                                         <a href="?status=open" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i> Open
+                                                            <i class="ti ti-point-filled me-1"></i> Ouvert
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="?status=closed" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i> Closed
+                                                            <i class="ti ti-point-filled me-1"></i> Fermé
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="?status=pending" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i> Pending
+                                                            <i class="ti ti-point-filled me-1"></i> En Attente
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="?status=in_progress" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i> In Progress
+                                                            <i class="ti ti-point-filled me-1"></i> En Cours
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </div>
 
-                                            <!-- Sort Filter Dropdown -->
+                                            <!-- Filtre de Tri -->
                                             <div class="dropdown">
                                                 <a href="javascript:void(0);" class="dropdown-toggle btn btn-sort bg-neutral-100 btn-sm neutral-500 rounded-pill fw-normal fs-8 d-inline-flex align-items-center" data-bs-toggle="dropdown">
-                                                    <i class="fi fi-rr-filter-list me-2"></i> Sort
+                                                    <i class="fi fi-rr-filter-list me-2"></i> Trier
                                                 </a>
                                                 <ul class="dropdown-menu small dropdown-menu-end p-2">
                                                     <li>
                                                         <a href="?sort=newest" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i> Newest
+                                                            <i class="ti ti-point-filled me-1"></i> Plus Récent
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="?sort=oldest" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i> Oldest
+                                                            <i class="ti ti-point-filled me-1"></i> Plus Ancien
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -96,10 +96,10 @@
                                                 <thead class="thead-light">
                                                     <tr>
                                                         <th>ID</th>
-                                                        <th>Job Title & Salary</th>
+                                                        <th>Poste & Salaire</th>
                                                         <th>Client</th>
-                                                        <th>location</th>
-                                                        <th>Status</th>
+                                                        <th>Localisation</th>
+                                                        <th>Statut</th>
                                                         <th>Actions</th>
                                                     </tr>
                                                 </thead>
@@ -131,22 +131,22 @@
                                                             <td>
                                                                 {% if application.status == 'accepted' %}
                                                                     <span class="badge badge-success rounded-pill d-inline-flex align-items-center fs-10">
-                                                                        <i class="fi fi-rr-check-circle me-1"></i> Accepted
+                                                                        <i class="fi fi-rr-check-circle me-1"></i> Accepté
                                                                     </span>
                                                                 {% elif application.status == 'rejected' %}
                                                                     <span class="badge badge-danger rounded-pill d-inline-flex align-items-center fs-10">
-                                                                        <i class="fi fi-rr-door-closed me-1"></i> Rejected
+                                                                        <i class="fi fi-rr-door-closed me-1"></i> Rejeté
                                                                     </span>
                                                                 {% elif application.status == 'pending' %}
                                                                     <span class="badge badge-warning rounded-pill d-inline-flex align-items-center fs-10">
-                                                                        <i class="fi fi-rr-hourglass me-1"></i> Pending
+                                                                        <i class="fi fi-rr-hourglass me-1"></i> En Attente
                                                                     </span>
                                                                 {% endif %}
                                                             </td>
                                                             <td>
                                                                 <div class="d-flex align-items-center">
                                                                     <a href="{% url 'base:getNannyHireApplicationDetails' application.id %}" class="px-2">
-                                                                        <i class="fi fi-rr-bullseye-pointer"></i> View
+                                                                        <i class="fi fi-rr-bullseye-pointer"></i> Voir
                                                                     </a>
                                                                 </div>
                                                             </td>
@@ -154,7 +154,7 @@
                                                     {% empty %}
                                                         <tr>
                                                             <div class="col-12">
-                                                                <p class="text-center">No one has sent hire application to you yet!</p>
+                                                                <p class="text-center">Aucune candidature d'embauche reçue pour le moment !</p>
                                                             </div>
                                                         </tr>
                                                     {% endfor %}
