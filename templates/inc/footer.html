@@ -21,35 +21,34 @@
             <div class="col-md-6 col-sm-12 footer-1">
                 <div class="mt-20 mb-20">
                     <a class="d-flex" href="{% url 'base:home' %}">
-                        <img class="light-mode" alt="SAF" src="{% static 'img/logo/logo-green.png' %}" style="width: 100px;"/>
-                        <img class="dark-mode" alt="SAF" src="{% static 'img/logo/logo-green.png' %}" style="width: 100px;"/>
+                        <img class="light-mode" alt="SAF" src="{{ settings.logo.url }}" style="width: 100px;"/>
+                        <img class="dark-mode" alt="SAF" src="{{ settings.logo.url }}" style="width: 100px;"/>
                     </a>
                     <div class="box-info-contact mt-0">
                         <p class="text-md neutral-400 icon-address">Location</p>
-                        <p class="text-md neutral-400 icon-email">info@sfa.com</p>
+                        <p class="text-md neutral-400 icon-email">
+                            {{ settings.location }}
+                        </p>
                     </div>
                     <div class="box-need-help">
                         <p class="need-help text-md-medium mb-5">Need help? Call us</p>
                         <br/>
-                        <a class="heading-6 phone-support" href="tel:+250 712 345 678">+250 712 345 678</a>
+                        <a class="heading-6 phone-support" href="#">
+                            {{ settings.phone_number }}
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 col-xs-6 footer-3">
                 <h6 class="text-linear-3">About Us</h6>
                 <ul class="menu-footer">
-                    <li><a href="#" class="fw-bold">Our Story</a></li>
-                    <li><a href="#" class="fw-bold">Our Mission</a></li>
-                    <li><a href="#" class="fw-bold">The Impact</a></li>
-                    <li><a href="#" class="fw-bold">Meet Our Team</a></li>
-                    <li><a href="#" class="fw-bold">Blog</a></li>
-                    <li><a href="#" class="fw-bold">Contact Us</a></li>
+                    <li><a href="{% url 'base:services' %}" class="fw-bold">Our Services</a></li>
                 </ul>
             </div>
             <div class="col-md-2 col-xs-6 footer-2">
                 <h6 class="text-linear-3">What We Do</h6>
                 <ul class="menu-footer">
-                    <li><a href="#" class="fw-bold">Connecting People</a></li>
+                    <li><a href="{% url 'base:getNannies' %}" class="fw-bold">Connecting People</a></li>
                 </ul>
             </div>
         </div>
