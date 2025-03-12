@@ -3,6 +3,7 @@ from base.models import *
 from account.models import *
 from django.db.models import Q
 from django.urls import reverse
+from django.conf import settings
 from django.contrib import messages
 from django.utils import translation
 from django.http import Http404, JsonResponse
