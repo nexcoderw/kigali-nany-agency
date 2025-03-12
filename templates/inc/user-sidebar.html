@@ -4,10 +4,17 @@
             <div class="profile-content rounded-pill">
                 <div class="d-flex align-items-center justify-content-between">
                     <div class="d-flex align-items-center justify-content-center py-2">
-                        <img src="https://static.vecteezy.com/system/resources/thumbnails/005/129/844/small_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg" alt="image" class="img-fluid avatar avatar-lg rounded-circle me-3">
+                        <img src="https://static.vecteezy.com/system/resources/thumbnails/005/129/844/small_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg" 
+                            alt="image" class="img-fluid avatar avatar-lg rounded-circle me-3">
                         <div>
                             <p class="fw-bold fs-5">{{ request.user.name }} ({{ request.user.role }})</p>
-                            <span class="fs-14 text-gray-6">Since {{ request.user.created_at|date }}</span>
+                            <span class="fs-14 text-gray-6">
+                                {% if request.session.lang == 'en' %}
+                                    Since {{ request.user.created_at|date }}
+                                {% else %}
+                                    Depuis {{ request.user.created_at|date }}
+                                {% endif %}
+                            </span>
                         </div>
                     </div>
                     <div>
@@ -26,62 +33,102 @@
                     <li class="py-2">
                         <a href="{% url 'base:dashboard' %}">
                             <i class="fi fi-rr-dashboard"></i>
-                            Dashboard
+                            {% if request.session.lang == 'en' %}
+                                Dashboard
+                            {% else %}
+                                Tableau de bord
+                            {% endif %}
                         </a>
                     </li>
                     <li class="py-2">
                         <a href="{% url 'base:getJobListings' %}">
                             <i class="fi fi-rr-briefcase me-1"></i> 
-                            Job Listing
+                            {% if request.session.lang == 'en' %}
+                                Job Listing
+                            {% else %}
+                                Offres d'emploi
+                            {% endif %}
                         </a>
                     </li>
                     <li class="py-2">
                         <a href="{% url 'base:getJobApplicants' %}">
                             <i class="fi fi-rr-users-alt me-1"></i> 
-                            Applicants
+                            {% if request.session.lang == 'en' %}
+                                Applicants
+                            {% else %}
+                                Candidats
+                            {% endif %}
                         </a>
                     </li>
                     <li class="py-2">
                         <a href="{% url 'base:getHireApplications' %}">
                             <i class="fi fi-rr-calendar me-1"></i> 
-                            Hire Applications
+                            {% if request.session.lang == 'en' %}
+                                Hire Applications
+                            {% else %}
+                                Demandes d'embauche
+                            {% endif %}
                         </a>
                     </li>
                     <li class="py-2">
                         <a href="{% url 'auth:profile' %}">
                             <i class="fi fi-rr-user-md me-1"></i> 
-                            My Profile
+                            {% if request.session.lang == 'en' %}
+                                My Profile
+                            {% else %}
+                                Mon profil
+                            {% endif %}
                         </a>
                     </li>
                 {% elif user.role == 'Nanny' %}
                     <li class="py-2">
                         <a href="{% url 'base:dashboard' %}">
                             <i class="fi fi-rr-dashboard"></i>
-                            Dashboard
+                            {% if request.session.lang == 'en' %}
+                                Dashboard
+                            {% else %}
+                                Tableau de bord
+                            {% endif %}
                         </a>
                     </li>
                     <li class="py-2">
                         <a href="{% url 'base:getJobApplications' %}">
                             <i class="fi fi-rr-Booking me-1"></i> 
-                            My Applicants
+                            {% if request.session.lang == 'en' %}
+                                My Applicants
+                            {% else %}
+                                Mes candidatures
+                            {% endif %}
                         </a>
                     </li>
                     <li class="py-2">
                         <a href="{% url 'base:getNannyHireApplications' %}">
                             <i class="fi fi-rr-calendar me-1"></i> 
-                            Hire Applications
+                            {% if request.session.lang == 'en' %}
+                                Hire Applications
+                            {% else %}
+                                Demandes d'embauche
+                            {% endif %}
                         </a>
                     </li>
                     <li class="py-2">
                         <a href="{% url 'auth:profile' %}">
                             <i class="fi fi-rr-user-md me-1"></i> 
-                            My Profile
+                            {% if request.session.lang == 'en' %}
+                                My Profile
+                            {% else %}
+                                Mon profil
+                            {% endif %}
                         </a>
                     </li>
                 {% else %}
                     <li class="py-2">
                         <p>
-                            You are not authorized to view navigation links.
+                            {% if request.session.lang == 'en' %}
+                                You are not authorized to view navigation links.
+                            {% else %}
+                                Vous n'êtes pas autorisé à voir les liens de navigation.
+                            {% endif %}
                         </p>
                     </li>
                 {% endif %}
