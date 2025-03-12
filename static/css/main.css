@@ -43,15 +43,15 @@
   --bs-neutral-800: #454545;
   --bs-neutral-900: #313131;
   --bs-neutral-1000: #000000;
-  --bs-button-bg: #70f46d;
+  --bs-button-bg: #129aca;
   --bs-button-bg-2: #f2f4f6;
   --bs-button-text: #101010;
   --bs-button-text-2: #000000;
-  --bs-brand-2: #70f46d;
-  --bs-brand-2-dark: #70f46d;
-  --bs-brand-2-darken: #5edd5b;
-  --bs-brand-2-light: #2d4a2c;
-  --bs-link-hover-color: #235922;
+  --bs-brand-2: #129aca;
+  --bs-brand-2-dark: #129aca;
+  --bs-brand-2-darken: #2a8cae;
+  --bs-brand-2-light: #275a6c;
+  --bs-link-hover-color: #41869f;
   --bs-brand-1: #8acfff;
   --bs-warning: #ffc700;
   --bs-success: #34d674;
@@ -1515,8 +1515,8 @@ p {
 }
 
 .form-check-input:checked {
-  background-color: #5edd5b;
-  border-color: #5edd5b;
+  background-color: #2a8cae;
+  border-color: #2a8cae;
 }
 
 .list-image-upload {
@@ -1883,7 +1883,7 @@ h4 {
 .page-loader {
   width: 30px;
   height: 30px;
-  border: 3px solid #235922;
+  border: 3px solid #41869f;
   border-radius: 50%;
   display: inline-block;
   position: relative;
@@ -1902,7 +1902,7 @@ h4 {
   height: 38px;
   border-radius: 50%;
   border: 3px solid;
-  border-color: #5edd5b transparent;
+  border-color: #2a8cae transparent;
 }
 
 @keyframes rotation {
@@ -2400,7 +2400,7 @@ body {
 }
 
 input:checked + .slider {
-  background-color: #70f46d;
+  background-color: #129aca;
 }
 
 input:focus + .slider {
@@ -6587,7 +6587,7 @@ a.icon-socials:hover {
   transition-duration: 0.2s;
 }
 a.icon-socials:hover svg path {
-  fill: #70f46d;
+  fill: #129aca;
 }
 
 .footer-1 {
@@ -8937,7 +8937,7 @@ a.icon-socials:hover {
   transition-duration: 0.2s;
 }
 a.icon-socials:hover svg path {
-  fill: #70f46d;
+  fill: #129aca;
 }
 
 .box-socials svg path {
