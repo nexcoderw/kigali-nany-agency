@@ -4,11 +4,24 @@ from account.models import *
 from django.db.models import Q
 from django.urls import reverse
 from django.contrib import messages
+from django.utils import translation
 from django.http import Http404, JsonResponse
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+def change_language(request, lang_code):
+    """
+    Change the language for the current session.
+    Only allow languages defined in settings.LANGUAGES.
+    """
+    if lang_code in dict(settings.LANGUAGES).keys():
+        request.session[translation.LANGUAGE_SESSION_KEY] = lang_code
+        translation.activate(lang_code)
+    # Redirect back to the previous page or home if not available
+    next_url = request.META.get('HTTP_REFERER', '/')
+    return redirect(next_url)
 
 def home(request):
     team = Team.objects.all()[:4]
