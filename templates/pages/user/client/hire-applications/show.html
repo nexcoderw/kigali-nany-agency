@@ -2,110 +2,208 @@
 {% load humanize %}
 {% block content %}
 
-    <section class="box-section background-body pt-80">
-        <div class="container">
-            <div class="text-center">
-                <div class="background-body px-3 py-2 rounded-12 border d-flex gap-3 d-inline-flex">
-                    <a href="{% url 'base:home' %}" class="neutral-700 text-md-medium">Home</a>
-                    <span>
-                        <img src="https://carento-demo.vercel.app/assets/imgs/template/icons/arrow-right.svg" alt="Carento" />
-                    </span>
-                    <a href="{% url 'base:getJobApplicants' %}" class="neutral-1000 text-md-bold">Applicants</a>
-                    <span>
-                        <img src="https://carento-demo.vercel.app/assets/imgs/template/icons/arrow-right.svg" alt="Carento" />
-                    </span>
-                    <a href="{% url 'base:getJobApplicants' %}" class="neutral-1000 text-md-bold">{{ application.job_title }}</a>
-                </div>
-                <h3 class="mt-3 neutral-1000">{{ application.job_title }}</h3>
+<section class="box-section background-body pt-80">
+    <div class="container">
+        <div class="text-center">
+            <div class="background-body px-3 py-2 rounded-12 border d-flex gap-3 d-inline-flex">
+                <a href="{% url 'base:home' %}" class="neutral-700 text-md-medium">
+                    {% if request.session.lang == 'en' %}
+                        Home
+                    {% else %}
+                        Accueil
+                    {% endif %}
+                </a>
+                <span>
+                    <img src="https://carento-demo.vercel.app/assets/imgs/template/icons/arrow-right.svg" alt="Carento" />
+                </span>
+                <a href="{% url 'base:getJobApplicants' %}" class="neutral-1000 text-md-bold">
+                    {% if request.session.lang == 'en' %}
+                        Applicants
+                    {% else %}
+                        Candidats
+                    {% endif %}
+                </a>
+                <span>
+                    <img src="https://carento-demo.vercel.app/assets/imgs/template/icons/arrow-right.svg" alt="Carento" />
+                </span>
+                <a href="#" class="neutral-1000 text-md-bold">{{ application.job_title }}</a>
             </div>
+            <h3 class="mt-3 neutral-1000">{{ application.job_title }}</h3>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="box-section background-body pt-80 pb-110 dashboard">
-        <div class="container">
-            <div class="row">
-                {% include 'inc/user-sidebar.html' %}
+<section class="box-section background-body pt-80 pb-110 dashboard">
+    <div class="container">
+        <div class="row">
+            {% include 'inc/user-sidebar.html' %}
 
-                <div class="col-xl-9 col-lg-8">
-                    <div class="row mb-3">
-                        <div class="col-lg-3 mb-3 mb-lg-0">
-                            <div class="card shadow-none flex-fill bg-1">
-                                <div class="box-earning px-3 py-4 text-center">
-                                    <span class="avatar rounded-circle bg-primary me-3">
-                                        <img src="https://static.vecteezy.com/system/resources/thumbnails/005/129/844/small_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg" alt="image">
-                                    </span>
-                                    <p>{{ application.nanny.name }}</p>
-                                    <p>{{ application.nanny.phone_number }}</p>
-                                    <p>{{ application.nanny.email }}</p>
-                                </div>
+            <div class="col-xl-9 col-lg-8">
+                <div class="row mb-3">
+                    <div class="col-lg-3 mb-3 mb-lg-0">
+                        <div class="card shadow-none flex-fill bg-1">
+                            <div class="box-earning px-3 py-4 text-center">
+                                <span class="avatar rounded-circle bg-primary me-3">
+                                    <img src="https://static.vecteezy.com/system/resources/thumbnails/005/129/844/small_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg" alt="image">
+                                </span>
+                                <p>{{ application.nanny.name }}</p>
+                                <p>{{ application.nanny.phone_number }}</p>
+                                <p>{{ application.nanny.email }}</p>
                             </div>
                         </div>
-                        <div class="col-lg-9">
-                            <div class="card shadow-none flex-fill bg-3">
-                                <div class="box-earning px-3 py-4">
-                                    <span class="neutral-1000 text-md-bold fs-5">Job Info</span>
-                                    <div class="row">
-                                        <div class="col-lg-3 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Client Name</p>
-                                            <p class="fs-6 text-truncate">{{ application.client.name }}</p>
-                                        </div>
-                                        <div class="col-lg-3 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Client Phone Number</p>
-                                            <p class="fs-6 text-truncate">{{ application.client.phone_number }}</p>
-                                        </div>
-                                        <div class="col-lg-3 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Job</p>
-                                            <p class="fs-6 text-truncate">{{ application.job_title }}</p>
-                                        </div>
-                                        <div class="col-lg-2 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Job Salary</p>
-                                            <p class="fs-6 text-truncate">{{ application.expected_salary|floatformat|intcomma }} RWF</p>
-                                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="card shadow-none flex-fill bg-3">
+                            <div class="box-earning px-3 py-4">
+                                <span class="neutral-1000 text-md-bold fs-5">
+                                    {% if request.session.lang == 'en' %}
+                                        Job Info
+                                    {% else %}
+                                        Informations sur l'emploi
+                                    {% endif %}
+                                </span>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">
+                                            {% if request.session.lang == 'en' %}
+                                                Client Name
+                                            {% else %}
+                                                Nom du client
+                                            {% endif %}
+                                        </p>
+                                        <p class="fs-6 text-truncate">{{ application.client.name }}</p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">
+                                            {% if request.session.lang == 'en' %}
+                                                Client Phone Number
+                                            {% else %}
+                                                Numéro de téléphone du client
+                                            {% endif %}
+                                        </p>
+                                        <p class="fs-6 text-truncate">{{ application.client.phone_number }}</p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">
+                                            {% if request.session.lang == 'en' %}
+                                                Job
+                                            {% else %}
+                                                Emploi
+                                            {% endif %}
+                                        </p>
+                                        <p class="fs-6 text-truncate">{{ application.job_title }}</p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">
+                                            {% if request.session.lang == 'en' %}
+                                                Job Salary
+                                            {% else %}
+                                                Salaire de l'emploi
+                                            {% endif %}
+                                        </p>
+                                        <p class="fs-6 text-truncate">{{ application.expected_salary|floatformat|intcomma }} RWF</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card shadow-none flex-fill bg-3">
-                                <div class="box-earning px-3 py-4">
-                                    <span class="neutral-1000 text-md-bold fs-5">Application info</span>
-                                    <div class="row">
-                                        <div class="col-lg-4 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Expected to Start</p>
-                                            <p class="fs-6 text-truncate">{{ application.expected_start_date|date }}</p>
-                                        </div>
-                                        <div class="col-lg-4 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Expected to End</p>
-                                            <p class="fs-6 text-truncate">{{ application.expected_end_date|date }}</p>
-                                        </div>
-                                        <div class="col-lg-4 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Application Status</p>
-                                            <p class="fs-6 text-truncate">
-                                                {% if application.status == 'accepted' %}
-                                                    <span class="badge badge-success rounded-pill d-inline-flex align-items-center fs-10">
-                                                        <i class="fi fi-rr-check-circle me-1"></i> Accepted
-                                                    </span>
-                                                {% elif application.status == 'rejected' %}
-                                                    <span class="badge badge-danger rounded-pill d-inline-flex align-items-center fs-10">
-                                                        <i class="fi fi-rr-door-closed me-1"></i> Rejected
-                                                    </span>
-                                                {% elif application.status == 'pending' %}
-                                                    <span class="badge badge-warning rounded-pill d-inline-flex align-items-center fs-10">
-                                                        <i class="fi fi-rr-hourglass me-1"></i> Pending
-                                                    </span>
-                                                {% endif %}
-                                            </p>
-                                        </div>
-                                        <div class="col-lg-12 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Job Work Schedule</p>
-                                            <p class="fs-6 text-truncate">{{ application.work_schedule }}</p>
-                                        </div>
-                                        <div class="col-lg-12 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Job Additional Requirements</p>
-                                            <p class="fs-6 text-truncate">{{ application.additional_requirements }}</p>
-                                        </div>
-                                        <div class="col-lg-12 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Job Description</p>
-                                            <p class="fs-6 text-truncate">{{ application.description }}</p>
-                                        </div>
+                        </div>
+                        <div class="card shadow-none flex-fill bg-3">
+                            <div class="box-earning px-3 py-4">
+                                <span class="neutral-1000 text-md-bold fs-5">
+                                    {% if request.session.lang == 'en' %}
+                                        Application Info
+                                    {% else %}
+                                        Informations sur la candidature
+                                    {% endif %}
+                                </span>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">
+                                            {% if request.session.lang == 'en' %}
+                                                Expected to Start
+                                            {% else %}
+                                                Date de début prévue
+                                            {% endif %}
+                                        </p>
+                                        <p class="fs-6 text-truncate">{{ application.expected_start_date|date }}</p>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">
+                                            {% if request.session.lang == 'en' %}
+                                                Expected to End
+                                            {% else %}
+                                                Date de fin prévue
+                                            {% endif %}
+                                        </p>
+                                        <p class="fs-6 text-truncate">{{ application.expected_end_date|date }}</p>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">
+                                            {% if request.session.lang == 'en' %}
+                                                Application Status
+                                            {% else %}
+                                                Statut de la candidature
+                                            {% endif %}
+                                        </p>
+                                        <p class="fs-6 text-truncate">
+                                            {% if application.status == 'accepted' %}
+                                                <span class="badge badge-success rounded-pill d-inline-flex align-items-center fs-10">
+                                                    <i class="fi fi-rr-check-circle me-1"></i> 
+                                                    {% if request.session.lang == 'en' %}
+                                                        Accepted
+                                                    {% else %}
+                                                        Accepté
+                                                    {% endif %}
+                                                </span>
+                                            {% elif application.status == 'rejected' %}
+                                                <span class="badge badge-danger rounded-pill d-inline-flex align-items-center fs-10">
+                                                    <i class="fi fi-rr-door-closed me-1"></i> 
+                                                    {% if request.session.lang == 'en' %}
+                                                        Rejected
+                                                    {% else %}
+                                                        Rejeté
+                                                    {% endif %}
+                                                </span>
+                                            {% elif application.status == 'pending' %}
+                                                <span class="badge badge-warning rounded-pill d-inline-flex align-items-center fs-10">
+                                                    <i class="fi fi-rr-hourglass me-1"></i> 
+                                                    {% if request.session.lang == 'en' %}
+                                                        Pending
+                                                    {% else %}
+                                                        En attente
+                                                    {% endif %}
+                                                </span>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <p class="fs-8 neutral-500 text-md-bold">
+                                            {% if request.session.lang == 'en' %}
+                                                Job Work Schedule
+                                            {% else %}
+                                                Horaire de travail
+                                            {% endif %}
+                                        </p>
+                                        <p class="fs-6 text-truncate">{{ application.work_schedule }}</p>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <p class="fs-8 neutral-500 text-md-bold">
+                                            {% if request.session.lang == 'en' %}
+                                                Job Additional Requirements
+                                            {% else %}
+                                                Exigences supplémentaires
+                                            {% endif %}
+                                        </p>
+                                        <p class="fs-6 text-truncate">{{ application.additional_requirements }}</p>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <p class="fs-8 neutral-500 text-md-bold">
+                                            {% if request.session.lang == 'en' %}
+                                                Job Description
+                                            {% else %}
+                                                Description du poste
+                                            {% endif %}
+                                        </p>
+                                        <p class="fs-6 text-truncate">{{ application.description }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -114,6 +212,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 {% endblock content %}
