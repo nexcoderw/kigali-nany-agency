@@ -8,53 +8,119 @@
             <img class="w-100 h-100 img-banner" src="{% static 'img/img-3.jpg' %}" alt="Kigali Nanny Agency"/>
         </div>
         <div class="container position-absolute z-1 top-50 start-50 translate-middle">
-            <h2 class="text-white">Contact Us</h2>
-            <span class="text-white text-xl-medium">Reach out to us with any questions or inquiries</span>
+            <h2 class="text-white">
+                {% if request.session.lang == 'en' %}
+                    Contact Us
+                {% else %}
+                    Contactez-nous
+                {% endif %}
+            </h2>
+            <span class="text-white text-xl-medium">
+                {% if request.session.lang == 'en' %}
+                    Reach out to us with any questions or inquiries
+                {% else %}
+                    Contactez-nous pour toute question ou demande
+                {% endif %}
+            </span>
         </div>
         <div class="background-body position-absolute z-1 top-100 start-50 translate-middle px-3 py-2 rounded-12 border d-flex gap-3 @@navigation-page">
-            <a href="{% url 'base:home' %}" class="neutral-700 text-md-medium">Home</a>
+            <a href="{% url 'base:home' %}" class="neutral-700 text-md-medium">
+                {% if request.session.lang == 'en' %}
+                    Home
+                {% else %}
+                    Accueil
+                {% endif %}
+            </a>
             <span>
                 <img src="{% static 'img/icons/arrow-right.svg' %}" alt="Kigali Nanny Agency"/>
             </span>
-            <a href="#" class="neutral-1000 text-md-bold">Contact Us</a>
+            <a href="#" class="neutral-1000 text-md-bold">
+                {% if request.session.lang == 'en' %}
+                    Contact Us
+                {% else %}
+                    Contactez-nous
+                {% endif %}
+            </a>
         </div>
     </div>
 </div>
+
 <section class="box-section box-contact-form background-body">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mb-30">
-                <h2 class="neutral-1000 mb-25">Get in Touch</h2>
+                <h2 class="neutral-1000 mb-25">
+                    {% if request.session.lang == 'en' %}
+                        Get in Touch
+                    {% else %}
+                        Prenez contact
+                    {% endif %}
+                </h2>
                 <div class="form-contact">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="text-sm-medium neutral-1000">First Name</label>
-                                <input class="form-control username" type="text" placeholder="First Name"/>
+                                <label class="text-sm-medium neutral-1000">
+                                    {% if request.session.lang == 'en' %}
+                                        First Name
+                                    {% else %}
+                                        Prénom
+                                    {% endif %}
+                                </label>
+                                <input class="form-control username" type="text" 
+                                    placeholder="{% if request.session.lang == 'en' %}First Name{% else %}Prénom{% endif %}"/>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="text-sm-medium neutral-1000">Last Name</label>
-                                <input class="form-control username" type="text" placeholder="Last Name"/>
+                                <label class="text-sm-medium neutral-1000">
+                                    {% if request.session.lang == 'en' %}
+                                        Last Name
+                                    {% else %}
+                                        Nom de famille
+                                    {% endif %}
+                                </label>
+                                <input class="form-control username" type="text" 
+                                    placeholder="{% if request.session.lang == 'en' %}Last Name{% else %}Nom de famille{% endif %}"/>
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label class="text-sm-medium neutral-1000">Email Address</label>
+                                <label class="text-sm-medium neutral-1000">
+                                    {% if request.session.lang == 'en' %}
+                                        Email Address
+                                    {% else %}
+                                        Adresse e-mail
+                                    {% endif %}
+                                </label>
                                 <input class="form-control email" type="email" placeholder="email@domain.com"/>
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label class="text-sm-medium neutral-1000">Phone Number</label>
-                                <input class="form-control phone" type="text" placeholder="Phone number"/>
+                                <label class="text-sm-medium neutral-1000">
+                                    {% if request.session.lang == 'en' %}
+                                        Phone Number
+                                    {% else %}
+                                        Numéro de téléphone
+                                    {% endif %}
+                                </label>
+                                <input class="form-control phone" type="text" 
+                                    placeholder="{% if request.session.lang == 'en' %}Phone number{% else %}Numéro de téléphone{% endif %}"/>
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label class="text-sm-medium neutral-1000">Your Message</label>
-                                <textarea class="form-control" rows="6" placeholder="Leave us a message..."></textarea>
+                                <label class="text-sm-medium neutral-1000">
+                                    {% if request.session.lang == 'en' %}
+                                        Your Message
+                                    {% else %}
+                                        Votre message
+                                    {% endif %}
+                                </label>
+                                <textarea class="form-control" rows="6" 
+                                    placeholder="{% if request.session.lang == 'en' %}Leave us a message...{% else %}Laissez-nous un message...{% endif %}">
+                                </textarea>
                             </div>
                         </div>
                         <div class="box-remember-forgot">
@@ -62,15 +128,24 @@
                                 <div class="remeber-me">
                                     <label class="text-sm-medium neutral-500">
                                         <input class="cb-remember" type="checkbox"/>
-                                        Agree to our <a class="text-sm-medium neutral-1000" href="#">Terms of Service</a> 
-                                        and <a class="text-sm-medium neutral-1000" href="#">Privacy Policy</a>
+                                        {% if request.session.lang == 'en' %}
+                                            Agree to our <a class="text-sm-medium neutral-1000" href="#">Terms of Service</a> 
+                                            and <a class="text-sm-medium neutral-1000" href="#">Privacy Policy</a>
+                                        {% else %}
+                                            Accepter nos <a class="text-sm-medium neutral-1000" href="#">Conditions d'utilisation</a> 
+                                            et notre <a class="text-sm-medium neutral-1000" href="#">Politique de confidentialité</a>
+                                        {% endif %}
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <button class="btn btn-book">
-                                Send message
+                                {% if request.session.lang == 'en' %}
+                                    Send message
+                                {% else %}
+                                    Envoyer le message
+                                {% endif %}
                                 <svg width="17" height="16" viewbox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M8.5 15L15.5 8L8.5 1M15.5 8L1.5 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                 </svg>
@@ -81,7 +156,13 @@
             </div>
             <div class="col-lg-6 mb-30">
                 <div class="ps-lg-5">
-                    <h4 class="neutral-1000">Our Location</h4>
+                    <h4 class="neutral-1000">
+                        {% if request.session.lang == 'en' %}
+                            Our Location
+                        {% else %}
+                            Notre emplacement
+                        {% endif %}
+                    </h4>
                     <p class="neutral-500 mb-30">Kigali Business Center, KG 7 Ave, Kigali, Rwanda</p>
                     <iframe class="h-520 rounded-3" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15959.174211539294!2d30.072711!3d-1.9448845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca7215f2c7f3d%3A0x4c817f45edebf555!2sKigali%20Business%20Center!5e0!3m2!1sen!2srw!4v1712486491620!5m2!1sen!2srw" width="100%" height="650" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
@@ -89,4 +170,5 @@
         </div>
     </div>
 </section>
+
 {% endblock content %}
