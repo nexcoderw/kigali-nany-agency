@@ -36,8 +36,11 @@ def userLogin(request):
     else:
         form = LoginForm()
 
+    settings = Setting.objects.first()
+
     context = {
-        'form': form
+        'form': form,
+        'settings': settings
     }
 
     return render(request, 'pages/auth/login.html', context)
@@ -71,8 +74,11 @@ def userRegister(request):
     else:
         form = RegisterForm()
 
+    settings = Setting.objects.first()
+
     context = {
         'form': form,
+        'settings': settings
     }
 
     return render(request, 'pages/auth/register.html', context)
@@ -106,8 +112,11 @@ def userProfile(request):
         else:
             messages.error(request, "Please correct the errors below.")
 
+    settings = Setting.objects.first()
+
     context = {
         'user_form': user_form,
+        'settings': settings,
         'profile_form': profile_form,
     }
 
@@ -148,10 +157,15 @@ def password_reset_request(request):
             messages.error(request, "Please correct the errors below.")
     else:
         form = PasswordResetRequestForm()
+
+    settings = Setting.objects.first()
+
     context = {
         'form': form,
+        'settings': settings,
         'step': 'request'
     }
+
     return render(request, 'pages/auth/forget-password.html', context)
 
 def password_reset_confirm(request):
@@ -175,8 +189,13 @@ def password_reset_confirm(request):
         # Retrieve the email from session and set it as initial data
         email = request.session.get('reset_email', '')
         form = PasswordResetConfirmForm(initial={'email': email})
+
+    settings = Setting.objects.first()
+
     context = {
         'form': form,
+        'settings': settings,
         'step': 'confirm'
     }
+
     return render(request, 'pages/auth/forget-password.html', context)
