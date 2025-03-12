@@ -163,6 +163,51 @@ class ClientProfile(models.Model):
         verbose_name = 'Client Profile'
         verbose_name_plural = 'Client Profiles'
 
+def team_image_path(instance, filename):
+    base_filename, file_extension = os.path.splitext(filename)
+    timestamp = timezone.now().strftime("%Y%m%d%H%M%S")
+    return f'team/member_{slugify(instance.name)}_{timestamp}.png'
+
+class Team(models.Model):
+    name = models.CharField(max_length=255, null=True, blank=True)
+    slug = models.SlugField(max_length=255, unique=True)
+    position = models.CharField(max_length=255, null=True, blank=True)
+    image = ProcessedImageField(
+        upload_to=team_image_path,
+        processors=[ResizeToFill(1333, 1694)],
+        format='JPEG',
+        options={'quality': 90},
+        null=True,
+        blank=True,
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def _generate_unique_slug(self):
+        """Generate a unique slug based on the name."""
+        base_slug = slugify(self.name)
+        slug = base_slug
+        while Team.objects.filter(slug=slug).exists():
+            slug = f"{base_slug}-{timezone.now().strftime('%Y%m%d%H%M%S')}"
+        return slug
+    
+    def save(self, *args, **kwargs):
+        # Only update slug if name has changed
+        if self.pk:  # Check if the instance already exists
+            original = Team.objects.get(pk=self.pk)
+            if self.name != original.name:
+                self.slug = self._generate_unique_slug()  # Update slug only if name is changed
+        elif not self.slug:  # For new objects, generate a slug
+            self.slug = self._generate_unique_slug()
+        
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.name if self.name else "Unnamed Team Member"
+    
+    class Meta:
+        verbose_name_plural = "Team Members"
+
 def logo_image_path(instance, filename):
     base_filename, file_extension = os.path.splitext(filename)
     timestamp = timezone.now().strftime("%Y%m%d%H%M%S")
