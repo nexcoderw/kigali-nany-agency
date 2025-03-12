@@ -5,14 +5,14 @@
 <div class="page-header pt-30 background-body">
     <div class="custom-container position-relative mx-auto">
         <div class="bg-overlay rounded-12 overflow-hidden">
-            <img class="w-100 h-100 img-banner" src="{% static 'img/breadcrumbs/our-team.jpg' %}" alt="Kigali Nanny Agency"/>
+            <img class="w-100 h-100 img-banner" src="{% static 'img/img-3.jpg' %}" alt="Kigali Nanny Agency"/>
         </div>
         <div class="container position-absolute z-1 top-50 start-50 translate-middle">
-            <h2 class="text-white">About Us</h2>
+            <h2 class="text-white">Services</h2>
             <span class="text-white text-xl-medium">Learn more about our services and values</span>
         </div>
         <div class="background-body position-absolute z-1 top-100 start-50 translate-middle px-3 py-2 rounded-12 border d-flex gap-3 @@navigation-page">
-            <a href="index.html" class="neutral-700 text-md-medium">Home</a>
+            <a href="{% url 'base:home' %}" class="neutral-700 text-md-medium">Home</a>
             <span>
                 <img src="{% static 'img/icons/arrow-right.svg' %}" alt="Kigali Nanny Agency"/>
             </span>
@@ -30,63 +30,6 @@
                 <p class="text-lg-medium neutral-500">Whether you need full-time, part-time, or emergency care, we offer a range of childcare services designed to meet your family’s needs and lifestyle.</p>
             </div>
         </div>
-        <div class="row mt-50">
-            <div class="col-lg-4 col-md-6">
-                <div class="card-news background-card hover-up mb-24">
-                    <div class="card-image">
-                        <img src="{% static 'img/story/img-6.jpg' %}" alt="Kigali Nanny Agency" />
-                    </div>
-                    <div class="card-info">
-                        <div class="card-title mb-3">
-                            <a class="text-xl-bold neutral-1000" href="blog-details.html">Full-Time Nanny Services</a>
-                            <p class="text-md-medium neutral-500 mt-2">Get dedicated, long-term care with full-time nannies who provide ongoing support for your children’s development and well-being.</p>
-                        </div>
-                        <div class="card-program">
-                            <div class="endtime">
-                                <div class="card-button"><a class="btn btn-primary2" href="blog-details.html">View Details</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="card-news background-card hover-up mb-24">
-                    <div class="card-image">
-                        <img src="{% static 'img/story/img-7.jpg' %}" alt="Kigali Nanny Agency" />
-                    </div>
-                    <div class="card-info">
-                        <div class="card-title mb-3">
-                            <a class="text-xl-bold neutral-1000" href="blog-details.html">Part-Time and Temporary Services</a>
-                            <p class="text-md-medium neutral-500 mt-2">Flexible childcare options for busy parents who need part-time support or temporary care for special occasions.</p>
-                        </div>
-                        <div class="card-program">
-                            <div class="endtime">
-                                <div class="card-button"><a class="btn btn-primary2" href="blog-details.html">View Details</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="card-news background-card hover-up mb-24">
-                    <div class="card-image">
-                        <img src="{% static 'img/story/img-8.jpg' %}" alt="Kigali Nanny Agency" />
-                    </div>
-                    <div class="card-info">
-                        <div class="card-title mb-3">
-                            <a class="text-xl-bold neutral-1000" href="blog-details.html">Emergency Nanny Services</a>
-                            <p class="text-md-medium neutral-500 mt-2">Reliable last-minute care for families facing unexpected childcare needs, ensuring peace of mind when you need it most.</p>
-                        </div>
-                        <div class="card-program">
-                            <div class="endtime">
-                                <div class="card-button"><a class="btn btn-primary2" href="blog-details.html">View Details</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
     </div>
 </section>
 <section class="section-cta-7 background-body py-4">
@@ -98,10 +41,10 @@
                         <div class="swiper-container swiper-group-1">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
-                                    <img class="rounded-12" src="{% static 'img/story/img-5.jpg' %}" alt="Kigali Nanny Agency" />
+                                    <img class="rounded-12" src="{% static 'img/img-1.jpg' %}" alt="Kigali Nanny Agency" />
                                 </div>
                                 <div class="swiper-slide">
-                                    <img class="rounded-12" src="{% static 'img/story/img-5.jpg' %}" alt="Kigali Nanny Agency" />
+                                    <img class="rounded-12" src="{% static 'img/img-2.jpg' %}" alt="Kigali Nanny Agency" />
                                 </div>
                             </div>
                             <div class="position-absolute end-0 bottom-0 p-40">
