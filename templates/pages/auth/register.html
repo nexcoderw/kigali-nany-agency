@@ -7,8 +7,12 @@
             <div class="col-lg-5 mx-auto">
                 <div class="register-content border rounded-3 px-md-5 px-3 ptb-50">
                     <div class="text-center">
-                        <p class="neutral-1000 px-4 py-2 bg-2 text-sm-bold rounded-12 d-inline-flex align-items-center">Register</p>
-                        <h4 class="neutral-1000">Create an Account</h4>
+                        <p class="neutral-1000 px-4 py-2 bg-2 text-sm-bold rounded-12 d-inline-flex align-items-center">
+                            {% if request.session.lang == 'en' %} Register {% else %} S'inscrire {% endif %}
+                        </p>
+                        <h4 class="neutral-1000">
+                            {% if request.session.lang == 'en' %} Create an Account {% else %} Créer un compte {% endif %}
+                        </h4>
                     </div>
                     <div class="form-login mt-30">
                         <form method="POST">
@@ -29,21 +33,28 @@
                                 {{ form.confirm_password }}
                             </div>
                             <div class="form-group my-3">
-                                <label class="d-block neutral-500">Select Role:</label>
+                                <label class="d-block neutral-500">
+                                    {% if request.session.lang == 'en' %} Select Role: {% else %} Sélectionnez un rôle : {% endif %}
+                                </label>
                                 {{ form.role }}
                             </div>
                             <div class="form-group mb-30">
-                                <button class="btn btn-primary w-100" type="submit">Sign up
+                                <button class="btn btn-primary w-100" type="submit">
+                                    {% if request.session.lang == 'en' %} Sign up {% else %} S'inscrire {% endif %}
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                     </svg>
                                 </button>
                             </div>
-                            <p class="text-md-medium neutral-500 text-center">Or connect with your social account</p>
+                            <p class="text-md-medium neutral-500 text-center">
+                                {% if request.session.lang == 'en' %} Or connect with your social account {% else %} Ou connectez-vous avec votre compte social {% endif %}
+                            </p>
                             <div class="box-button-logins">
                                 <a class="btn btn-login btn-google mr-10" href="#">
                                     <img src="https://carento-demo.vercel.app/assets/imgs/template/popup/google.svg" alt="Carento" />
-                                    <span class="text-sm-bold">Sign up with Google</span>
+                                    <span class="text-sm-bold">
+                                        {% if request.session.lang == 'en' %} Sign up with Google {% else %} S'inscrire avec Google {% endif %}
+                                    </span>
                                 </a>
                                 <a class="btn btn-login mr-10" href="#">
                                     <img src="https://carento-demo.vercel.app/assets/imgs/template/popup/facebook.svg" alt="Carento" />
@@ -53,9 +64,9 @@
                                 </a>
                             </div>
                             <p class="text-sm-medium neutral-500 text-center mt-70">
-                                Already have an account? 
+                                {% if request.session.lang == 'en' %} Already have an account? {% else %} Vous avez déjà un compte ? {% endif %}
                                 <a class="neutral-1000" href="{% url 'auth:login' %}">
-                                    Login Here !
+                                    {% if request.session.lang == 'en' %} Login Here! {% else %} Connectez-vous ici ! {% endif %}
                                 </a>
                             </p>
                         </form>
