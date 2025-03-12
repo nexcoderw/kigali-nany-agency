@@ -7,6 +7,8 @@ from django.conf.urls.static import static
 app_name = 'base'
 
 urlpatterns = [
+    path('change-language/<str:lang_code>/', change_language, name='change_language'),
+
     path('', home, name="home"),
     path('about', about, name="about"),
     path('services', services, name="services"),
