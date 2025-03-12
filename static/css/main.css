@@ -8360,10 +8360,10 @@ a.icon-socials:hover svg path {
   padding: 120px 0px 180px 0px;
 }
 .block-banner-home3 .item-banner-slide.banner-1 {
-  background: url(../img/hero/hero-7.jpg) lightgray 50%/cover no-repeat;
+  background: url(../img/hero/hero-1.jpg) lightgray 50%/cover no-repeat;
 }
 .block-banner-home3 .item-banner-slide.banner-2 {
-  background: url(../img/hero/hero-5.jpg) lightgray 50%/cover no-repeat;
+  background: url(../img/hero/hero-1.jpg) lightgray 50%/cover no-repeat;
 }
 .block-banner-home3 .item-banner-slide::after {
   content: "";
@@ -8424,7 +8424,7 @@ a.icon-socials:hover svg path {
   left: 0px;
   width: 100%;
   height: 100%;
-  background-image: url(../img/img-4.jpg);
+  background-image: url(../img/hero/hero-1.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -8450,7 +8450,7 @@ a.icon-socials:hover svg path {
   left: 0px;
   width: 100%;
   height: 100%;
-  background-image: url(../img/img-3.jpg);
+  background-image: url(../img/hero/hero-1.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -8551,7 +8551,7 @@ a.icon-socials:hover svg path {
   width: 100%;
   height: 100%;
   opacity: 0.26;
-  background: url(../img/img-1.jpg) lightgray 50%/cover no-repeat;
+  background: url(../img/hero/hero-1.jpg) lightgray 50%/cover no-repeat;
 }
 .section-cta-4 .bg-shape::after {
   content: "";
@@ -8570,7 +8570,7 @@ a.icon-socials:hover svg path {
 }
 
 .item-banner-slide-review {
-  background-image: url(../img/img-1.jpg);
+  background-image: url(../img/hero/hero-1.jpg);
   min-height: 504px;
   background-position: center;
   background-repeat: no-repeat;
