@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 <header class="header sticky-bar header-home-2 border-0">
     <div class="top-bar top-bar-2 top-bar-3 @@bg">
@@ -27,15 +28,22 @@
             <div class="top-right-header">
                 <div class="d-none d-xl-inline-block box-dropdown-cart align-middle mr-15 head-lang">
                     <span class="text-14-medium icon-list icon-account icon-lang">
-                        <span class="text-14-medium arrow-down">EN</span>
+                        <span class="text-14-medium arrow-down">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {{ LANGUAGE_CODE|upper }}
+                        </span>
                     </span>
                     <div class="dropdown-account">
                         <ul>
                             <li>
-                                <a class="text-sm-medium" href="#">English</a>
+                                <a class="text-sm-medium" href="{% url 'base:change_language' 'en' %}">
+                                    {% trans "English" %}
+                                </a>
                             </li>
                             <li>
-                                <a class="text-sm-medium" href="#">French</a>
+                                <a class="text-sm-medium" href="{% url 'base:change_language' 'fr' %}">
+                                    {% trans "French" %}
+                                </a>
                             </li>
                         </ul>
                     </div>
