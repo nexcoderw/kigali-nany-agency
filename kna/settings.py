@@ -44,10 +44,27 @@ INSTALLED_APPS = [
     'base',
 ]
 
+LANGUAGE_CODE = 'fr'  # Default language is French
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('fr', 'French'),
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+
+TIME_ZONE = 'UTC'
+USE_I18N = True
+USE_TZ = True
+
+# Middleware: Add LocaleMiddleware after SessionMiddleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  # Added for language support
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
