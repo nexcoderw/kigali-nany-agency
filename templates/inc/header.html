@@ -56,19 +56,49 @@
                     <nav class="nav-main-menu">
                         <ul class="main-menu">
                             <li>
-                                <a href="{% url 'base:home' %}" class="fw-bold">Home</a>
+                                <a href="{% url 'base:home' %}" class="fw-bold">
+                                    {% if request.session.lang == 'en' %}
+                                        Home
+                                    {% else %}
+                                        Accueil
+                                    {% endif %}
+                                </a>
                             </li>
                             <li>
-                                <a href="{% url 'base:about' %}" class="fw-bold">About Us</a>
+                                <a href="{% url 'base:about' %}" class="fw-bold">
+                                    {% if request.session.lang == 'en' %}
+                                        About Us
+                                    {% else %}
+                                        À propos de nous
+                                    {% endif %}
+                                </a>
                             </li>
                             <li>
-                                <a href="{% url 'base:getNannies' %}" class="fw-bold">Nannies</a>
+                                <a href="{% url 'base:getNannies' %}" class="fw-bold">
+                                    {% if request.session.lang == 'en' %}
+                                        Nannies
+                                    {% else %}
+                                        Nounous
+                                    {% endif %}
+                                </a>
                             </li>
                             <li>
-                                <a href="{% url 'base:getJobs' %}" class="fw-bold">Jobs</a>
+                                <a href="{% url 'base:getJobs' %}" class="fw-bold">
+                                    {% if request.session.lang == 'en' %}
+                                        Jobs
+                                    {% else %}
+                                        Emplois
+                                    {% endif %}
+                                </a>
                             </li>
                             <li>
-                                <a href="{% url 'base:services' %}" class="fw-bold">Services</a>
+                                <a href="{% url 'base:services' %}" class="fw-bold">
+                                    {% if request.session.lang == 'en' %}
+                                        Services
+                                    {% else %}
+                                        Services
+                                    {% endif %}
+                                </a>
                             </li>
                             <li>
                                 <a href="{% url 'base:contact' %}" class="fw-bold">
@@ -84,27 +114,43 @@
                 </div>
                 <div class="header-right">
                     {% if user.is_authenticated %}
-                        <div class="d-none d-xxl-inline-block align-middle mr-15">
-                            <a class="btn btn-signin neutral-1000" href="{% url 'base:dashboard' %}">
-                                <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                    <path d="M1 12C1 12 0 12 0 11C0 10 1 7 6 7C11 7 12 10 12 11C12 12 11 12 11 12H1ZM6 6C6.79565 6 7.55871 5.68393 8.12132 5.12132C8.68393 4.55871 9 3.79565 9 3C9 2.20435 8.68393 1.44129 8.12132 0.87868C7.55871 0.316071 6.79565 0 6 0C5.20435 0 4.44129 0.316071 3.87868 0.87868C3.31607 1.44129 3 2.20435 3 3C3 3.79565 3.31607 4.55871 3.87868 5.12132C4.44129 5.68393 5.20435 6 6 6Z" fill="#101010" />
-                                </svg>
+                    <div class="d-none d-xxl-inline-block align-middle mr-15">
+                        <a class="btn btn-signin neutral-1000" href="{% url 'base:dashboard' %}">
+                            <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                <path d="M1 12C1 12 0 12 0 11C0 10 1 7 6 7C11 7 12 10 12 11C12 12 11 12 11 12H1ZM6 6C6.79565 6 7.55871 5.68393 8.12132 5.12132C8.68393 4.55871 9 3.79565 9 3C9 2.20435 8.68393 1.44129 8.12132 0.87868C7.55871 0.316071 6.79565 0 6 0C5.20435 0 4.44129 0.316071 3.87868 0.87868C3.31607 1.44129 3 2.20435 3 3C3 3.79565 3.31607 4.55871 3.87868 5.12132C4.44129 5.68393 5.20435 6 6 6Z" fill="#101010" />
+                            </svg>
+                            {% if request.session.lang == 'en' %}
                                 Dashboard
-                            </a>
-                            <a class="btn btn-signin background-brand-2 text-dark" href="{% url 'auth:logout' %}">
+                            {% else %}
+                                Tableau de bord
+                            {% endif %}
+                        </a>
+                        <a class="btn btn-signin background-brand-2 text-dark" href="{% url 'auth:logout' %}">
+                            {% if request.session.lang == 'en' %}
                                 Sign Out
-                            </a>
-                        </div>
+                            {% else %}
+                                Déconnexion
+                            {% endif %}
+                        </a>
+                    </div>
                     {% else %}
-                        <div class="d-none d-xxl-inline-block align-middle mr-15">
+                        <<div class="d-none d-xxl-inline-block align-middle mr-15">
                             <a class="btn btn-signin neutral-1000" href="{% url 'auth:login' %}">
                                 <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                                     <path d="M1 12C1 12 0 12 0 11C0 10 1 7 6 7C11 7 12 10 12 11C12 12 11 12 11 12H1ZM6 6C6.79565 6 7.55871 5.68393 8.12132 5.12132C8.68393 4.55871 9 3.79565 9 3C9 2.20435 8.68393 1.44129 8.12132 0.87868C7.55871 0.316071 6.79565 0 6 0C5.20435 0 4.44129 0.316071 3.87868 0.87868C3.31607 1.44129 3 2.20435 3 3C3 3.79565 3.31607 4.55871 3.87868 5.12132C4.44129 5.68393 5.20435 6 6 6Z" fill="#101010" />
                                 </svg>
-                                Sign in
+                                {% if request.session.lang == 'en' %}
+                                    Sign In
+                                {% else %}
+                                    Connexion
+                                {% endif %}
                             </a>
                             <a class="btn btn-signin background-brand-2 text-dark" href="{% url 'auth:register' %}">
-                                Sign Up
+                                {% if request.session.lang == 'en' %}
+                                    Sign Up
+                                {% else %}
+                                    Inscription
+                                {% endif %}
                             </a>
                         </div>
                     {% endif %}
@@ -135,37 +181,92 @@
                     <nav>
                         <ul class="mobile-menu font-heading">
                             <li>
-                                <a href="{% url 'base:home' %}" class="fw-bold">Home</a>
+                                <a href="{% url 'base:home' %}" class="fw-bold">
+                                    {% if request.session.lang == 'en' %}
+                                        Home
+                                    {% else %}
+                                        Accueil
+                                    {% endif %}
+                                </a>
                             </li>
                             <li>
-                                <a href="#" class="fw-bold">About Us</a>
+                                <a href="#" class="fw-bold">
+                                    {% if request.session.lang == 'en' %}
+                                        About Us
+                                    {% else %}
+                                        À propos de nous
+                                    {% endif %}
+                                </a>
                             </li>
                             <li>
-                                <a href="{% url 'base:getNannies' %}" class="fw-bold">Nannies</a>
+                                <a href="{% url 'base:getNannies' %}" class="fw-bold">
+                                    {% if request.session.lang == 'en' %}
+                                        Nannies
+                                    {% else %}
+                                        Nounous
+                                    {% endif %}
+                                </a>
                             </li>
                             <li>
-                                <a href="{% url 'base:getJobs' %}" class="fw-bold">Jobs</a>
+                                <a href="{% url 'base:getJobs' %}" class="fw-bold">
+                                    {% if request.session.lang == 'en' %}
+                                        Jobs
+                                    {% else %}
+                                        Emplois
+                                    {% endif %}
+                                </a>
                             </li>
                             <li>
-                                <a href="#" class="fw-bold">Contact Us</a>
+                                <a href="#" class="fw-bold">
+                                    {% if request.session.lang == 'en' %}
+                                        Contact Us
+                                    {% else %}
+                                        Contactez-nous
+                                    {% endif %}
+                                </a>
                             </li>
                             {% if user.is_authenticated %}
                                 <li>
-                                    <a href="{% url 'base:dashboard' %}" class="fw-bold">Dashboard</a>
+                                    <a href="{% url 'base:dashboard' %}" class="fw-bold">
+                                        {% if request.session.lang == 'en' %}
+                                            Dashboard
+                                        {% else %}
+                                            Tableau de bord
+                                        {% endif %}
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'auth:logout' %}" class="fw-bold">Sign Out</a>
+                                    <a href="{% url 'auth:logout' %}" class="fw-bold">
+                                        {% if request.session.lang == 'en' %}
+                                            Sign Out
+                                        {% else %}
+                                            Déconnexion
+                                        {% endif %}
+                                    </a>
                                 </li>
                             {% else %}
                                 <li>
-                                    <a href="{% url 'auth:login' %}" class="fw-bold">Sign In</a>
+                                    <a href="{% url 'auth:login' %}" class="fw-bold">
+                                        {% if request.session.lang == 'en' %}
+                                            Sign In
+                                        {% else %}
+                                            Connexion
+                                        {% endif %}
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'auth:register' %}" class="fw-bold">Sign Up</a>
+                                    <a href="{% url 'auth:register' %}" class="fw-bold">
+                                        {% if request.session.lang == 'en' %}
+                                            Sign Up
+                                        {% else %}
+                                            Inscription
+                                        {% endif %}
+                                    </a>
                                 </li>
                             {% endif %}
                         </ul>
                     </nav>
+                    
                 </div>
             </div>
         </div>
