@@ -91,9 +91,27 @@
                     <li>
                         <a href="{% url 'base:getNannies' %}" class="fw-bold">
                             {% if request.session.lang == 'en' %}
-                                Connecting People
+                                Recommend nannies
                             {% else %}
-                                Connecter les gens
+                                Recommander des nounous
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'base:getNannies' %}" class="fw-bold">
+                            {% if request.session.lang == 'en' %}
+                                Nanny Training
+                            {% else %}
+                            Formation nounou
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'base:getNannies' %}" class="fw-bold">
+                            {% if request.session.lang == 'en' %}
+                                Nanny Placement and Coaching
+                            {% else %}
+                                Placement et coaching de nounou
                             {% endif %}
                         </a>
                     </li>
