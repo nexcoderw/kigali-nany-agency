@@ -32,10 +32,10 @@
                     <div class="dropdown-account">
                         <ul>
                             <li>
-                                <a class="text-sm-medium" href="#">English</a>
+                                <a class="text-sm-medium" href="{% url 'base:change_language' 'en' %}">English</a>
                             </li>
                             <li>
-                                <a class="text-sm-medium" href="#">French</a>
+                                <a class="text-sm-medium" href="{% url 'base:change_language' 'fr' %}">French</a>
                             </li>
                         </ul>
                     </div>
@@ -71,7 +71,13 @@
                                 <a href="{% url 'base:services' %}" class="fw-bold">Services</a>
                             </li>
                             <li>
-                                <a href="{% url 'base:contact' %}" class="fw-bold">Contact Us</a>
+                                <a href="{% url 'base:contact' %}" class="fw-bold">
+                                    {% if request.session.lang == 'en' %}
+                                        Contact Us
+                                    {% else %}
+                                        Contactez-nous
+                                    {% endif %}
+                                </a>
                             </li>
                         </ul>
                     </nav>
