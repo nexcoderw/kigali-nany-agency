@@ -6,13 +6,19 @@
         <div class="container">
             <div class="text-center">
                 <div class="background-body px-3 py-2 rounded-12 border d-flex gap-3 d-inline-flex">
-                    <a href="{% url 'base:home' %}" class="neutral-700 text-md-medium">Home</a>
+                    <a href="{% url 'base:home' %}" class="neutral-700 text-md-medium">
+                        {% if request.session.lang == 'en' %} Home {% else %} Accueil {% endif %}
+                    </a>
                     <span>
                         <img src="https://carento-demo.vercel.app/assets/imgs/template/icons/arrow-right.svg" alt="Carento" />
                     </span>
-                    <a href="#" class="neutral-1000 text-md-bold">User Dashboard</a>
+                    <a href="#" class="neutral-1000 text-md-bold">
+                        {% if request.session.lang == 'en' %} User Dashboard {% else %} Tableau de Bord Utilisateur {% endif %}
+                    </a>
                 </div>
-                <h3 class="mt-3 neutral-1000">User Dashboard</h3>
+                <h3 class="mt-3 neutral-1000">
+                    {% if request.session.lang == 'en' %} User Dashboard {% else %} Tableau de Bord Utilisateur {% endif %}
+                </h3>
             </div>
         </div>
     </section>
@@ -33,9 +39,11 @@
                                                 <i class="fi fi-rr-ticket-alt"></i>
                                             </span>
                                             <div>
-                                                <p>Total Bookings</p>
+                                                <p>{% if request.session.lang == 'en' %} Total Bookings {% else %} Réservations Totales {% endif %}</p>
                                                 <h5><span class="odometer" data-count="425"></span></h5>
-                                                <p><span class="text-success"><i class="fi fi-rr-arrow-small-up"></i>45%</span> This Week</p>
+                                                <p><span class="text-success"><i class="fi fi-rr-arrow-small-up"></i>45%</span> 
+                                                    {% if request.session.lang == 'en' %} This Week {% else %} Cette Semaine {% endif %}
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -49,9 +57,11 @@
                                                 <i class="fi fi-rr-car-side"></i>
                                             </span>
                                             <div>
-                                                <p>New Vehicles Listings</p>
+                                                <p>{% if request.session.lang == 'en' %} New Vehicles Listings {% else %} Nouveaux Véhicules {% endif %}</p>
                                                 <h5><span class="odometer" data-count="15"></span></h5>
-                                                <p><span class="text-danger">15%</span> This Week</p>
+                                                <p><span class="text-danger">15%</span> 
+                                                    {% if request.session.lang == 'en' %} This Week {% else %} Cette Semaine {% endif %}
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -65,9 +75,11 @@
                                                 <i class="fi fi-rr-sack-dollar"></i>
                                             </span>
                                             <div>
-                                                <p>Total Transaction</p>
+                                                <p>{% if request.session.lang == 'en' %} Total Transactions {% else %} Transactions Totales {% endif %}</p>
                                                 <h5>$<span class="odometer" data-count="625"></span></h5>
-                                                <p><span class="text-success"><i class="fi fi-rr-arrow-small-up"></i>25%</span> This Week</p>
+                                                <p><span class="text-success"><i class="fi fi-rr-arrow-small-up"></i>25%</span> 
+                                                    {% if request.session.lang == 'en' %} This Week {% else %} Cette Semaine {% endif %}
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -81,15 +93,16 @@
                                                 <i class="fi fi-rr-users-alt"></i>
                                             </span>
                                             <div>
-                                                <p>New Agents</p>
+                                                <p>{% if request.session.lang == 'en' %} New Agents {% else %} Nouveaux Agents {% endif %}</p>
                                                 <h5><span class="odometer" data-count="12"></span></h5>
-                                                <p><span class="text-danger"><i class="fi fi-rr-arrow-small-down"></i>5%</span> This Week</p>
+                                                <p><span class="text-danger"><i class="fi fi-rr-arrow-small-down"></i>5%</span> 
+                                                    {% if request.session.lang == 'en' %} This Week {% else %} Cette Semaine {% endif %}
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        
                         </div>
                     {% elif user.role == 'Nanny' %}
                         <div class="row">
@@ -102,7 +115,7 @@
                                             </span>
                                             <div>
                                                 <h5><span class="odometer" data-count="25"></span></h5>
-                                                <p>Total Bookings</p>
+                                                <p>{% if request.session.lang == 'en' %} Total Bookings {% else %} Réservations Totales {% endif %}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -117,7 +130,7 @@
                                             </span>
                                             <div>
                                                 <h5>$<span class="odometer" data-count="28"></span>K</h5>
-                                                <p>Total Transactions</p>
+                                                <p>{% if request.session.lang == 'en' %} Total Transactions {% else %} Transactions Totales {% endif %}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -132,7 +145,7 @@
                                             </span>
                                             <div>
                                                 <h5>$<span class="odometer" data-count="2458"></span></h5>
-                                                <p>Wallet balance</p>
+                                                <p>{% if request.session.lang == 'en' %} Wallet Balance {% else %} Solde du Portefeuille {% endif %}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -141,7 +154,7 @@
                         </div>
                     {% else %}
                         <p class="text-center">
-                            You are not authorized to view navigation links.
+                            {% if request.session.lang == 'en' %} You are not authorized to view navigation links. {% else %} Vous n'êtes pas autorisé à voir les liens de navigation. {% endif %}
                         </p>
                     {% endif %}
                 </div>
