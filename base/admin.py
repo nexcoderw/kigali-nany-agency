@@ -224,3 +224,23 @@ class TeamAdmin(admin.ModelAdmin):
         url = reverse("admin:home_team_delete", args=[obj.pk])
         return format_html('<a class="button" href="{}">Delete</a>', url)
     delete_link.short_description = "Delete"
+
+@admin.register(Setting)
+class SettingAdmin(admin.ModelAdmin):
+    def has_add_permission(self, request):
+        # Allow adding only if there is no existing Setting instance
+        return not Setting.objects.exists()
+    
+    list_display = ('address', 'email', 'phone_number', 'edit_link', 'delete_link')
+    readonly_fields = ('created_at',)
+    list_per_page = 20
+    
+    def edit_link(self, obj):
+        url = reverse("admin:home_setting_change", args=[obj.pk])
+        return format_html('<a class="button" href="{}">Edit</a>', url)
+    edit_link.short_description = "Edit"
+    
+    def delete_link(self, obj):
+        url = reverse("admin:home_setting_delete", args=[obj.pk])
+        return format_html('<a class="button" href="{}">Delete</a>', url)
+    delete_link.short_description = "Delete"
