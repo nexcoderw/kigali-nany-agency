@@ -8,30 +8,67 @@
             <img class="w-100 h-100 img-banner" src="{% static 'img/img-3.jpg' %}" alt="Kigali Nanny Agency"/>
         </div>
         <div class="container position-absolute z-1 top-50 start-50 translate-middle">
-            <h2 class="text-white">About Us</h2>
-            <span class="text-white text-xl-medium">Learn more about our mission and services</span>
+            <h2 class="text-white">
+                {% if request.session.lang == 'en' %}
+                    About Us
+                {% else %}
+                    À propos de nous
+                {% endif %}
+            </h2>
+            <span class="text-white text-xl-medium">
+                {% if request.session.lang == 'en' %}
+                    Learn more about our mission and services
+                {% else %}
+                    Découvrez notre mission et nos services
+                {% endif %}
+            </span>
         </div>
         <div class="background-body position-absolute z-1 top-100 start-50 translate-middle px-3 py-2 rounded-12 border d-flex gap-3 @@navigation-page">
-            <a href="{% url 'base:home' %}" class="neutral-700 text-md-medium">Home</a>
+            <a href="{% url 'base:home' %}" class="neutral-700 text-md-medium">
+                {% if request.session.lang == 'en' %}
+                    Home
+                {% else %}
+                    Accueil
+                {% endif %}
+            </a>
             <span>
                 <img src="{% static 'img/icons/arrow-right.svg' %}" alt="Kigali Nanny Agency"/>
             </span>
-            <a href="#" class="neutral-1000 text-md-bold">About Us</a>
+            <a href="#" class="neutral-1000 text-md-bold">
+                {% if request.session.lang == 'en' %}
+                    About Us
+                {% else %}
+                    À propos de nous
+                {% endif %}
+            </a>
         </div>
     </div>
 </div>
+
 <section class="section-1 py-96 background-body">
     <div class="container">
         <div class="row pb-50">
             <div class="col-lg-4">
                 <h3 class="neutral-1000">
-                    The Future of <br/>
-                    <span class="text-primary">Childcare</span>
-                    Starts Here
+                    {% if request.session.lang == 'en' %}
+                        The Future of <br/>
+                        <span class="text-primary">Childcare</span>
+                        Starts Here
+                    {% else %}
+                        L'avenir de <br/>
+                        <span class="text-primary">la garde d'enfants</span>
+                        commence ici
+                    {% endif %}
                 </h3>
             </div>
             <div class="col-lg-7 offset-lg-1">
-                <p class="text-lg-medium neutral-500">Welcome to Kigali Nanny Agency, your trusted solution for childcare services. Since our inception, we have focused on providing families with professionally trained, reliable, and caring nannies. Whether you need full-time care, part-time assistance, or short-term support, we have the right candidates to meet your family's needs.</p>
+                <p class="text-lg-medium neutral-500">
+                    {% if request.session.lang == 'en' %}
+                        Welcome to Kigali Nanny Agency, your trusted solution for childcare services. Since our inception, we have focused on providing families with professionally trained, reliable, and caring nannies.
+                    {% else %}
+                        Bienvenue chez Kigali Nanny Agency, votre solution de confiance pour les services de garde d'enfants. Depuis notre création, nous nous concentrons sur la fourniture aux familles de nounous professionnelles, fiables et attentionnées.
+                    {% endif %}
+                </p>
             </div>
         </div>
         <div class="row g-4">
@@ -41,87 +78,74 @@
                     <div class="box-tag bg-white p-3 d-flex position-absolute bottom-0 end-0 rounded-12 m-3">
                         <span class="text-dark fs-72 me-3">86</span>
                         <h6>
-                            Trained <br/>Professionals
+                            {% if request.session.lang == 'en' %}
+                                Trained <br/>Professionals
+                            {% else %}
+                                Professionnels <br/>formés
+                            {% endif %}
                         </h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="box-image rounded-12 position-relative overflow-hidden">
-                    <img class="rounded-12" src="{% static 'img/img-3.jpg' %}" alt="Kigali Nanny Agency"/>
-                </div>
-            </div>
-            <div class="col-lg-4 col-12">
-                <div class="d-flex flex-column gap-4 align-self-stretch h-100">
-                    <div class="box-tag background-brand-2 p-5 d-flex rounded-12">
-                        <span class="text-dark fs-96 me-3">5</span>
-                        <h4>
-                            Years of <br/>Experience
-                        </h4>
-                    </div>
-                    <img class="rounded-12" src="{% static 'img/img-2.jpg' %}" alt="Kigali Nanny Agency"/>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container pt-96">
-        <div class="row mt-40">
-            <div class="col-lg-3 col-sm-6">
-                <div class="card-why text-start wow fadeInUp">
-                    <div class="card-info">
-                        <h6 class="text-xl-bold neutral-1000 text-start">Personalized Care</h6>
-                        <p class="text-md-medium neutral-500">Select the ideal nanny tailored to your family's specific needs and preferences.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="card-why text-start wow fadeInUp">
-                    <div class="card-info">
-                        <h6 class="text-xl-bold neutral-1000 text-start">Clear Pricing</h6>
-                        <p class="text-md-medium neutral-500">Enjoy straightforward pricing with no hidden fees, giving you full transparency.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="card-why text-start wow fadeInUp">
-                    <div class="card-info">
-                        <h6 class="text-xl-bold neutral-1000 text-start">Convenient Scheduling</h6>
-                        <p class="text-md-medium neutral-500">Benefit from flexible scheduling options that accommodate your busy lifestyle.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="card-why text-start wow fadeInUp">
-                    <div class="card-info">
-                        <h6 class="text-xl-bold neutral-1000 text-start">24/7 Support</h6>
-                        <p class="text-md-medium neutral-500">Access our support team anytime for assistance and peace of mind.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 <section class="section-cta-7 background-body py-96">
     <div class="box-cta-6">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5">
-                    <a class="btn btn-signin bg-2 text-dark mb-4" href="#">Our Mission</a>
+                    <a class="btn btn-signin bg-2 text-dark mb-4" href="#">
+                        {% if request.session.lang == 'en' %}
+                            Our Mission
+                        {% else %}
+                            Notre mission
+                        {% endif %}
+                    </a>
                     <h4 class="mb-4 neutral-1000">
-                        Providing Quality Care. <br/>Get started today.
+                        {% if request.session.lang == 'en' %}
+                            Providing Quality Care. <br/>Get started today.
+                        {% else %}
+                            Fournir des soins de qualité. <br/>Commencez dès aujourd'hui.
+                        {% endif %}
                     </h4>
-                    <p class="text-lg-medium neutral-500 mb-4">Our mission is to ensure that families in Kigali have access to the best nannies, offering reliable and compassionate childcare solutions.</p>
-                    <div class="row">
-                        <div class="col">
-                            <ul class="list-ticks-green list-ticks-green-2">
-                                <li class="neutral-1000 pe-0">Tailored services to fit every family's unique needs</li>
-                                <li class="neutral-1000 pe-0">Comprehensive background checks and training</li>
-                                <li class="neutral-1000 pe-0">24/7 support to answer your questions and concerns</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <p class="text-lg-medium neutral-500 mb-4">
+                        {% if request.session.lang == 'en' %}
+                            Our mission is to ensure that families in Kigali have access to the best nannies.
+                        {% else %}
+                            Notre mission est de garantir que les familles à Kigali aient accès aux meilleures nounous.
+                        {% endif %}
+                    </p>
+                    <ul class="list-ticks-green list-ticks-green-2">
+                        <li class="neutral-1000 pe-0">
+                            {% if request.session.lang == 'en' %}
+                                Tailored services to fit every family's unique needs
+                            {% else %}
+                                Services adaptés aux besoins uniques de chaque famille
+                            {% endif %}
+                        </li>
+                        <li class="neutral-1000 pe-0">
+                            {% if request.session.lang == 'en' %}
+                                Comprehensive background checks and training
+                            {% else %}
+                                Vérifications approfondies des antécédents et formations
+                            {% endif %}
+                        </li>
+                        <li class="neutral-1000 pe-0">
+                            {% if request.session.lang == 'en' %}
+                                24/7 support to answer your questions and concerns
+                            {% else %}
+                                Assistance 24/7 pour répondre à vos questions et préoccupations
+                            {% endif %}
+                        </li>
+                    </ul>
                     <a class="btn btn-primary mt-2" href="#">
-                        Get Started Now
+                        {% if request.session.lang == 'en' %}
+                            Get Started Now
+                        {% else %}
+                            Commencez maintenant
+                        {% endif %}
                     </a>
                 </div>
                 <div class="col-lg-6 offset-lg-1 position-relative z-1 mt-lg-0 mt-4">
@@ -135,7 +159,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-overlay position-absolute bottom-0 end-0 h-75 background-brand-2 opacity-25 z-0 rounded-start-pill"></div>
     </div>
 </section>
+
 {% endblock content %}
