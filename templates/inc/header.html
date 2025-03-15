@@ -190,7 +190,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="fw-bold">
+                                <a href="{% url 'base:about' %}" class="fw-bold">
                                     {% if request.session.lang == 'en' %}
                                         About Us
                                     {% else %}
@@ -217,7 +217,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="fw-bold">
+                                <a href="{% url 'base:contact' %}" class="fw-bold">
                                     {% if request.session.lang == 'en' %}
                                         Contact Us
                                     {% else %}
