@@ -2,7 +2,13 @@
     <div class="sidebar-left border-1 background-body">
         <div class="box-filters-sidebar">
             <div class="block-filter border-1">
-                <h6 class="text-lg-bold item-collapse neutral-1000">Categories</h6>
+                <h6 class="text-lg-bold item-collapse neutral-1000">
+                    {% if request.session.lang == 'en' %}
+                        Categories
+                    {% else %}
+                        Catégories
+                    {% endif %}
+                </h6>
                 <div class="box-collapse scrollFilter">
                     <ul class="list-filter-checkbox">
                         {% for code, name in job_categories %}
@@ -20,7 +26,13 @@
     <div class="sidebar-left border-1 background-body">
         <div class="box-filters-sidebar">
             <div class="block-filter border-1">
-                <h6 class="text-lg-bold item-collapse neutral-1000">Job Status</h6>
+                <h6 class="text-lg-bold item-collapse neutral-1000">
+                    {% if request.session.lang == 'en' %}
+                        Job Status
+                    {% else %}
+                        Statut du poste
+                    {% endif %}
+                </h6>
                 <div class="box-collapse scrollFilter">
                     <ul class="list-filter-checkbox">
                         {% for status_code, status_name in job_statuses %}

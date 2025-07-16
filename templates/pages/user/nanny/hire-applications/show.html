@@ -6,15 +6,21 @@
         <div class="container">
             <div class="text-center">
                 <div class="background-body px-3 py-2 rounded-12 border d-flex gap-3 d-inline-flex">
-                    <a href="{% url 'base:home' %}" class="neutral-700 text-md-medium">Home</a>
+                    <a href="{% url 'base:home' %}" class="neutral-700 text-md-medium">
+                        {% if request.session.lang == 'en' %} Home {% else %} Accueil {% endif %}
+                    </a>
                     <span>
                         <img src="https://carento-demo.vercel.app/assets/imgs/template/icons/arrow-right.svg" alt="Carento" />
                     </span>
-                    <a href="{% url 'base:getNannyHireApplications' %}" class="neutral-1000 text-md-bold">Applicants</a>
+                    <a href="{% url 'base:getNannyHireApplications' %}" class="neutral-1000 text-md-bold">
+                        {% if request.session.lang == 'en' %} Applicants {% else %} Candidats {% endif %}
+                    </a>
                     <span>
                         <img src="https://carento-demo.vercel.app/assets/imgs/template/icons/arrow-right.svg" alt="Carento" />
                     </span>
-                    <a href="{% url 'base:getNannyHireApplications' %}" class="neutral-1000 text-md-bold">{{ application.job_title }}</a>
+                    <a href="{% url 'base:getNannyHireApplications' %}" class="neutral-1000 text-md-bold">
+                        {{ application.job_title }}
+                    </a>
                 </div>
                 <h3 class="mt-3 neutral-1000">{{ application.job_title }}</h3>
             </div>
@@ -43,22 +49,32 @@
                         <div class="col-lg-9">
                             <div class="card shadow-none flex-fill bg-3">
                                 <div class="box-earning px-3 py-4">
-                                    <span class="neutral-1000 text-md-bold fs-5">Job Info</span>
+                                    <span class="neutral-1000 text-md-bold fs-5">
+                                        {% if request.session.lang == 'en' %} Job Info {% else %} Informations sur le poste {% endif %}
+                                    </span>
                                     <div class="row">
                                         <div class="col-lg-6 me-2 me-lg-0 mb-4">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Nanny Name</p>
+                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">
+                                                {% if request.session.lang == 'en' %} Nanny Name {% else %} Nom de la nounou {% endif %}
+                                            </p>
                                             <p class="fs-6 text-truncate">{{ application.nanny.name }}</p>
                                         </div>
                                         <div class="col-lg-6 me-2 me-lg-0 mb-4">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Nanny Phone Number</p>
+                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">
+                                                {% if request.session.lang == 'en' %} Nanny Phone Number {% else %} Numéro de téléphone de la nounou {% endif %}
+                                            </p>
                                             <p class="fs-6 text-truncate">{{ application.nanny.phone_number }}</p>
                                         </div>
                                         <div class="col-lg-6 me-2 me-lg-0 mb-4">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Job</p>
+                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">
+                                                {% if request.session.lang == 'en' %} Job {% else %} Poste {% endif %}
+                                            </p>
                                             <p class="fs-6 text-truncate">{{ application.job_title }}</p>
                                         </div>
                                         <div class="col-lg-6 me-2 me-lg-0 mb-4">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Job Salary</p>
+                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">
+                                                {% if request.session.lang == 'en' %} Job Salary {% else %} Salaire {% endif %}
+                                            </p>
                                             <p class="fs-6 text-truncate">{{ application.expected_salary|floatformat|intcomma }} RWF</p>
                                         </div>
                                     </div>
@@ -66,45 +82,41 @@
                             </div>
                             <div class="card shadow-none flex-fill bg-3">
                                 <div class="box-earning px-3 py-4">
-                                    <span class="neutral-1000 text-md-bold fs-5">Application info</span>
+                                    <span class="neutral-1000 text-md-bold fs-5">
+                                        {% if request.session.lang == 'en' %} Application Info {% else %} Informations sur la candidature {% endif %}
+                                    </span>
                                     <div class="row">
                                         <div class="col-lg-4 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Expected to Start</p>
+                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">
+                                                {% if request.session.lang == 'en' %} Expected to Start {% else %} Début prévu {% endif %}
+                                            </p>
                                             <p class="fs-6 text-truncate">{{ application.expected_start_date|date }}</p>
                                         </div>
                                         <div class="col-lg-4 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Expected to End</p>
+                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">
+                                                {% if request.session.lang == 'en' %} Expected to End {% else %} Fin prévue {% endif %}
+                                            </p>
                                             <p class="fs-6 text-truncate">{{ application.expected_end_date|date }}</p>
                                         </div>
                                         <div class="col-lg-4 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Application Status</p>
+                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">
+                                                {% if request.session.lang == 'en' %} Application Status {% else %} Statut de la candidature {% endif %}
+                                            </p>
                                             <p class="fs-6 text-truncate">
                                                 {% if application.status == 'accepted' %}
                                                     <span class="badge badge-success rounded-pill d-inline-flex align-items-center fs-10">
-                                                        <i class="fi fi-rr-check-circle me-1"></i> Accepted
+                                                        {% if request.session.lang == 'en' %} Accepted {% else %} Acceptée {% endif %}
                                                     </span>
                                                 {% elif application.status == 'rejected' %}
                                                     <span class="badge badge-danger rounded-pill d-inline-flex align-items-center fs-10">
-                                                        <i class="fi fi-rr-door-closed me-1"></i> Rejected
+                                                        {% if request.session.lang == 'en' %} Rejected {% else %} Rejetée {% endif %}
                                                     </span>
                                                 {% elif application.status == 'pending' %}
                                                     <span class="badge badge-warning rounded-pill d-inline-flex align-items-center fs-10">
-                                                        <i class="fi fi-rr-hourglass me-1"></i> Pending
+                                                        {% if request.session.lang == 'en' %} Pending {% else %} En attente {% endif %}
                                                     </span>
                                                 {% endif %}
                                             </p>
-                                        </div>
-                                        <div class="col-lg-12 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Job Work Schedule</p>
-                                            <p class="fs-6 text-truncate">{{ application.work_schedule }}</p>
-                                        </div>
-                                        <div class="col-lg-12 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Job Additional Requirements</p>
-                                            <p class="fs-6 text-truncate">{{ application.additional_requirements }}</p>
-                                        </div>
-                                        <div class="col-lg-12 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Job Description</p>
-                                            <p class="fs-6 text-truncate">{{ application.description }}</p>
                                         </div>
                                     </div>
                                     {% if application.status == 'pending' %}
@@ -112,12 +124,12 @@
                                             <a href="#" class="d-flex align-items-center gap-1 text-primary-dark" 
                                             onclick="confirmAction('Accept Application', '{{ application.id }}', 'accept')">
                                                 <i class="fi fi-rr-check"></i>
-                                                Accept Application
+                                                {% if request.session.lang == 'en' %} Accept Application {% else %} Accepter la candidature {% endif %}
                                             </a>
                                             <a href="#" class="d-flex align-items-center gap-1 text-danger" 
                                             onclick="confirmAction('Reject Application', '{{ application.id }}', 'reject')">
                                                 <i class="fi fi-rr-do-not-enter"></i>
-                                                Reject Application
+                                                {% if request.session.lang == 'en' %} Reject Application {% else %} Rejeter la candidature {% endif %}
                                             </a>
                                         </div>
                                     {% endif %}
@@ -129,31 +141,5 @@
             </div>
         </div>
     </section>
-
-    <script>
-        function confirmAction(action, id, type) {
-            if (confirm('Are you sure you want to ' + action + '?')) {
-                // Construct the correct URL using Django's URL pattern and passing the `id`
-                let url;
-                if (type === 'accept') {
-                    url = "{% url 'base:nannyAcceptHireApplication' id=0 %}".replace('0', id);  // Replacing the placeholder with the actual id
-                } else if (type === 'reject') {
-                    url = "{% url 'base:nannyRejectHireApplication' id=0 %}".replace('0', id);  // Replacing the placeholder with the actual id
-                }
-    
-                // Perform the AJAX request to update the status
-                fetch(url, { method: 'GET' })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.status === 'success') {
-                            alert(data.message);
-                            location.reload(); // Reload to reflect the status change
-                        } else {
-                            alert(data.message);
-                        }
-                    });
-            }
-        }
-    </script>
 
 {% endblock content %}

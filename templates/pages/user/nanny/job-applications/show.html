@@ -6,11 +6,15 @@
         <div class="container">
             <div class="text-center">
                 <div class="background-body px-3 py-2 rounded-12 border d-flex gap-3 d-inline-flex">
-                    <a href="{% url 'base:home' %}" class="neutral-700 text-md-medium">Home</a>
+                    <a href="{% url 'base:home' %}" class="neutral-700 text-md-medium">
+                        {% if request.session.lang == 'en' %} Home {% else %} Accueil {% endif %}
+                    </a>
                     <span>
                         <img src="https://carento-demo.vercel.app/assets/imgs/template/icons/arrow-right.svg" alt="Carento" />
                     </span>
-                    <a href="{% url 'base:getJobApplicants' %}" class="neutral-1000 text-md-bold">Applicants</a>
+                    <a href="{% url 'base:getJobApplicants' %}" class="neutral-1000 text-md-bold">
+                        {% if request.session.lang == 'en' %} Applicants {% else %} Candidats {% endif %}
+                    </a>
                     <span>
                         <img src="https://carento-demo.vercel.app/assets/imgs/template/icons/arrow-right.svg" alt="Carento" />
                     </span>
@@ -43,30 +47,44 @@
                         <div class="col-lg-9">
                             <div class="card shadow-none flex-fill bg-3">
                                 <div class="box-earning px-3 py-4">
-                                    <span class="neutral-1000 text-md-bold fs-5">Job Info</span>
+                                    <span class="neutral-1000 text-md-bold fs-5">
+                                        {% if request.session.lang == 'en' %} Job Info {% else %} Informations sur le poste {% endif %}
+                                    </span>
                                     <div class="row">
-                                        <div class="col-lg-4 me-2 me-lg-0 mb-4">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Nanny Name</p>
+                                        <div class="col-lg-4 mb-4">
+                                            <p class="fs-8 neutral-500 text-md-bold">
+                                                {% if request.session.lang == 'en' %} Nanny Name {% else %} Nom de la nounou {% endif %}
+                                            </p>
                                             <p class="fs-6 text-truncate">{{ application.nanny.name }}</p>
                                         </div>
-                                        <div class="col-lg-4 me-2 me-lg-0 mb-4">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Nanny Phone Number</p>
+                                        <div class="col-lg-4 mb-4">
+                                            <p class="fs-8 neutral-500 text-md-bold">
+                                                {% if request.session.lang == 'en' %} Nanny Phone Number {% else %} Numéro de téléphone de la nounou {% endif %}
+                                            </p>
                                             <p class="fs-6 text-truncate">{{ application.nanny.phone_number }}</p>
                                         </div>
-                                        <div class="col-lg-4 me-2 me-lg-0 mb-4">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Job</p>
+                                        <div class="col-lg-4 mb-4">
+                                            <p class="fs-8 neutral-500 text-md-bold">
+                                                {% if request.session.lang == 'en' %} Job {% else %} Poste {% endif %}
+                                            </p>
                                             <p class="fs-6 text-truncate">{{ application.job.title }}</p>
                                         </div>
-                                        <div class="col-lg-4 me-2 me-lg-0 mb-4">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Job Salary</p>
+                                        <div class="col-lg-4 mb-4">
+                                            <p class="fs-8 neutral-500 text-md-bold">
+                                                {% if request.session.lang == 'en' %} Job Salary {% else %} Salaire {% endif %}
+                                            </p>
                                             <p class="fs-6 text-truncate">{{ application.job.salary|floatformat|intcomma }} RWF</p>
                                         </div>
-                                        <div class="col-lg-4 me-2 me-lg-0 mb-4">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Location</p>
+                                        <div class="col-lg-4 mb-4">
+                                            <p class="fs-8 neutral-500 text-md-bold">
+                                                {% if request.session.lang == 'en' %} Location {% else %} Localisation {% endif %}
+                                            </p>
                                             <p class="fs-6 text-truncate">{{ application.job.location }}</p>
                                         </div>
-                                        <div class="col-lg-4 me-2 me-lg-0 mb-4">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Time</p>
+                                        <div class="col-lg-4 mb-4">
+                                            <p class="fs-8 neutral-500 text-md-bold">
+                                                {% if request.session.lang == 'en' %} Time {% else %} Temps {% endif %}
+                                            </p>
                                             <p class="fs-6 text-truncate">{{ application.job.start_date|date }} - {{ application.job.end_date|date }}</p>
                                         </div>
                                     </div>
@@ -74,37 +92,47 @@
                             </div>
                             <div class="card shadow-none flex-fill bg-3">
                                 <div class="box-earning px-3 py-4">
-                                    <span class="neutral-1000 text-md-bold fs-5">Application info</span>
+                                    <span class="neutral-1000 text-md-bold fs-5">
+                                        {% if request.session.lang == 'en' %} Application Info {% else %} Informations sur la candidature {% endif %}
+                                    </span>
                                     <div class="row">
-                                        <div class="col-lg-4 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Nanny Experience</p>
+                                        <div class="col-lg-4">
+                                            <p class="fs-8 neutral-500 text-md-bold">
+                                                {% if request.session.lang == 'en' %} Nanny Experience {% else %} Expérience de la nounou {% endif %}
+                                            </p>
                                             <p class="fs-6 text-truncate">{{ application.experience }}</p>
                                         </div>
-                                        <div class="col-lg-4 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Nanny Availability</p>
+                                        <div class="col-lg-4">
+                                            <p class="fs-8 neutral-500 text-md-bold">
+                                                {% if request.session.lang == 'en' %} Nanny Availability {% else %} Disponibilité de la nounou {% endif %}
+                                            </p>
                                             <p class="fs-6 text-truncate">{{ application.availability|date }}</p>
                                         </div>
-                                        <div class="col-lg-4 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Application Status</p>
+                                        <div class="col-lg-4">
+                                            <p class="fs-8 neutral-500 text-md-bold">
+                                                {% if request.session.lang == 'en' %} Application Status {% else %} Statut de la candidature {% endif %}
+                                            </p>
                                             <p class="fs-6 text-truncate">
                                                 {% if application.status == 'accepted' %}
-                                                    <span class="badge badge-success rounded-pill d-inline-flex align-items-center fs-10">
-                                                        <i class="fi fi-rr-check-circle me-1"></i> Accepted
+                                                    <span class="badge badge-success rounded-pill fs-10">
+                                                        {% if request.session.lang == 'en' %} Accepted {% else %} Accepté {% endif %}
                                                     </span>
                                                 {% elif application.status == 'rejected' %}
-                                                    <span class="badge badge-danger rounded-pill d-inline-flex align-items-center fs-10">
-                                                        <i class="fi fi-rr-door-closed me-1"></i> Rejected
+                                                    <span class="badge badge-danger rounded-pill fs-10">
+                                                        {% if request.session.lang == 'en' %} Rejected {% else %} Rejeté {% endif %}
                                                     </span>
                                                 {% elif application.status == 'pending' %}
-                                                    <span class="badge badge-warning rounded-pill d-inline-flex align-items-center fs-10">
-                                                        <i class="fi fi-rr-hourglass me-1"></i> Pending
+                                                    <span class="badge badge-warning rounded-pill fs-10">
+                                                        {% if request.session.lang == 'en' %} Pending {% else %} En attente {% endif %}
                                                     </span>
                                                 {% endif %}
                                             </p>
                                         </div>
-                                        <div class="col-lg-12 me-2 me-lg-0">
-                                            <p class="fs-8 two-line-ellipsis neutral-500 text-md-bold">Nanny Cover letter</p>
-                                            <p class="fs-6 text-truncate">{{ application.job.title }}</p>
+                                        <div class="col-lg-12">
+                                            <p class="fs-8 neutral-500 text-md-bold">
+                                                {% if request.session.lang == 'en' %} Nanny Cover Letter {% else %} Lettre de motivation de la nounou {% endif %}
+                                            </p>
+                                            <p class="fs-6 text-truncate">{{ application.cover_letter }}</p>
                                         </div>
                                     </div>
                                 </div>

@@ -10,16 +10,52 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+def change_language(request, lang_code):
+    """
+    Sets the session language. Defaults to French if no language is chosen.
+    """
+    # Save the selected language in session (e.g. 'en' or 'fr')
+    request.session['lang'] = lang_code
+    # Redirect back to the referring page, or home if not available.
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
 def home(request):
-    return render(request, 'pages/index.html')
+    team = Team.objects.all()[:4]
+    settings = Setting.objects.first()
+
+    context = {
+        'team': team,
+        'settings': settings
+    }
+
+    return render(request, 'pages/index.html', context)
+
 def about(request):
-    return render(request, 'pages/about.html')
+    settings = Setting.objects.first()
+
+    context = {
+        'settings': settings
+    }
+
+    return render(request, 'pages/about.html', context)
 
 def services(request):
-    return render(request, 'pages/services.html')
+    settings = Setting.objects.first()
+
+    context = {
+        'settings': settings
+    }
+
+    return render(request, 'pages/services.html', context)
 
 def contact(request):
-    return render(request, 'pages/contact.html')
+    settings = Setting.objects.first()
+
+    context = {
+        'settings': settings
+    }
+
+    return render(request, 'pages/contact.html', context)
 
 def getJobs(request):
     jobs = JobPosting.objects.all().order_by('-created_at')
@@ -73,6 +109,7 @@ def getJobs(request):
     # --- Dynamic Filter Options ---
     job_categories = JobCategory.choices
     job_statuses = JobStatus.choices
+    settings = Setting.objects.first()
 
     context = {
         'jobs': jobs_page,
@@ -82,12 +119,14 @@ def getJobs(request):
         'jobs_count': paginator.count,
         'paginator': paginator,
         'page_obj': jobs_page,
+        'settings': settings
     }
 
     return render(request, 'pages/jobs/index.html', context)
 
 def showJobDetails(request, slug):
     job = get_object_or_404(JobPosting, slug=slug)
+    settings = Setting.objects.first()
 
     # Check if the user is logged in and has the 'Nanny' role
     if request.user.is_authenticated and request.user.role == 'Nanny':
@@ -113,12 +152,14 @@ def showJobDetails(request, slug):
         context = {
             'job': job,
             'form': form,
+            'settings': settings,
             'already_applied': False
         }
     else:
         # If the user isn't logged in or doesn't have the Nanny role, display a login redirect button
         context = {
             'job': job,
+            'settings': settings,
             'already_applied': False,
             'login_required': True
         }
@@ -127,15 +168,18 @@ def showJobDetails(request, slug):
 
 def getNannies(request):
     nannies = User.objects.filter(role = 'Nanny').order_by('-created_at')
+    settings = Setting.objects.first()
 
     context = {
-        'nannies': nannies
+        'nannies': nannies,
+        'settings': settings
     }
 
     return render(request, 'pages/nannies/index.html', context)
 
 def showNanny(request, slug):
     nanny = get_object_or_404(User, slug=slug)
+    settings = Setting.objects.first()
 
     # Check if the user is logged in and has the 'Client' role
     if request.user.is_authenticated and request.user.role == 'Client':
@@ -171,23 +215,32 @@ def showNanny(request, slug):
         if not request.user.is_authenticated:
             context = {
                 'nanny': nanny,
+                'settings': settings,
                 'login_required': True,  # Notify the user they need to log in
             }
         elif request.user.role != 'Client':
             context = {
                 'nanny': nanny,
+                'settings': settings,
                 'client_required': True,  # Notify the user they need to register as a client
             }
         else:
             context = {
                 'nanny': nanny,
+                'settings': settings,
                 'already_applied': False,
             }
 
     return render(request, 'pages/nannies/show.html', context)
 
 def dashboard(request):
-    return render(request, 'pages/user/dashboard.html')
+    settings = Setting.objects.first()
+
+    context = {
+        'settings': settings
+    }
+
+    return render(request, 'pages/user/dashboard.html', context)
 
 @login_required
 def getJobListings(request):
@@ -215,11 +268,13 @@ def getJobListings(request):
     paginator = Paginator(job_postings, 10)  # Show 10 job postings per page
     page_number = request.GET.get('page')  # Get the page number from the query params
     page_obj = paginator.get_page(page_number)
+    settings = Setting.objects.first()
 
     context = {
         'job_postings': page_obj,
         'status_filter': status_filter,
         'sort_by': sort_by,
+        'settings': settings,
     }
 
     return render(request, 'pages/user/client/listings/index.html', context)
@@ -242,8 +297,11 @@ def addJobListing(request):
     else:
         form = JobPostingForm()
 
+    settings = Setting.objects.first()
+
     context = {
-        'form': form
+        'form': form,
+        'settings': settings
     }
 
     return render(request, 'pages/user/client/listings/create.html', context)
@@ -265,9 +323,12 @@ def editJobListing(request, slug):
     else:
         form = JobPostingForm(instance=job)
 
+    settings = Setting.objects.first()
+
     context = {
         'form': form,
-        'job': job
+        'job': job,
+        'settings': settings
     }
 
     return render(request, 'pages/user/client/listings/edit.html', context)
@@ -304,8 +365,11 @@ def getJobApplicants(request):
     if not job_applicants.exists():
         messages.info(request, "No applicants have applied to your jobs yet.")
     
+    settings = Setting.objects.first()
+
     context = {
-        'job_applicants': job_applicants
+        'job_applicants': job_applicants,
+        'settings': settings
     }
 
     return render(request, 'pages/user/client/job-applicants/index.html', context)
@@ -313,9 +377,11 @@ def getJobApplicants(request):
 @login_required
 def getJobApplicantDetails(request, id):
     applicant = get_object_or_404(JobApplication, id=id)
+    settings = Setting.objects.first()
 
     context = {
-        'applicant': applicant
+        'applicant': applicant,
+        'settings': settings
     }
 
     return render(request, 'pages/user/client/job-applicants/show.html', context)
@@ -364,9 +430,12 @@ def getHireApplications(request):
     # If no applicants are found, display a message
     if not applications.exists():
         messages.info(request, "No hire applications you have sent yet.")
-    
+
+    settings = Setting.objects.first()
+
     context = {
-        'applications': applications
+        'applications': applications,
+        'settings': settings
     }
 
     return render(request, 'pages/user/client/hire-applications/index.html', context)
@@ -374,9 +443,11 @@ def getHireApplications(request):
 @login_required
 def getHireApplicationDetails(request, id):
     application = get_object_or_404(HireApplication, id=id)
+    settings = Setting.objects.first()
 
     context = {
-        'application': application
+        'application': application,
+        'settings': settings
     }
 
     return render(request, 'pages/user/client/hire-applications/show.html', context)
@@ -399,9 +470,12 @@ def getJobApplications(request):
     # If no applications are found, display a message
     if not applications.exists():
         messages.info(request, "You have not applied to any jobs yet.")
-    
+
+    settings = Setting.objects.first()
+
     context = {
-        'applications': applications
+        'applications': applications,
+        'settings': settings
     }
 
     return render(request, 'pages/user/nanny/job-applications/index.html', context)
@@ -409,9 +483,11 @@ def getJobApplications(request):
 @login_required
 def getJobApplicationDetails(request, id):
     application = get_object_or_404(JobApplication, id=id)
+    settings = Setting.objects.first()
 
     context = {
-        'application': application
+        'application': application,
+        'settings': settings
     }
 
     return render(request, 'pages/user/nanny/job-applications/show.html', context)
@@ -430,13 +506,15 @@ def getNannyHireApplications(request):
     
     # Retrieve all job applications sent by the logged-in nanny
     applications = HireApplication.objects.filter(nanny=request.user)
+    settings = Setting.objects.first()
     
     # If no applications are found, display a message
     if not applications.exists():
         messages.info(request, "No one has sent hire application to you set.")
     
     context = {
-        'applications': applications
+        'applications': applications,
+        'settings': settings
     }
 
     return render(request, 'pages/user/nanny/hire-applications/index.html', context)
@@ -444,9 +522,11 @@ def getNannyHireApplications(request):
 @login_required
 def getNannyHireApplicationDetails(request, id):
     application = get_object_or_404(HireApplication, id=id)
+    settings = Setting.objects.first()
 
     context = {
-        'application': application
+        'application': application,
+        'settings': settings
     }
 
     return render(request, 'pages/user/nanny/hire-applications/show.html', context)

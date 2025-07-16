@@ -6,13 +6,19 @@
         <div class="container">
             <div class="text-center">
                 <div class="background-body px-3 py-2 rounded-12 border d-flex gap-3 d-inline-flex">
-                    <a href="{% url 'base:home' %}" class="neutral-700 text-md-medium">Home</a>
+                    <a href="{% url 'base:home' %}" class="neutral-700 text-md-medium">
+                        {% if request.session.lang == 'en' %} Home {% else %} Accueil {% endif %}
+                    </a>
                     <span>
                         <img src="https://carento-demo.vercel.app/assets/imgs/template/icons/arrow-right.svg" alt="Carento" />
                     </span>
-                    <a href="{% url 'base:getNannyHireApplications' %}" class="neutral-1000 text-md-bold">Hire Application</a>
+                    <a href="{% url 'base:getNannyHireApplications' %}" class="neutral-1000 text-md-bold">
+                        {% if request.session.lang == 'en' %} Hire Applications {% else %} Candidature d'Embauche {% endif %}
+                    </a>
                 </div>
-                <h3 class="mt-3 neutral-1000">Hire Application</h3>
+                <h3 class="mt-3 neutral-1000">
+                    {% if request.session.lang == 'en' %} Hire Applications {% else %} Candidatures d'Embauche {% endif %}
+                </h3>
             </div>
         </div>
     </section>
@@ -28,40 +34,43 @@
                             <div class="card shadow-none flex-fill">
                                 <div class="card-header">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <span class="neutral-1000 text-md-bold fs-5">Hire Applications</span>
+                                        <span class="neutral-1000 text-md-bold fs-5">
+                                            {% if request.session.lang == 'en' %} Hire Applications {% else %} Candidatures d'Embauche {% endif %}
+                                        </span>
                                         <div class="d-flex gap-2">
                                             <!-- Search Input -->
                                             <div class="input-icon-start position-relative">
                                                 <span class="icon-addon">
                                                     <i class="fi fi-rr-search"></i>
                                                 </span>
-                                                <input type="text" class="input-small" placeholder="Search job title or location">
+                                                <input type="text" class="input-small" placeholder="{% if request.session.lang == 'en' %} Search job title or location {% else %} Rechercher un poste ou une localisation {% endif %}">
                                             </div>
 
                                             <!-- Status Filter Dropdown -->
                                             <div class="dropdown">
                                                 <a href="javascript:void(0);" class="dropdown-toggle btn btn-sort bg-neutral-100 btn-sm neutral-500 rounded-pill fw-normal fs-8 d-inline-flex align-items-center" data-bs-toggle="dropdown">
-                                                    <i class="fi fi-rr-steering-wheel me-2"></i> Status
+                                                    <i class="fi fi-rr-steering-wheel me-2"></i> 
+                                                    {% if request.session.lang == 'en' %} Status {% else %} Statut {% endif %}
                                                 </a>
                                                 <ul class="dropdown-menu small dropdown-menu-end p-2">
                                                     <li>
                                                         <a href="?status=open" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i> Open
+                                                            <i class="ti ti-point-filled me-1"></i> {% if request.session.lang == 'en' %} Open {% else %} Ouvert {% endif %}
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="?status=closed" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i> Closed
+                                                            <i class="ti ti-point-filled me-1"></i> {% if request.session.lang == 'en' %} Closed {% else %} Fermé {% endif %}
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="?status=pending" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i> Pending
+                                                            <i class="ti ti-point-filled me-1"></i> {% if request.session.lang == 'en' %} Pending {% else %} En Attente {% endif %}
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="?status=in_progress" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i> In Progress
+                                                            <i class="ti ti-point-filled me-1"></i> {% if request.session.lang == 'en' %} In Progress {% else %} En Cours {% endif %}
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -70,17 +79,18 @@
                                             <!-- Sort Filter Dropdown -->
                                             <div class="dropdown">
                                                 <a href="javascript:void(0);" class="dropdown-toggle btn btn-sort bg-neutral-100 btn-sm neutral-500 rounded-pill fw-normal fs-8 d-inline-flex align-items-center" data-bs-toggle="dropdown">
-                                                    <i class="fi fi-rr-filter-list me-2"></i> Sort
+                                                    <i class="fi fi-rr-filter-list me-2"></i> 
+                                                    {% if request.session.lang == 'en' %} Sort {% else %} Trier {% endif %}
                                                 </a>
                                                 <ul class="dropdown-menu small dropdown-menu-end p-2">
                                                     <li>
                                                         <a href="?sort=newest" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i> Newest
+                                                            <i class="ti ti-point-filled me-1"></i> {% if request.session.lang == 'en' %} Newest {% else %} Plus Récent {% endif %}
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="?sort=oldest" class="dropdown-item rounded-1">
-                                                            <i class="ti ti-point-filled me-1"></i> Oldest
+                                                            <i class="ti ti-point-filled me-1"></i> {% if request.session.lang == 'en' %} Oldest {% else %} Plus Ancien {% endif %}
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -90,77 +100,55 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <div class="card shadow-none mb-2">
-                                        <div class="table-responsive">
-                                            <table class="table datatable table-striped">
-                                                <thead class="thead-light">
+                                    <div class="table-responsive">
+                                        <table class="table datatable table-striped">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>{% if request.session.lang == 'en' %} Job Title & Salary {% else %} Poste & Salaire {% endif %}</th>
+                                                    <th>{% if request.session.lang == 'en' %} Client {% else %} Client {% endif %}</th>
+                                                    <th>{% if request.session.lang == 'en' %} Location {% else %} Localisation {% endif %}</th>
+                                                    <th>{% if request.session.lang == 'en' %} Status {% else %} Statut {% endif %}</th>
+                                                    <th>{% if request.session.lang == 'en' %} Actions {% else %} Actions {% endif %}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for application in applications %}
                                                     <tr>
-                                                        <th>ID</th>
-                                                        <th>Job Title & Salary</th>
-                                                        <th>Client</th>
-                                                        <th>location</th>
-                                                        <th>Status</th>
-                                                        <th>Actions</th>
+                                                        <td>#{{ application.id }}</td>
+                                                        <td>{{ application.job_title }} - {{ application.expected_salary|floatformat|intcomma }} RWF</td>
+                                                        <td>{{ application.client.name }}</td>
+                                                        <td>{{ application.expected_start_date|date }}</td>
+                                                        <td>
+                                                            {% if application.status == 'accepted' %}
+                                                                <span class="badge badge-success">
+                                                                    {% if request.session.lang == 'en' %} Accepted {% else %} Accepté {% endif %}
+                                                                </span>
+                                                            {% elif application.status == 'rejected' %}
+                                                                <span class="badge badge-danger">
+                                                                    {% if request.session.lang == 'en' %} Rejected {% else %} Rejeté {% endif %}
+                                                                </span>
+                                                            {% elif application.status == 'pending' %}
+                                                                <span class="badge badge-warning">
+                                                                    {% if request.session.lang == 'en' %} Pending {% else %} En Attente {% endif %}
+                                                                </span>
+                                                            {% endif %}
+                                                        </td>
+                                                        <td>
+                                                            <a href="{% url 'base:getNannyHireApplicationDetails' application.id %}">
+                                                                {% if request.session.lang == 'en' %} View {% else %} Voir {% endif %}
+                                                            </a>
+                                                        </td>
                                                     </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {% for application in applications %}
-                                                        <tr>
-                                                            <td><a href="javascript:void(0);" class="text-primary-dark fw-medium">#{{ application.id }}</a></td>
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="ms-2">
-                                                                        <p class="text-dark mb-0 fw-medium fs-14">
-                                                                            <a href="#">{{ application.job_title }}</a>
-                                                                        </p>
-                                                                        <span class="fw-bold neutral-500" style="font-size: 12px;">{{ application.expected_salary|floatformat|intcomma }} RWF</span>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="ms-2">
-                                                                        <p class="text-dark mb-0 fw-medium fs-14">
-                                                                            <a href="#">{{ application.client.name }}</a>
-                                                                        </p>
-                                                                        <span class="fw-bold neutral-500" style="font-size: 12px;">{{ application.client.phone_number }}</span>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>{{ application.expected_start_date|date }} - {{ application.expected_end_date }}</td>
-                                                            <td>
-                                                                {% if application.status == 'accepted' %}
-                                                                    <span class="badge badge-success rounded-pill d-inline-flex align-items-center fs-10">
-                                                                        <i class="fi fi-rr-check-circle me-1"></i> Accepted
-                                                                    </span>
-                                                                {% elif application.status == 'rejected' %}
-                                                                    <span class="badge badge-danger rounded-pill d-inline-flex align-items-center fs-10">
-                                                                        <i class="fi fi-rr-door-closed me-1"></i> Rejected
-                                                                    </span>
-                                                                {% elif application.status == 'pending' %}
-                                                                    <span class="badge badge-warning rounded-pill d-inline-flex align-items-center fs-10">
-                                                                        <i class="fi fi-rr-hourglass me-1"></i> Pending
-                                                                    </span>
-                                                                {% endif %}
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <a href="{% url 'base:getNannyHireApplicationDetails' application.id %}" class="px-2">
-                                                                        <i class="fi fi-rr-bullseye-pointer"></i> View
-                                                                    </a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    {% empty %}
-                                                        <tr>
-                                                            <div class="col-12">
-                                                                <p class="text-center">No one has sent hire application to you yet!</p>
-                                                            </div>
-                                                        </tr>
-                                                    {% endfor %}
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                {% empty %}
+                                                    <tr>
+                                                        <td colspan="6" class="text-center">
+                                                            {% if request.session.lang == 'en' %} No applications found {% else %} Aucune candidature trouvée {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>

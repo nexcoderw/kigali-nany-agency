@@ -4,118 +4,129 @@
 
 <section class="box-section block-banner-home1 position-relative">
     <div class="container position-relative z-1">
-        <p class="text-primary text-md-bold wow fadeInUp">Hire a Trusted Nanny</p>
+        <p class="text-primary text-md-bold wow fadeInUp">
+            {% if request.session.lang == 'en' %}
+                Hire a Trusted Nanny
+            {% else %}
+                Engagez une nounou de confiance
+            {% endif %}
+        </p>
         <h1 class="color-white mb-35 wow fadeInUp">
-            Need a reliable nanny? <br class="d-none d-lg-block"/>Kigali Nanny Agency is your Solution.
+            {% if request.session.lang == 'en' %}
+                Need a reliable nanny? <br class="d-none d-lg-block"/>Comme chez Soi Burundi is your solution.
+            {% else %}
+                Besoin d'une nounou fiable ? <br class="d-none d-lg-block"/>Comme chez Soi Burundi est votre solution.
+            {% endif %}
         </h1>
         <ul class="list-ticks-green">
-            <li class="wow fadeInUp" data-wow-delay="0.1s">Caring service at an affordable rate.</li>
-            <li class="wow fadeInUp" data-wow-delay="0.2s">Professionally vetted nannies.</li>
-            <li class="wow fadeInUp" data-wow-delay="0.4s">Support available whenever you need it.</li>
+            <li class="wow fadeInUp" data-wow-delay="0.1s">
+                {% if request.session.lang == 'en' %}
+                    Caring service at an affordable rate.
+                {% else %}
+                    Service attentionné à un tarif abordable.
+                {% endif %}
+            </li>
+            <li class="wow fadeInUp" data-wow-delay="0.2s">
+                {% if request.session.lang == 'en' %}
+                    Professionally vetted nannies.
+                {% else %}
+                    Nounous soigneusement sélectionnées.
+                {% endif %}
+            </li>
+            <li class="wow fadeInUp" data-wow-delay="0.4s">
+                {% if request.session.lang == 'en' %}
+                    Support available whenever you need it.
+                {% else %}
+                    Assistance disponible à tout moment.
+                {% endif %}
+            </li>
         </ul>
     </div>
     <div class="bg-shape z-0"></div>
 </section>
-<section class="box-section box-search-advance-home10 background-100">
-    <div class="container">
-        <div class="box-search-advance background-card wow fadeIn">
-            <div class="box-top-search">
-                <div class="left-top-search">
-                    <a class="category-link text-sm-bold btn-click active" href="#">All nannies</a>
-                    <a class="category-link text-sm-bold btn-click" href="#">Full-time nannies</a>
-                    <a class="category-link text-sm-bold btn-click" href="#">Part-time nannies</a>
-                </div>
-                <div class="right-top-search d-none d-md-flex">
-                    <a class="text-sm-medium need-some-help" href="contact">Need assistance?</a>
-                </div>
-            </div>
-            <div class="box-bottom-search background-card">
-                <div class="item-search">
-                    <label class="text-sm-bold neutral-500">Preferred Location</label>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle btn-dropdown-search location-search" type="button" data-bs-toggle="dropdown" aria-expanded="false">Kigali, Rwanda</button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a class="dropdown-item" href="#">Nyamata, Rwanda</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">Musanze, Rwanda</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">Rubavu, Rwanda</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="item-search item-search-2">
-                    <label class="text-sm-bold neutral-500">Backup Location</label>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle btn-dropdown-search location-search" type="button" data-bs-toggle="dropdown" aria-expanded="false">Gisenyi, Rwanda</button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a class="dropdown-item" href="#">Nyamata, Rwanda</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">Musanze, Rwanda</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">Rubavu, Rwanda</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="item-search item-search-3">
-                    <label class="text-sm-bold neutral-500">Start Date & Time</label>
-                    <div class="box-calendar-date">
-                        <input class="search-input datepicker" type="text" placeholder="" value="Thu, Oct 01 2024"/>
-                    </div>
-                </div>
-                <div class="item-search bd-none">
-                    <label class="text-sm-bold neutral-500">End Date & Time</label>
-                    <div class="box-calendar-date">
-                        <input class="search-input datepicker" type="text" placeholder="" value="Mon, Oct 07 2024"/>
-                    </div>
-                </div>
-                <div class="item-search bd-none d-flex justify-content-end">
-                    <button class="btn btn-brand-2 text-nowrap">
-                        <svg class="me-2" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19 19L14.6569 14.6569M14.6569 14.6569C16.1046 13.2091 17 11.2091 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17C11.2091 17 13.2091 16.1046 14.6569 14.6569Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                        Find a Nanny
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 <section class="box-cta-1 background-100 py-96">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 pe-lg-5 wow fadeInUp">
                 <div class="card-video">
                     <div class="card-image">
-                        <a class="btn btn-play popup-youtube" href="https://www.youtube.com/watch?v=AOg61RB75Ho"></a>
-                        <img src="{% static 'img/story/home-1.png' %}" alt="Kigali Nanny Agency"/>
+                        <a class="btn btn-play popup-youtube" href="#"></a>
+                        <img src="{% static 'img/img-7.jpg' %}" alt="Comme chez Soi Burundi"/>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 mt-lg-0 mt-4">
-                <span class="btn btn-signin bg-white text-dark mb-4 wow fadeInUp">Your Trusted Nanny Service</span>
-                <h4 class="mb-4 neutral-1000 wow fadeInUp">Get Peace of Mind—Hire a Nanny Today</h4>
-                <p class="text-lg-medium neutral-500 mb-4 wow fadeInUp">We focus on providing professional, caring, and reliable services tailored to your family’s needs.</p>
+                <span class="btn btn-signin bg-white text-dark mb-4 wow fadeInUp">
+                    {% if request.session.lang == 'en' %}
+                        Your Trusted Nanny Service
+                    {% else %}
+                        Votre service de nounou de confiance
+                    {% endif %}
+                </span>
+                <h4 class="mb-4 neutral-1000 wow fadeInUp">
+                    {% if request.session.lang == 'en' %}
+                        Get Peace of Mind—Hire a Nanny Today
+                    {% else %}
+                        Tranquillité d'esprit—Engagez une nounou aujourd'hui
+                    {% endif %}
+                </h4>
+                <p class="text-lg-medium neutral-500 mb-4 wow fadeInUp">
+                    {% if request.session.lang == 'en' %}
+                        We focus on providing professional, caring, and reliable services tailored to your family’s needs.
+                    {% else %}
+                        Nous nous concentrons sur la fourniture de services professionnels, attentionnés et fiables adaptés aux besoins de votre famille.
+                    {% endif %}
+                </p>
                 <div class="row">
                     <div class="col-md-6">
                         <ul class="list-ticks-green">
-                            <li class="neutral-1000 wow fadeInUp" data-wow-delay="0.1s">Trained and Vetted Professionals</li>
-                            <li class="neutral-1000 wow fadeInUp" data-wow-delay="0.2s">Affordable Payment Plans</li>
-                            <li class="neutral-1000 wow fadeInUp" data-wow-delay="0.3s">Personalized Care Options</li>
+                            <li class="neutral-1000 wow fadeInUp" data-wow-delay="0.1s">
+                                {% if request.session.lang == 'en' %}
+                                    Trained and Vetted Professionals
+                                {% else %}
+                                    Professionnels formés et vérifiés
+                                {% endif %}
+                            </li>
+                            <li class="neutral-1000 wow fadeInUp" data-wow-delay="0.2s">
+                                {% if request.session.lang == 'en' %}
+                                    Affordable Payment Plans
+                                {% else %}
+                                    Plans de paiement abordables
+                                {% endif %}
+                            </li>
+                            <li class="neutral-1000 wow fadeInUp" data-wow-delay="0.3s">
+                                {% if request.session.lang == 'en' %}
+                                    Personalized Care Options
+                                {% else %}
+                                    Options de soins personnalisés
+                                {% endif %}
+                            </li>
                         </ul>
                     </div>
                     <div class="col-md-6">
                         <ul class="list-ticks-green wow fadeInUp">
-                            <li class="neutral-1000 wow fadeInUp" data-wow-delay="0.1s">24/7 Support Available</li>
-                            <li class="neutral-1000 wow fadeInUp" data-wow-delay="0.2s">Emergency Services Offered</li>
-                            <li class="neutral-1000 wow fadeInUp" data-wow-delay="0.3s">On-Demand Replacements</li>
+                            <li class="neutral-1000 wow fadeInUp" data-wow-delay="0.1s">
+                                {% if request.session.lang == 'en' %}
+                                    24/7 Support Available
+                                {% else %}
+                                    Assistance disponible 24/7
+                                {% endif %}
+                            </li>
+                            <li class="neutral-1000 wow fadeInUp" data-wow-delay="0.2s">
+                                {% if request.session.lang == 'en' %}
+                                    Emergency Services Offered
+                                {% else %}
+                                    Services d'urgence disponibles
+                                {% endif %}
+                            </li>
+                            <li class="neutral-1000 wow fadeInUp" data-wow-delay="0.3s">
+                                {% if request.session.lang == 'en' %}
+                                    On-Demand Replacements
+                                {% else %}
+                                    Remplacements à la demande
+                                {% endif %}
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -124,89 +135,52 @@
     </div>
 </section> 
 
-<section class="section-box box-properties-area pt-96 pb-50 background-body">
+<section class="section-team-1 py-96 background-body">
     <div class="container">
-        <div class="row align-items-end mb-40">
-            <div class="col-md-8">
-                <h3 class="neutral-1000">Top Nanny Candidates</h3>
-                <p class="text-lg-medium neutral-500">Exceptional Care, Reliability, and Trust</p>
-            </div>
-            <div class="col-md-4 mt-md-0 mt-4">
-                <div class="d-flex justify-content-md-end justify-content-center">
-                    <a class="btn btn-primary" href="nanny-list.html">
-                        View More
-                    
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8 15L15 8L8 1M15 8L1 8" stroke="" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                    </a>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-xl-6 col-lg-7 col-md-9 col-sm-11">
+                <div class="text-center mb-5">
+                    <span class="text-xl-medium neutral-500">
+                        {% if request.session.lang == 'en' %}
+                            Awesome Teams
+                        {% else %}
+                            Équipes formidables
+                        {% endif %}
+                    </span>
+                    <h3 class="section-title neutral-1000">
+                        {% if request.session.lang == 'en' %}
+                            Meet Our Leaders
+                        {% else %}
+                            Rencontrez nos dirigeants
+                        {% endif %}
+                    </h3>
                 </div>
             </div>
         </div>
-        <div class="box-list-featured">
-            <div class="box-swiper mt-0">
-                <div class="swiper-container swiper-group-4 swiper-group-journey">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="card-spot background-card wow fadeInDown">
-                                <div class="card-image">
-                                    <a href="services.html">
-                                        <img class="rounded-3" src="https://carento-demo.vercel.app/assets/imgs/services/services-1/img-1.png" alt="Kigali Nanny"/>
-                                    </a>
-                                </div>
-                                <div class="card-info background-card">
-                                    <div class="card-left">
-                                        <div class="card-title">
-                                            <a class="text-lg-bold neutral-1000" href="services.html">Nanny name</a>
-                                        </div>
-                                        <div class="card-desc">
-                                            <a class="text-sm neutral-500" href="#">Experience in months</a>
-                                        </div>
-                                    </div>
-                                    <div class="card-right">
-                                        <div class="card-button">
-                                            <a href="services.html">
-                                                <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+        <div class="row mt-50">
+            {% for member in team %}
+                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="card-news background-card hover-up shadow-2 mb-50">
+                        <div class="card-image">
+                            <a href="#">
+                                <img src="{{ member.image.url }}" alt="KGA"/>
+                            </a>
                         </div>
-                        <div class="swiper-slide">
-                            <div class="card-spot background-card wow fadeInDown">
-                                <div class="card-image">
-                                    <a href="services.html">
-                                        <img class="rounded-3" src="https://carento-demo.vercel.app/assets/imgs/services/services-1/img-1.png" alt="Kigali Nanny"/>
-                                    </a>
-                                </div>
-                                <div class="card-info background-card">
-                                    <div class="card-left">
-                                        <div class="card-title">
-                                            <a class="text-lg-bold neutral-1000" href="services.html">Nanny name</a>
-                                        </div>
-                                        <div class="card-desc">
-                                            <a class="text-sm neutral-500" href="#">Experience in months</a>
-                                        </div>
-                                    </div>
-                                    <div class="card-right">
-                                        <div class="card-button">
-                                            <a href="services.html">
-                                                <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M5.00011 9.08347L9.08347 5.00011L5.00011 0.916748M9.08347 5.00011L0.916748 5.00011" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="card-info p-4">
+                            <div class="card-title">
+                                <a class="text-xl-bold neutral-1000" href="#">
+                                    <h6>{{ member.name }}</h6>
+                                </a>
+                                <span class="text-sm-medium neutral-500">
+                                    {{ member.position }}
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
+
 {% endblock content %}

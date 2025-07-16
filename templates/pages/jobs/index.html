@@ -6,9 +6,15 @@
         <div class="container">
             <div class="row align-items-end">
                 <div class="col-md-9 mb-30 wow fadeInUp">
-                    <h4 class="title-svg neutral-1000 mb-15">Latest Jobs</h4>
+                    <h4 class="title-svg neutral-1000 mb-15">
+                        {% if request.session.lang == 'en' %} Latest Jobs {% else %} Offres d'emploi Récentes {% endif %}
+                    </h4>
                     <p class="text-md-medium text-bold neutral-500">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae, amet?
+                        {% if request.session.lang == 'en' %}
+                            Find the latest job opportunities that match your skills.
+                        {% else %}
+                            Trouvez les dernières opportunités d'emploi correspondant à vos compétences.
+                        {% endif %}
                     </p>
                 </div>
             </div>
@@ -23,7 +29,10 @@
                         <div class="row align-items-center">
                             <div class="col-xl-4 col-md-4 mb-10 text-lg-start text-center">
                                 <div class="box-view-type">
-                                    <span class="text-sm-bold neutral-500 number-found">{{ jobs_count }} jobs found</span>
+                                    <span class="text-sm-bold neutral-500 number-found">
+                                        {{ jobs_count }} 
+                                        {% if request.session.lang == 'en' %} jobs found {% else %} emplois trouvés {% endif %}
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-xl-8 col-md-8 mb-10 text-lg-end text-center">
@@ -31,25 +40,35 @@
                                     <form method="get" class="d-flex">
                                         <div class="item-sort border-1 me-3">
                                             <select name="limit" class="form-select" style="border: none;">
-                                                <option value="12" {% if filter_params.limit == "12" %}selected{% endif %}>Show: 12</option>
-                                                <option value="30" {% if filter_params.limit == "30" %}selected{% endif %}>Show: 30</option>
-                                                <option value="50" {% if filter_params.limit == "50" %}selected{% endif %}>Show: 50</option>
+                                                <option value="12" {% if filter_params.limit == "12" %}selected{% endif %}>
+                                                    {% if request.session.lang == 'en' %} Show: 12 {% else %} Afficher : 12 {% endif %}
+                                                </option>
+                                                <option value="30" {% if filter_params.limit == "30" %}selected{% endif %}>
+                                                    {% if request.session.lang == 'en' %} Show: 30 {% else %} Afficher : 30 {% endif %}
+                                                </option>
+                                                <option value="50" {% if filter_params.limit == "50" %}selected{% endif %}>
+                                                    {% if request.session.lang == 'en' %} Show: 50 {% else %} Afficher : 50 {% endif %}
+                                                </option>
                                             </select>
                                         </div>
                                         <div class="item-sort border-1">
                                             <select name="sort" class="form-select" style="border: none;">
-                                                <option value="newest" {% if filter_params.sort == "newest" %}selected{% endif %}>Sort by (Newest)</option>
-                                                <option value="oldest" {% if filter_params.sort == "oldest" %}selected{% endif %}>Oldest</option>
+                                                <option value="newest" {% if filter_params.sort == "newest" %}selected{% endif %}>
+                                                    {% if request.session.lang == 'en' %} Sort by (Newest) {% else %} Trier par (Plus récent) {% endif %}
+                                                </option>
+                                                <option value="oldest" {% if filter_params.sort == "oldest" %}selected{% endif %}>
+                                                    {% if request.session.lang == 'en' %} Oldest {% else %} Plus ancien {% endif %}
+                                                </option>
                                             </select>
                                         </div>
                                         <div class="card-button ms-2">
-                                            <button type="submit" class="btn btn-gray" style="background: #70f46d;;">
-                                                Filter
+                                            <button type="submit" class="btn btn-gray" style="background: #70f46d;">
+                                                {% if request.session.lang == 'en' %} Filter {% else %} Filtrer {% endif %}
                                             </button>
                                         </div>
                                         <div class="card-button">
                                             <a class="btn btn-gray" href="{% url 'base:getJobs' %}">
-                                                Reset
+                                                {% if request.session.lang == 'en' %} Reset {% else %} Réinitialiser {% endif %}
                                             </a>
                                         </div>
                                     </form>
@@ -72,38 +91,37 @@
                                             <div class="card-program">
                                                 <ul class="list-style-disc ps-3 pe-4">
                                                     <li class="text-xs-medium neutral-1000">
-                                                        Location: <strong>{{ job.location }}</strong>
+                                                        {% if request.session.lang == 'en' %} Location {% else %} Lieu {% endif %} : <strong>{{ job.location }}</strong>
                                                     </li>
                                                     <li class="text-xs-medium neutral-1000">
-                                                        Time: <strong>{{ job.start_date|date }} - {{ job.end_date|date }}</strong>
+                                                        {% if request.session.lang == 'en' %} Time {% else %} Temps {% endif %} : 
+                                                        <strong>{{ job.start_date|date }} - {{ job.end_date|date }}</strong>
                                                     </li>
                                                     <li class="text-xs-medium neutral-1000">
-                                                        Contact Number: <strong>{{ job.client.phone_number }}</strong>
+                                                        {% if request.session.lang == 'en' %} Contact Number {% else %} Numéro de Contact {% endif %} : 
+                                                        <strong>{{ job.client.phone_number }}</strong>
                                                     </li>
                                                     <li class="text-xs-medium neutral-1000">
-                                                        Category: <strong>{{ job.get_category_display }}</strong>
+                                                        {% if request.session.lang == 'en' %} Category {% else %} Catégorie {% endif %} : 
+                                                        <strong>{{ job.get_category_display }}</strong>
                                                     </li>
                                                 </ul>
                                                 <div class="endtime pt-3 mt-3 border-top">
-                                                    <div class="card-price">
-                                                        <h6 class="text-md-medium neutral-500 text-decoration-line-through"></h6>
-                                                    </div>
                                                     <a href="#" class="card-button pe-3">
                                                         {% if job.status == 'open' %}
                                                             <span class="badge badge-success rounded-pill d-inline-flex align-items-center fs-10">
-                                                                <i class="fi fi-rr-check-circle me-1"></i> Open
+                                                                <i class="fi fi-rr-check-circle me-1"></i> 
+                                                                {% if request.session.lang == 'en' %} Open {% else %} Ouvert {% endif %}
                                                             </span>
                                                         {% elif job.status == 'closed' %}
                                                             <span class="badge badge-danger rounded-pill d-inline-flex align-items-center fs-10">
-                                                                <i class="fi fi-rr-door-closed me-1"></i> Closed
+                                                                <i class="fi fi-rr-door-closed me-1"></i> 
+                                                                {% if request.session.lang == 'en' %} Closed {% else %} Fermé {% endif %}
                                                             </span>
                                                         {% elif job.status == 'pending' %}
                                                             <span class="badge badge-warning rounded-pill d-inline-flex align-items-center fs-10">
-                                                                <i class="fi fi-rr-hourglass me-1"></i> Pending
-                                                            </span>
-                                                        {% elif job.status == 'in_progress' %}
-                                                            <span class="badge badge-info rounded-pill d-inline-flex align-items-center fs-10">
-                                                                <i class="fi fi-rr-caret-right me-1"></i> In Progress
+                                                                <i class="fi fi-rr-hourglass me-1"></i> 
+                                                                {% if request.session.lang == 'en' %} Pending {% else %} En attente {% endif %}
                                                             </span>
                                                         {% endif %}
                                                     </a>
@@ -111,12 +129,15 @@
                                                 <div class="endtime">
                                                     <div class="card-price">
                                                         <a href="{% url 'base:showJobDetails' job.slug %}" class="text-lg-bold neutral-1000" style="font-size: 16px;">
-                                                            {{ job.salary|intcomma }} RWF / <span style="font-size: 12px;">per day</span>
+                                                            {{ job.salary|intcomma }} RWF / 
+                                                            <span style="font-size: 12px;">
+                                                                {% if request.session.lang == 'en' %} per day {% else %} par jour {% endif %}
+                                                            </span>
                                                         </a>
                                                     </div>
                                                     <div class="card-button">
                                                         <a class="btn btn-gray" href="{% url 'base:showJobDetails' job.slug %}">
-                                                            Apply
+                                                            {% if request.session.lang == 'en' %} Apply {% else %} Postuler {% endif %}
                                                         </a>
                                                     </div>
                                                 </div>
@@ -127,46 +148,6 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">
-                                        <svg width="12" height="12" viewbox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M6.00016 1.33325L1.3335 5.99992M1.3335 5.99992L6.00016 10.6666M1.3335 5.99992H10.6668" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </svg>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link active" href="#">2</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">4</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">5</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">...</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">
-                                        <svg width="12" height="12" viewbox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M5.99967 10.6666L10.6663 5.99992L5.99968 1.33325M10.6663 5.99992L1.33301 5.99992" stroke="" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </svg>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
                 {% include 'inc/job-sidebar.html' %}
             </div>

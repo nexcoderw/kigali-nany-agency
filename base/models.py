@@ -1,3 +1,5 @@
+import os
+import random
 from account.models import *
 from django.db import models
 from django.utils import timezone
@@ -160,3 +162,67 @@ class ClientProfile(models.Model):
     class Meta:
         verbose_name = 'Client Profile'
         verbose_name_plural = 'Client Profiles'
+
+def team_image_path(instance, filename):
+    base_filename, file_extension = os.path.splitext(filename)
+    timestamp = timezone.now().strftime("%Y%m%d%H%M%S")
+    return f'team/member_{slugify(instance.name)}_{timestamp}.png'
+
+class Team(models.Model):
+    name = models.CharField(max_length=255, null=True, blank=True)
+    position = models.CharField(max_length=255, null=True, blank=True)
+    image = ProcessedImageField(
+        upload_to=team_image_path,
+        processors=[ResizeToFill(1333, 1694)],
+        format='JPEG',
+        options={'quality': 90},
+        null=True,
+        blank=True,
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return self.name if self.name else "Unnamed Team Member"
+    
+    class Meta:
+        verbose_name_plural = "Team Members"
+
+def logo_image_path(instance, filename):
+    base_filename, file_extension = os.path.splitext(filename)
+    timestamp = timezone.now().strftime("%Y%m%d%H%M%S")
+    random_number = random.randint(1000, 9999)
+    return f'settings/logo/{random_number}_{timestamp}{file_extension}'
+
+
+class Setting(models.Model):
+    logo = ProcessedImageField(
+        upload_to=logo_image_path,
+        # processors=[ResizeToFill(600, 600)],
+        format='PNG',
+        options={'quality': 90},
+        null=True,
+        blank=True
+    )
+    address = models.CharField(max_length=255, null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
+    second_email = models.EmailField(null=True, blank=True)
+    phone_number = models.CharField(max_length=20, null=True, blank=True)
+    instagram = models.URLField(null=True, blank=True)
+    twitter = models.URLField(null=True, blank=True)
+    linkedin = models.URLField(null=True, blank=True)
+    github = models.URLField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def save(self, *args, **kwargs):
+        # Ensure only one instance of settings can exist
+        if not self.pk and Setting.objects.exists():
+            raise ValueError("You can only create one instance of the settings.")
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return "Website Settings"
+    
+    class Meta:
+        verbose_name = "Setting"
+        verbose_name_plural = "Settings"

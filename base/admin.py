@@ -1,4 +1,5 @@
 from base.models import *
+from django.urls import reverse
 from django.contrib import admin
 from django.utils.html import format_html
 from django.contrib.auth import get_user_model
@@ -197,3 +198,49 @@ class HireApplicationAdmin(admin.ModelAdmin):
         if 'nanny' in form.base_fields:
             form.base_fields['nanny'].queryset = form.base_fields['nanny'].queryset.filter(role='Nanny')
         return form
+
+@admin.register(Team)
+class TeamAdmin(admin.ModelAdmin):
+    list_display = ('name', 'position', 'edit_link', 'delete_link')
+    search_fields = ('name', 'position')
+    list_filter = ('created_at', 'updated_at')
+    list_per_page = 20
+    
+    def linked_social_profiles(self, obj):
+        links = []
+        if obj.linkedin:
+            links.append(f'<a href="{obj.linkedin}" target="_blank">LinkedIn</a>')
+        if obj.github:
+            links.append(f'<a href="{obj.github}" target="_blank">GitHub</a>')
+        return format_html(" | ".join(links)) if links else "-"
+    linked_social_profiles.short_description = 'Social Profiles'
+    
+    def edit_link(self, obj):
+        url = reverse("admin:base_team_change", args=[obj.pk])
+        return format_html('<a class="button" href="{}">Edit</a>', url)
+    edit_link.short_description = "Edit"
+    
+    def delete_link(self, obj):
+        url = reverse("admin:base_team_delete", args=[obj.pk])
+        return format_html('<a class="button" href="{}">Delete</a>', url)
+    delete_link.short_description = "Delete"
+
+@admin.register(Setting)
+class SettingAdmin(admin.ModelAdmin):
+    def has_add_permission(self, request):
+        # Allow adding only if there is no existing Setting instance
+        return not Setting.objects.exists()
+    
+    list_display = ('address', 'email', 'phone_number', 'edit_link', 'delete_link')
+    readonly_fields = ('created_at',)
+    list_per_page = 20
+    
+    def edit_link(self, obj):
+        url = reverse("admin:base_setting_change", args=[obj.pk])
+        return format_html('<a class="button" href="{}">Edit</a>', url)
+    edit_link.short_description = "Edit"
+    
+    def delete_link(self, obj):
+        url = reverse("admin:base_setting_delete", args=[obj.pk])
+        return format_html('<a class="button" href="{}">Delete</a>', url)
+    delete_link.short_description = "Delete"

@@ -152,9 +152,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'account.User'
 
 JAZZMIN_SETTINGS = {
-    "site_title": "Kigali Nanny Agency",
-    "site_header": "Kigali Nanny Agency",
-    "site_brand": "Kigali Nanny Agency",
+    "site_title": " Comme chez Soi Burundi",
+    "site_header": " Comme chez Soi Burundi",
+    "site_brand": " Comme chez Soi Burundi",
     "welcome_sign": "Welcome Admin",
     "show_sidebar": True,
     "navigation_expanded": True,
