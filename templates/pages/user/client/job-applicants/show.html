@@ -125,11 +125,11 @@
                                 </div>
                                 {% if applicant.status == 'pending' %}
                                     <div class="d-flex gap-5 justify-content-between w-100 mt-4">
-                                        <a href="#" class="text-primary-dark"
+                                        <a href="{% url 'base:acceptApplication' application.id %}" class="text-primary-dark"
                                            onclick="confirmAction('{% if request.session.lang == 'en' %}Accept Application{% else %}Accepter la candidature{% endif %}', '{{ applicant.id }}', 'accept')">
                                             <i class="fi fi-rr-check"></i> {% if request.session.lang == 'en' %} Accept Application {% else %} Accepter la candidature {% endif %}
                                         </a>
-                                        <a href="#" class="text-danger"
+                                        <a href="{% url 'base:rejectApplication' application.id %}" class="text-danger"
                                            onclick="confirmAction('{% if request.session.lang == 'en' %}Reject Application{% else %}Rejeter la candidature{% endif %}', '{{ applicant.id }}', 'reject')">
                                             <i class="fi fi-rr-do-not-enter"></i> {% if request.session.lang == 'en' %} Reject Application {% else %} Rejeter la candidature {% endif %}
                                         </a>
